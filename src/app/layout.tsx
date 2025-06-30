@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Wonderland Kindergarten & Early Years - We learn, We care, We play",
-  description: "Welcome to Wonderland Kindergarten & Early Years. A nurturing environment where children learn, care, and play together. Discover our programs for early years education.",
+  title: "Wonderland Early Years & Prep School - We learn, We care, We play",
+  description: "Welcome to Wonderland Early Years & Prep School. A nurturing environment where children learn, care, and play together. Discover our programs for early years education.",
   keywords: "kindergarten, early years, preschool, childcare, education, learning, play-based learning",
 };
 
