@@ -5,13 +5,13 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <nav className="bg-white/90 backdrop-blur-sm shadow-sm sticky top-0 z-50">
+      <nav className="bg-background/95 backdrop-blur-sm shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <span className="text-2xl">🌈</span>
               <h1 className="text-2xl font-bold text-gradient">
-                Wonderland Kindergarten
+                Wonderland Early Years & Prep School
               </h1>
             </div>
             <div className="hidden md:flex space-x-6">
@@ -60,7 +60,7 @@ export default function Home() {
                 <span className="text-gradient">We play</span>
               </h2>
               <p className="text-xl text-foreground/80 mb-8">
-                Welcome to Wonderland Kindergarten & Early Years, where every
+                Welcome to Wonderland Early Years & Prep School, where every
                 child's journey begins with wonder, creativity, and endless
                 possibilities.
               </p>
@@ -125,7 +125,7 @@ export default function Home() {
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">Welcome to Wonderland</h2>
             <p className="text-xl text-foreground/70 max-w-3xl mx-auto">
-              At Wonderland Kindergarten, we believe every child is unique and
+              At Wonderland Early Years & Prep School, we believe every child is unique and
               special. Our nurturing environment fosters creativity, curiosity,
               and confidence in young learners.
             </p>
@@ -583,7 +583,7 @@ export default function Home() {
           </div>
           <div className="border-t border-white/20 mt-8 pt-8 text-center text-white/70">
             <p>
-              &copy; 2024 Wonderland Kindergarten & Early Years. All rights
+              &copy; 2024 Wonderland Early Years & Prep School. All rights
               reserved.
             </p>
           </div>
