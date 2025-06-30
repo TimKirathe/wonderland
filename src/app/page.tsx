@@ -73,7 +73,7 @@ export default function Home() {
               </h2>
               <p className="text-xl text-foreground/80 mb-8">
                 Welcome to Wonderland Early Years & Prep School, where every
-                child's journey begins with wonder, creativity, and endless
+                child&apos;s journey begins with wonder, creativity, and endless
                 possibilities.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -371,8 +371,8 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-foreground/70 mb-4">
-                "My daughter loves going to Wonderland every day. The teachers
-                are amazing and she's learned so much!"
+                &quot;My daughter loves going to Wonderland every day. The teachers
+                are amazing and she&apos;s learned so much!&quot;
               </p>
               <p className="font-semibold">- Sarah M.</p>
             </div>
@@ -385,8 +385,8 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-foreground/70 mb-4">
-                "The perfect balance of learning and play. My son has grown so
-                much in confidence since joining."
+                &quot;The perfect balance of learning and play. My son has grown so
+                much in confidence since joining.&quot;
               </p>
               <p className="font-semibold">- David L.</p>
             </div>
@@ -399,8 +399,8 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-foreground/70 mb-4">
-                "Wonderland truly lives up to its name. It's a magical place
-                where children thrive and grow."
+                &quot;Wonderland truly lives up to its name. It&apos;s a magical place
+                where children thrive and grow.&quot;
               </p>
               <p className="font-semibold">- Emma K.</p>
             </div>
@@ -481,7 +481,7 @@ export default function Home() {
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
                   />
                   <select className="w-full px-4 py-3 pr-12 rounded-lg border border-gray-300 focus:outline-none focus:border-primary appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2714%27%20height%3D%278%27%20viewBox%3D%270%200%2014%208%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cpath%20d%3D%27M1%201l6%206%206-6%27%20stroke%3D%27%236B7280%27%20stroke-width%3D%272%27%20fill%3D%27none%27%20fill-rule%3D%27evenodd%27%2F%3E%3C%2Fsvg%3E')] bg-[length:14px_8px] bg-[position:right_16px_center] bg-no-repeat">
-                    <option>Select Child's Age</option>
+                    <option>Select Child&apos;s Age</option>
                     <option>2 years</option>
                     <option>3 years</option>
                     <option>4 years</option>

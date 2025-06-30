@@ -263,7 +263,7 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
           <h3 className="text-xl font-semibold mb-4">Child Information</h3>
           
           <div>
-            <label className="block text-sm font-medium mb-1">Child's Name *</label>
+            <label className="block text-sm font-medium mb-1">Child&apos;s Name *</label>
             <input
               type="text"
               name="childName"
@@ -384,7 +384,7 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
               onChange={handleInputChange}
               rows={4}
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
-              placeholder="Any questions or additional information you'd like to share?"
+              placeholder="Any questions or additional information you&apos;d like to share?"
             />
           </div>
 
