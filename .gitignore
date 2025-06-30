@@ -46,3 +46,4 @@ runtime.log
 
 # local CLAUDE files
 CLAUDE.local.md
+.claude/*
