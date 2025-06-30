@@ -9,7 +9,13 @@ export default function Home() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <span className="text-2xl">🌈</span>
+              <Image
+                src="/wonderland-logo.svg"
+                alt="Wonderland Logo"
+                width={32}
+                height={32}
+                className="h-20 w-16"
+              />
               <h1 className="text-2xl font-bold text-gradient">
                 Wonderland Early Years & Prep School
               </h1>
@@ -125,9 +131,9 @@ export default function Home() {
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">Welcome to Wonderland</h2>
             <p className="text-xl text-foreground/70 max-w-3xl mx-auto">
-              At Wonderland Early Years & Prep School, we believe every child is unique and
-              special. Our nurturing environment fosters creativity, curiosity,
-              and confidence in young learners.
+              At Wonderland Early Years & Prep School, we believe every child is
+              unique and special. Our nurturing environment fosters creativity,
+              curiosity, and confidence in young learners.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -409,7 +415,8 @@ export default function Home() {
                     <div>
                       <p className="font-semibold">Address</p>
                       <p className="text-foreground/70">
-                        123 Rainbow Lane, Wonderland City, WL 12345
+                        Ngei Estate Phase 1, Kalobot road, Langata, Nairobi,
+                        Kenya
                       </p>
                     </div>
                   </div>
@@ -417,7 +424,9 @@ export default function Home() {
                     <span className="text-2xl">📞</span>
                     <div>
                       <p className="font-semibold">Phone</p>
-                      <p className="text-foreground/70">(555) 123-4567</p>
+                      <p className="text-foreground/70">
+                        <a href="tel:+254738626219">+254 738 626 219</a>
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
@@ -425,7 +434,9 @@ export default function Home() {
                     <div>
                       <p className="font-semibold">Email</p>
                       <p className="text-foreground/70">
-                        hello@wonderlandkindergarten.com
+                        <a href="mailto:info@wonderlandkindergarten.sc.ke">
+                          info@wonderlandkindergarten.sc.ke
+                        </a>
                       </p>
                     </div>
                   </div>
@@ -441,7 +452,9 @@ export default function Home() {
                 </div>
               </div>
               <div>
-                <h3 className="text-2xl font-semibold mb-6">Schedule a Tour</h3>
+                <h3 className="text-2xl font-semibold mb-6">
+                  Schedule a Visit
+                </h3>
                 <form className="space-y-4">
                   <input
                     type="text"
@@ -458,7 +471,7 @@ export default function Home() {
                     placeholder="Phone Number"
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
                   />
-                  <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary">
+                  <select className="w-full px-4 pr-10 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary">
                     <option>Select Child's Age</option>
                     <option>2 years</option>
                     <option>3 years</option>
@@ -583,7 +596,7 @@ export default function Home() {
           </div>
           <div className="border-t border-white/20 mt-8 pt-8 text-center text-white/70">
             <p>
-              &copy; 2024 Wonderland Early Years & Prep School. All rights
+              &copy; 2025 Wonderland Early Years & Prep School. All rights
               reserved.
             </p>
           </div>
