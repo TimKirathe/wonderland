@@ -1,7 +1,13 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import JourneyModal from "@/components/JourneyModal";
 
 export default function Home() {
+  const [isJourneyModalOpen, setIsJourneyModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen">
       {/* Navigation */}
@@ -71,7 +77,10 @@ export default function Home() {
                 possibilities.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-primary text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-primary/90 transition-all transform hover:scale-105">
+                <button 
+                  onClick={() => setIsJourneyModalOpen(true)}
+                  className="bg-primary text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-primary/90 transition-all transform hover:scale-105"
+                >
                   Start Your Journey
                 </button>
                 <button className="border-2 border-primary text-primary px-8 py-4 rounded-full text-lg font-semibold hover:bg-primary hover:text-white transition-all">
@@ -471,7 +480,7 @@ export default function Home() {
                     placeholder="Phone Number"
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
                   />
-                  <select className="w-full px-4 pr-10 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary">
+                  <select className="w-full px-4 py-3 pr-12 rounded-lg border border-gray-300 focus:outline-none focus:border-primary appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2714%27%20height%3D%278%27%20viewBox%3D%270%200%2014%208%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cpath%20d%3D%27M1%201l6%206%206-6%27%20stroke%3D%27%236B7280%27%20stroke-width%3D%272%27%20fill%3D%27none%27%20fill-rule%3D%27evenodd%27%2F%3E%3C%2Fsvg%3E')] bg-[length:14px_8px] bg-[position:right_16px_center] bg-no-repeat">
                     <option>Select Child's Age</option>
                     <option>2 years</option>
                     <option>3 years</option>
@@ -503,7 +512,13 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <span className="text-3xl">🌈</span>
+                <Image
+                  src="/wonderland-logo.svg"
+                  alt="Wonderland Logo"
+                  width={48}
+                  height={48}
+                  className="h-20 w-16"
+                />
                 <h3 className="text-xl font-bold">Wonderland</h3>
               </div>
               <p className="text-white/70">We learn, We care, We play</p>
@@ -602,6 +617,12 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Journey Modal */}
+      <JourneyModal
+        isOpen={isJourneyModalOpen}
+        onClose={() => setIsJourneyModalOpen(false)}
+      />
     </div>
   );
 }
