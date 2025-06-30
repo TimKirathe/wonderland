@@ -23,6 +23,7 @@
 # misc
 .DS_Store
 *.pem
+package-lock.json
 
 # debug
 npm-debug.log*
@@ -42,3 +43,6 @@ next-env.d.ts
 
 # log files
 runtime.log
+
+# local CLAUDE files
+CLAUDE.local.md
