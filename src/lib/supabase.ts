@@ -78,3 +78,31 @@ export async function updateInquiry(id: string, updates: InquiryUpdate) {
   if (error) throw error;
   return data;
 }
+
+// Information Request types
+export interface InformationRequest {
+  id?: string;
+  parent_name: string;
+  email: string;
+  phone: string;
+  child_age: string;
+  message?: string;
+  request_id: string;
+  status?: string;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export type InformationRequestInsert = Omit<InformationRequest, 'id' | 'created_at' | 'updated_at'>;
+
+// Information Request helper functions
+export async function createInformationRequest(request: InformationRequestInsert) {
+  const { data, error } = await supabase
+    .from('information_requests')
+    .insert([request])
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data;
+}
