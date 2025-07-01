@@ -129,9 +129,6 @@ export default function Home() {
           className="absolute bottom-10 right-10 text-6xl animate-wiggle opacity-20"
           style={{ animationDelay: "0.5s" }}
         >
-          🌈
-        </div>
-        <div className="absolute top-1/2 left-1/4 text-4xl animate-float opacity-10">
           ☁️
         </div>
       </section>
