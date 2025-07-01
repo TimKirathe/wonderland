@@ -43,6 +43,10 @@ next-env.d.ts
 
 # log files
 runtime.log
+browser-tools.log
+
+# screenshots
+browser-screenshots/
 
 # local CLAUDE files
 CLAUDE.local.md

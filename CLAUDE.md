@@ -22,6 +22,41 @@ npm run start
 npm run lint
 ```
 
+## Git
+
+### Commit style
+
+- Use the 'Conventional Commits' convention for all your git commits.
+- Ensure that you commit code frequently.
+- Make sure that you group tasks which are logically related into a single commit.
+- Perform git commits every time a task or set of related tasks are completed.
+- **Always ask for approval before making commits.**
+
+#### Conventional Commits Format
+- Use scope in format: `type(scope): description` (e.g., `feat(contact): add email validation`)
+- Only include body/footer content if additional explanation is needed to explain the why behind what was done or to make the description understandable
+- Breaking changes notation:
+  - Option 1: Add `!` after type or scope (e.g., `feat!: remove deprecated login endpoint` or `feat(auth)!: drop support for legacy token system`)
+  - Option 2: Include `BREAKING CHANGE:` in commit footer
+
+#### Grouping Changes
+- **Commit small related fixes together if:**
+  - They are tightly related (e.g., fixing typos in the same function or fixing a bug and its related test)
+  - The group of changes forms a logical unit that's easier to understand as a whole
+  - Splitting them would add noise rather than clarity
+  - Think: "Would someone reviewing or reverting this benefit from it being one commit?"
+
+- **Commit them separately if:**
+  - Each fix addresses a different issue, concern, or component
+  - You want clear commit history for blame, review, or rollback
+  - The changes, while small, stand alone logically
+  - Think: "Could I describe each change in a commit message without referencing the others?"
+
+### General Notes
+
+- If you create a file that you are unsure about whether or not it should be gitignored. Ask before proceeding.
+- Make sure that any files/directories that you create which contain sensitive information are put inside the .gitignore file.
+
 ## Architecture
 
 ### App Router Structure
