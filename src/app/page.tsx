@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import JourneyModal from "@/components/JourneyModal";
+import ContactForm from "@/components/ContactForm";
 
 export default function Home() {
   const [isJourneyModalOpen, setIsJourneyModalOpen] = useState(false);
@@ -13,20 +14,20 @@ export default function Home() {
       {/* Navigation */}
       <nav className="bg-background/95 backdrop-blur-sm shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center space-x-2 flex-shrink min-w-0">
               <Image
                 src="/wonderland-logo.svg"
                 alt="Wonderland Logo"
                 width={32}
                 height={32}
-                className="h-20 w-16"
+                className="h-20 w-16 flex-shrink-0"
               />
-              <h1 className="text-2xl font-bold text-gradient">
+              <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gradient truncate">
                 Wonderland Early Years & Prep School
               </h1>
             </div>
-            <div className="hidden md:flex space-x-6">
+            <div className="hidden lg:flex space-x-6">
               <Link
                 href="#about"
                 className="text-foreground hover:text-primary transition-colors"
@@ -52,7 +53,7 @@ export default function Home() {
                 Contact
               </Link>
             </div>
-            <button className="bg-primary text-white px-4 py-2 rounded-full hover:bg-primary/90 transition-colors">
+            <button className="bg-primary text-white px-3 sm:px-4 py-2 rounded-full hover:bg-primary/90 transition-colors whitespace-nowrap flex-shrink-0 text-sm sm:text-base">
               Enroll Now
             </button>
           </div>
@@ -64,6 +65,10 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
+              <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6">
+                <span className="text-lg">🏆</span>
+                <span className="text-sm font-semibold">Nurturing Young Minds Since 1976</span>
+              </div>
               <h2 className="text-5xl md:text-6xl font-bold mb-6">
                 <span className="text-gradient">We learn,</span>
                 <br />
@@ -76,15 +81,12 @@ export default function Home() {
                 child&apos;s journey begins with wonder, creativity, and endless
                 possibilities.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button 
+              <div className="flex">
+                <button
                   onClick={() => setIsJourneyModalOpen(true)}
                   className="bg-primary text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-primary/90 transition-all transform hover:scale-105"
                 >
                   Start Your Journey
-                </button>
-                <button className="border-2 border-primary text-primary px-8 py-4 rounded-full text-lg font-semibold hover:bg-primary hover:text-white transition-all">
-                  Virtual Tour
                 </button>
               </div>
             </div>
@@ -189,11 +191,11 @@ export default function Home() {
       >
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-12">Our Programs</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             <div className="bg-card-bg rounded-3xl p-8 card-shadow card-shadow-hover transition-all">
-              <div className="text-5xl mb-4">🍼</div>
-              <h3 className="text-2xl font-semibold mb-3">Nursery</h3>
-              <p className="text-foreground/70 mb-4">Ages 2-3 years</p>
+              <div className="text-5xl mb-4">🧸</div>
+              <h3 className="text-2xl font-semibold mb-3">Playgroup</h3>
+              <p className="text-foreground/70 mb-4">Ages 2-4 years</p>
               <ul className="space-y-2">
                 <li className="flex items-center">
                   <span className="text-secondary mr-2">✓</span> Sensory play
@@ -215,8 +217,8 @@ export default function Home() {
             </div>
             <div className="bg-card-bg rounded-3xl p-8 card-shadow card-shadow-hover transition-all">
               <div className="text-5xl mb-4">🎨</div>
-              <h3 className="text-2xl font-semibold mb-3">Pre-K</h3>
-              <p className="text-foreground/70 mb-4">Ages 3-4 years</p>
+              <h3 className="text-2xl font-semibold mb-3">Pre-Primary 1</h3>
+              <p className="text-foreground/70 mb-4">Ages 4-5 years</p>
               <ul className="space-y-2">
                 <li className="flex items-center">
                   <span className="text-secondary mr-2">✓</span> Creative arts &
@@ -237,8 +239,8 @@ export default function Home() {
             </div>
             <div className="bg-card-bg rounded-3xl p-8 card-shadow card-shadow-hover transition-all">
               <div className="text-5xl mb-4">🎒</div>
-              <h3 className="text-2xl font-semibold mb-3">Kindergarten</h3>
-              <p className="text-foreground/70 mb-4">Ages 4-6 years</p>
+              <h3 className="text-2xl font-semibold mb-3">Pre-Primary 2</h3>
+              <p className="text-foreground/70 mb-4">Ages 5-6 years</p>
               <ul className="space-y-2">
                 <li className="flex items-center">
                   <span className="text-secondary mr-2">✓</span> Reading &
@@ -258,6 +260,95 @@ export default function Home() {
                 </li>
               </ul>
             </div>
+            <div className="bg-card-bg rounded-3xl p-8 card-shadow card-shadow-hover transition-all">
+              <div className="text-5xl mb-4">📚</div>
+              <h3 className="text-2xl font-semibold mb-3">Grade 1</h3>
+              <p className="text-foreground/70 mb-4">Ages 6-7 years</p>
+              <ul className="space-y-2">
+                <li className="flex items-center">
+                  <span className="text-secondary mr-2">✓</span> Foundational
+                  literacy
+                </li>
+                <li className="flex items-center">
+                  <span className="text-secondary mr-2">✓</span> Basic
+                  arithmetic
+                </li>
+                <li className="flex items-center">
+                  <span className="text-secondary mr-2">✓</span> Environmental
+                  studies
+                </li>
+                <li className="flex items-center">
+                  <span className="text-secondary mr-2">✓</span> Creative
+                  expression
+                </li>
+              </ul>
+            </div>
+            <div className="bg-card-bg rounded-3xl p-8 card-shadow card-shadow-hover transition-all">
+              <div className="text-5xl mb-4">✏️</div>
+              <h3 className="text-2xl font-semibold mb-3">Grade 2</h3>
+              <p className="text-foreground/70 mb-4">Ages 7-8 years</p>
+              <ul className="space-y-2">
+                <li className="flex items-center">
+                  <span className="text-secondary mr-2">✓</span> Reading
+                  comprehension
+                </li>
+                <li className="flex items-center">
+                  <span className="text-secondary mr-2">✓</span> Problem solving
+                </li>
+                <li className="flex items-center">
+                  <span className="text-secondary mr-2">✓</span> Social studies
+                </li>
+                <li className="flex items-center">
+                  <span className="text-secondary mr-2">✓</span> Physical
+                  education
+                </li>
+              </ul>
+            </div>
+            <div className="bg-card-bg rounded-3xl p-8 card-shadow card-shadow-hover transition-all">
+              <div className="text-5xl mb-4">🌟</div>
+              <h3 className="text-2xl font-semibold mb-3">Grade 3</h3>
+              <p className="text-foreground/70 mb-4">Ages 8-9 years</p>
+              <ul className="space-y-2">
+                <li className="flex items-center">
+                  <span className="text-secondary mr-2">✓</span> Advanced
+                  reading
+                </li>
+                <li className="flex items-center">
+                  <span className="text-secondary mr-2">✓</span> Multiplication
+                  & division
+                </li>
+                <li className="flex items-center">
+                  <span className="text-secondary mr-2">✓</span> Science
+                  projects
+                </li>
+                <li className="flex items-center">
+                  <span className="text-secondary mr-2">✓</span> Critical
+                  thinking
+                </li>
+              </ul>
+            </div>
+            <div className="bg-card-bg rounded-3xl p-8 card-shadow card-shadow-hover transition-all">
+              <div className="text-5xl mb-4">🎯</div>
+              <h3 className="text-2xl font-semibold mb-3">Grade 4</h3>
+              <p className="text-foreground/70 mb-4">Ages 9-10 years</p>
+              <ul className="space-y-2">
+                <li className="flex items-center">
+                  <span className="text-secondary mr-2">✓</span> Independent
+                  learning
+                </li>
+                <li className="flex items-center">
+                  <span className="text-secondary mr-2">✓</span> Research skills
+                </li>
+                <li className="flex items-center">
+                  <span className="text-secondary mr-2">✓</span> Technology
+                  integration
+                </li>
+                <li className="flex items-center">
+                  <span className="text-secondary mr-2">✓</span> Leadership
+                  development
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -268,7 +359,28 @@ export default function Home() {
           <h2 className="text-4xl font-bold text-center mb-12">
             Why Choose Wonderland?
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Video Column */}
+            <div className="relative">
+              <div className="rounded-3xl overflow-hidden card-shadow">
+                <video
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  controls
+                >
+                  <source
+                    src="/wonderland-school-video-1.mp4"
+                    type="video/mp4"
+                  />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+
+            {/* Features Column */}
             <div className="space-y-6">
               <div className="flex items-start space-x-4">
                 <div className="bg-primary/10 p-3 rounded-full flex-shrink-0">
@@ -308,8 +420,6 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-            </div>
-            <div className="space-y-6">
               <div className="flex items-start space-x-4">
                 <div className="bg-primary/10 p-3 rounded-full flex-shrink-0">
                   <span className="text-2xl">👨‍👩‍👧‍👦</span>
@@ -371,8 +481,8 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-foreground/70 mb-4">
-                &quot;My daughter loves going to Wonderland every day. The teachers
-                are amazing and she&apos;s learned so much!&quot;
+                &quot;My daughter loves going to Wonderland every day. The
+                teachers are amazing and she&apos;s learned so much!&quot;
               </p>
               <p className="font-semibold">- Sarah M.</p>
             </div>
@@ -385,8 +495,8 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-foreground/70 mb-4">
-                &quot;The perfect balance of learning and play. My son has grown so
-                much in confidence since joining.&quot;
+                &quot;The perfect balance of learning and play. My son has grown
+                so much in confidence since joining.&quot;
               </p>
               <p className="font-semibold">- David L.</p>
             </div>
@@ -399,8 +509,8 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-foreground/70 mb-4">
-                &quot;Wonderland truly lives up to its name. It&apos;s a magical place
-                where children thrive and grow.&quot;
+                &quot;Wonderland truly lives up to its name. It&apos;s a magical
+                place where children thrive and grow.&quot;
               </p>
               <p className="font-semibold">- Emma K.</p>
             </div>
@@ -464,42 +574,7 @@ export default function Home() {
                 <h3 className="text-2xl font-semibold mb-6">
                   Schedule a Visit
                 </h3>
-                <form className="space-y-4">
-                  <input
-                    type="text"
-                    placeholder="Parent's Name"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
-                  />
-                  <input
-                    type="email"
-                    placeholder="Email Address"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
-                  />
-                  <input
-                    type="tel"
-                    placeholder="Phone Number"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
-                  />
-                  <select className="w-full px-4 py-3 pr-12 rounded-lg border border-gray-300 focus:outline-none focus:border-primary appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2714%27%20height%3D%278%27%20viewBox%3D%270%200%2014%208%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cpath%20d%3D%27M1%201l6%206%206-6%27%20stroke%3D%27%236B7280%27%20stroke-width%3D%272%27%20fill%3D%27none%27%20fill-rule%3D%27evenodd%27%2F%3E%3C%2Fsvg%3E')] bg-[length:14px_8px] bg-[position:right_16px_center] bg-no-repeat">
-                    <option>Select Child&apos;s Age</option>
-                    <option>2 years</option>
-                    <option>3 years</option>
-                    <option>4 years</option>
-                    <option>5 years</option>
-                    <option>6 years</option>
-                  </select>
-                  <textarea
-                    placeholder="Message (Optional)"
-                    rows={4}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
-                  ></textarea>
-                  <button
-                    type="submit"
-                    className="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
-                  >
-                    Request Information
-                  </button>
-                </form>
+                <ContactForm />
               </div>
             </div>
           </div>
@@ -509,19 +584,24 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-2 mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 md:gap-12">
+            <div className="md:col-span-2 xl:col-span-1">
+              <div className="flex items-start space-x-2 mb-4">
                 <Image
                   src="/wonderland-logo.svg"
                   alt="Wonderland Logo"
                   width={48}
                   height={48}
-                  className="h-20 w-16"
+                  className="h-20 w-16 flex-shrink-0"
                 />
-                <h3 className="text-xl font-bold">Wonderland</h3>
+                <div className="pt-1">
+                  <h3 className="text-xl font-bold">Wonderland</h3>
+                  <p className="text-white/70 mt-1">We learn, We care, We play</p>
+                </div>
               </div>
-              <p className="text-white/70">We learn, We care, We play</p>
+              <p className="text-white/60 text-sm max-w-xs">
+                Nurturing young minds with love, creativity, and endless possibilities.
+              </p>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Quick Links</h4>
@@ -529,7 +609,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="#about"
-                    className="hover:text-white transition-colors"
+                    className="hover:text-white transition-colors text-sm"
                   >
                     About Us
                   </Link>
@@ -537,7 +617,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="#programs"
-                    className="hover:text-white transition-colors"
+                    className="hover:text-white transition-colors text-sm"
                   >
                     Programs
                   </Link>
@@ -545,7 +625,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="#admissions"
-                    className="hover:text-white transition-colors"
+                    className="hover:text-white transition-colors text-sm"
                   >
                     Admissions
                   </Link>
@@ -553,7 +633,7 @@ export default function Home() {
                 <li>
                   <Link
                     href="#contact"
-                    className="hover:text-white transition-colors"
+                    className="hover:text-white transition-colors text-sm"
                   >
                     Contact
                   </Link>
@@ -564,53 +644,69 @@ export default function Home() {
               <h4 className="font-semibold mb-4">Programs</h4>
               <ul className="space-y-2 text-white/70">
                 <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    Nursery
+                  <Link
+                    href="#programs"
+                    className="hover:text-white transition-colors text-sm"
+                  >
+                    Playgroup
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    Pre-K
+                  <Link
+                    href="#programs"
+                    className="hover:text-white transition-colors text-sm"
+                  >
+                    Pre-Primary 1 & 2
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    Kindergarten
+                  <Link
+                    href="#programs"
+                    className="hover:text-white transition-colors text-sm"
+                  >
+                    Grade 1-4
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    After School
+                  <Link
+                    href="#programs"
+                    className="hover:text-white transition-colors text-sm"
+                  >
+                    All Programs
                   </Link>
                 </li>
               </ul>
             </div>
-            <div>
-              <h4 className="font-semibold mb-4">Follow Us</h4>
-              <div className="flex space-x-4">
+            <div className="md:col-span-2 xl:col-span-1">
+              <h4 className="font-semibold mb-4">Connect With Us</h4>
+              <div className="flex items-center space-x-4 mb-4">
                 <a
-                  href="#"
-                  className="bg-white/10 p-2 rounded-full hover:bg-white/20 transition-colors"
+                  href={
+                    process.env.NEXT_PUBLIC_INSTAGRAM_URL ||
+                    "https://www.instagram.com/wonderlandkindergartenke/"
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white/10 p-3 rounded-full hover:bg-white/20 transition-colors"
+                  aria-label="Follow us on Instagram"
                 >
-                  <span className="text-xl">📘</span>
+                  <Image
+                    src="/social-media/instagram.svg"
+                    alt="Instagram"
+                    width={20}
+                    height={20}
+                    className="w-5 h-5 brightness-0 invert"
+                  />
                 </a>
-                <a
-                  href="#"
-                  className="bg-white/10 p-2 rounded-full hover:bg-white/20 transition-colors"
-                >
-                  <span className="text-xl">📷</span>
-                </a>
-                <a
-                  href="#"
-                  className="bg-white/10 p-2 rounded-full hover:bg-white/20 transition-colors"
-                >
-                  <span className="text-xl">🐦</span>
-                </a>
+                <span className="text-white/70 text-sm">@wonderlandkindergartenke</span>
               </div>
+              <p className="text-white/60 text-sm">
+                Follow us for updates, events, and moments from our wonderful community.
+              </p>
             </div>
           </div>
-          <div className="border-t border-white/20 mt-8 pt-8 text-center text-white/70">
-            <p>
+          <div className="border-t border-white/20 mt-12 pt-8 text-center text-white/70">
+            <p className="text-sm">
               &copy; 2025 Wonderland Early Years & Prep School. All rights
               reserved.
             </p>
