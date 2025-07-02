@@ -124,7 +124,7 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4" suppressHydrationWarning>
       {submitStatus === "success" && (
         <div className="bg-green-50 border border-green-200 rounded-lg p-4">
           <div className="flex items-start">
@@ -184,6 +184,7 @@ export default function ContactForm() {
           placeholder="Parent's Name"
           className={`w-full px-4 py-3 rounded-lg border ${errors.parentName ? "border-red-500" : "border-gray-300"} focus:outline-none focus:border-primary`}
           disabled={isSubmitting}
+          suppressHydrationWarning
         />
         {errors.parentName && (
           <p className="text-red-500 text-sm mt-1">{errors.parentName}</p>
@@ -199,6 +200,7 @@ export default function ContactForm() {
           placeholder="Email Address"
           className={`w-full px-4 py-3 rounded-lg border ${errors.email ? "border-red-500" : "border-gray-300"} focus:outline-none focus:border-primary`}
           disabled={isSubmitting}
+          suppressHydrationWarning
         />
         {errors.email && (
           <p className="text-red-500 text-sm mt-1">{errors.email}</p>
@@ -214,6 +216,7 @@ export default function ContactForm() {
           placeholder="Phone Number"
           className={`w-full px-4 py-3 rounded-lg border ${errors.phone ? "border-red-500" : "border-gray-300"} focus:outline-none focus:border-primary`}
           disabled={isSubmitting}
+          suppressHydrationWarning
         />
         {errors.phone && (
           <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
@@ -227,6 +230,7 @@ export default function ContactForm() {
           onChange={handleInputChange}
           className={`w-full px-4 py-3 pr-12 rounded-lg border ${errors.childAge ? "border-red-500" : "border-gray-300"} focus:outline-none focus:border-primary appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2714%27%20height%3D%278%27%20viewBox%3D%270%200%2014%208%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cpath%20d%3D%27M1%201l6%206%206-6%27%20stroke%3D%27%236B7280%27%20stroke-width%3D%272%27%20fill%3D%27none%27%20fill-rule%3D%27evenodd%27%2F%3E%3C%2Fsvg%3E')] bg-[length:14px_8px] bg-[position:right_16px_center] bg-no-repeat`}
           disabled={isSubmitting}
+          suppressHydrationWarning
         >
           <option value="">Select Child&apos;s Age</option>
           <option value="2 years">2 years</option>
@@ -249,6 +253,7 @@ export default function ContactForm() {
           rows={4}
           className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
           disabled={isSubmitting}
+          suppressHydrationWarning
         />
       </div>
 

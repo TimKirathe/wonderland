@@ -6,6 +6,7 @@ import Link from "next/link";
 import JourneyModal from "@/components/JourneyModal";
 import ContactForm from "@/components/ContactForm";
 import HeroCarousel from "@/components/HeroCarousel";
+import NoSSR from "@/components/NoSSR";
 
 export default function Home() {
   const [isJourneyModalOpen, setIsJourneyModalOpen] = useState(false);
@@ -556,7 +557,9 @@ export default function Home() {
               </div>
               <div>
                 <h3 className="text-2xl font-semibold mb-6">Make an Enquiry</h3>
-                <ContactForm />
+                <NoSSR>
+                  <ContactForm />
+                </NoSSR>
               </div>
             </div>
           </div>
@@ -666,10 +669,7 @@ export default function Home() {
               <h4 className="font-semibold mb-4">Connect With Us</h4>
               <div className="flex items-center space-x-4 mb-4">
                 <a
-                  href={
-                    process.env.NEXT_PUBLIC_INSTAGRAM_URL ||
-                    "https://www.instagram.com/wonderlandkindergartenke/"
-                  }
+                  href="https://www.instagram.com/wonderlandkindergartenke/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-white/10 p-3 rounded-full hover:bg-white/20 transition-colors"
