@@ -1,0 +1,163 @@
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
+
+interface HeroCarouselProps {
+  images: string[];
+  interval?: number;
+  children: React.ReactNode;
+}
+
+export default function HeroCarousel({
+  images,
+  interval = 6000,
+  children,
+}: HeroCarouselProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  const goToPrevious = useCallback(() => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+    setIsAutoPlaying(false);
+  }, [images.length]);
+
+  const goToNext = useCallback(() => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+    );
+    setIsAutoPlaying(false);
+  }, [images.length]);
+
+  useEffect(() => {
+    if (!isAutoPlaying) {
+      const timeout = setTimeout(() => setIsAutoPlaying(true), 10000);
+      return () => clearTimeout(timeout);
+    }
+  }, [isAutoPlaying]);
+
+  useEffect(() => {
+    if (isAutoPlaying && images.length > 1) {
+      const timer = setInterval(() => {
+        setCurrentIndex((prevIndex) =>
+          prevIndex === images.length - 1 ? 0 : prevIndex + 1
+        );
+      }, interval);
+
+      return () => clearInterval(timer);
+    }
+  }, [isAutoPlaying, images.length, interval]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowLeft") {
+        goToPrevious();
+      } else if (event.key === "ArrowRight") {
+        goToNext();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [goToPrevious, goToNext]);
+
+  if (images.length === 0) return null;
+
+  return (
+    <div className="relative w-full h-full overflow-hidden">
+      {/* Image Background */}
+      <div className="absolute inset-0">
+        {images.map((image, index) => (
+          <div
+            key={image}
+            className={`absolute inset-0 transition-opacity duration-700 ${
+              index === currentIndex ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <Image
+              src={image}
+              alt={`Wonderland kindergarten photo ${index + 1}`}
+              fill
+              priority={index === 0}
+              className="object-cover"
+              sizes="100vw"
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Dark Overlay for Text Readability */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/30 to-black/40" />
+
+      {/* Navigation Arrows */}
+      {images.length > 1 && (
+        <>
+          <button
+            onClick={goToPrevious}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full transition-all"
+            aria-label="Previous image"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+          <button
+            onClick={goToNext}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 rounded-full transition-all"
+            aria-label="Next image"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+        </>
+      )}
+
+      {/* Dot Indicators */}
+      {images.length > 1 && (
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex space-x-2">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                setCurrentIndex(index);
+                setIsAutoPlaying(false);
+              }}
+              className={`w-2 h-2 rounded-full transition-all ${
+                index === currentIndex
+                  ? "bg-white w-8"
+                  : "bg-white/50 hover:bg-white/70"
+              }`}
+              aria-label={`Go to image ${index + 1}`}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Content Overlay */}
+      <div className="relative z-10 h-full">{children}</div>
+    </div>
+  );
+}
