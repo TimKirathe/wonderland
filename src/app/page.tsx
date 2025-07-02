@@ -136,8 +136,9 @@ export default function Home() {
                 Caring Environment
               </h3>
               <p className="text-foreground/70">
-                Our dedicated teachers create a warm, supportive atmosphere
-                where children feel safe and loved.
+                Keeping with our established reputation for excellence, We
+                educate young children in an atmosphere of Christian love,
+                culture, and Biblical values.
               </p>
             </div>
             <div className="text-center">
@@ -146,18 +147,20 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-semibold mb-2">Quality Education</h3>
               <p className="text-foreground/70">
-                Age-appropriate curriculum designed to spark curiosity and
-                develop essential skills.
+                Our teachers are thoroughly trained in the new CBC curriculum.
+                We prepare our young learners to be productive members of our
+                society.
               </p>
             </div>
             <div className="text-center">
               <div className="bg-accent/10 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-4xl">🎯</span>
               </div>
-              <h3 className="text-2xl font-semibold mb-2">Individual Growth</h3>
+              <h3 className="text-2xl font-semibold mb-2">Co-Curricluum</h3>
               <p className="text-foreground/70">
-                Personalized attention to help each child reach their full
-                potential at their own pace.
+                Your child will never lack something to do. The wide range of
+                extra- curricular activities that we offer include: Abacus,
+                Swimmining, Football, Skating, and Ballet!
               </p>
             </div>
           </div>
@@ -188,24 +191,24 @@ export default function Home() {
               <div className="px-8 pb-8">
                 <h3 className="text-2xl font-semibold mb-3">Playgroup</h3>
                 <p className="text-foreground/70 mb-4">Ages 2-4 years</p>
-              <ul className="space-y-2">
-                <li className="flex items-center">
-                  <span className="text-secondary mr-2">✓</span> Sensory play
-                  activities
-                </li>
-                <li className="flex items-center">
-                  <span className="text-secondary mr-2">✓</span> Basic motor
-                  skills
-                </li>
-                <li className="flex items-center">
-                  <span className="text-secondary mr-2">✓</span> Social
-                  interaction
-                </li>
-                <li className="flex items-center">
-                  <span className="text-secondary mr-2">✓</span> Language
-                  development
-                </li>
-              </ul>
+                <ul className="space-y-2">
+                  <li className="flex items-center">
+                    <span className="text-secondary mr-2">✓</span> Sensory play
+                    activities
+                  </li>
+                  <li className="flex items-center">
+                    <span className="text-secondary mr-2">✓</span> Basic motor
+                    skills
+                  </li>
+                  <li className="flex items-center">
+                    <span className="text-secondary mr-2">✓</span> Social
+                    interaction
+                  </li>
+                  <li className="flex items-center">
+                    <span className="text-secondary mr-2">✓</span> Language
+                    development
+                  </li>
+                </ul>
               </div>
             </div>
             {/* Pre-Primary Programs Card */}
@@ -220,46 +223,60 @@ export default function Home() {
                 />
               </div>
               <div className="px-8 pb-8">
-                <h3 className="text-2xl font-semibold mb-3">Pre-Primary 1 & 2</h3>
+                <h3 className="text-2xl font-semibold mb-3">
+                  Pre-Primary 1 & 2
+                </h3>
                 <p className="text-foreground/70 mb-6">Ages 4-6 years</p>
-              
-              <div className="space-y-6">
-                <div>
-                  <h4 className="font-medium text-lg mb-2">Pre-Primary 1 (Ages 4-5)</h4>
-                  <ul className="space-y-1 text-sm">
-                    <li className="flex items-center">
-                      <span className="text-secondary mr-2">✓</span> Creative arts & crafts
-                    </li>
-                    <li className="flex items-center">
-                      <span className="text-secondary mr-2">✓</span> Early literacy skills
-                    </li>
-                    <li className="flex items-center">
-                      <span className="text-secondary mr-2">✓</span> Number concepts
-                    </li>
-                    <li className="flex items-center">
-                      <span className="text-secondary mr-2">✓</span> Music & movement
-                    </li>
-                  </ul>
+
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="font-medium text-lg mb-2">
+                      Pre-Primary 1 (Ages 4-5)
+                    </h4>
+                    <ul className="space-y-1 text-sm">
+                      <li className="flex items-center">
+                        <span className="text-secondary mr-2">✓</span> Creative
+                        arts & crafts
+                      </li>
+                      <li className="flex items-center">
+                        <span className="text-secondary mr-2">✓</span> Early
+                        literacy skills
+                      </li>
+                      <li className="flex items-center">
+                        <span className="text-secondary mr-2">✓</span> Number
+                        concepts
+                      </li>
+                      <li className="flex items-center">
+                        <span className="text-secondary mr-2">✓</span> Music &
+                        movement
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="font-medium text-lg mb-2">
+                      Pre-Primary 2 (Ages 5-6)
+                    </h4>
+                    <ul className="space-y-1 text-sm">
+                      <li className="flex items-center">
+                        <span className="text-secondary mr-2">✓</span> Reading &
+                        writing
+                      </li>
+                      <li className="flex items-center">
+                        <span className="text-secondary mr-2">✓</span>{" "}
+                        Mathematics basics
+                      </li>
+                      <li className="flex items-center">
+                        <span className="text-secondary mr-2">✓</span> Science
+                        exploration
+                      </li>
+                      <li className="flex items-center">
+                        <span className="text-secondary mr-2">✓</span> School
+                        readiness
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-                
-                <div>
-                  <h4 className="font-medium text-lg mb-2">Pre-Primary 2 (Ages 5-6)</h4>
-                  <ul className="space-y-1 text-sm">
-                    <li className="flex items-center">
-                      <span className="text-secondary mr-2">✓</span> Reading & writing
-                    </li>
-                    <li className="flex items-center">
-                      <span className="text-secondary mr-2">✓</span> Mathematics basics
-                    </li>
-                    <li className="flex items-center">
-                      <span className="text-secondary mr-2">✓</span> Science exploration
-                    </li>
-                    <li className="flex items-center">
-                      <span className="text-secondary mr-2">✓</span> School readiness
-                    </li>
-                  </ul>
-                </div>
-              </div>
               </div>
             </div>
             {/* Grade 1-4 Card */}
@@ -276,38 +293,44 @@ export default function Home() {
               <div className="px-8 pb-8">
                 <h3 className="text-2xl font-semibold mb-3">Grade 1-4</h3>
                 <p className="text-foreground/70 mb-6">Ages 6-10 years</p>
-              
-              <div className="space-y-4">
-                <div>
-                  <h4 className="font-medium mb-2">Grade 1-2 (Ages 6-8)</h4>
-                  <ul className="space-y-1 text-sm">
-                    <li className="flex items-center">
-                      <span className="text-secondary mr-2">✓</span> Foundational literacy & comprehension
-                    </li>
-                    <li className="flex items-center">
-                      <span className="text-secondary mr-2">✓</span> Basic arithmetic & problem solving
-                    </li>
-                    <li className="flex items-center">
-                      <span className="text-secondary mr-2">✓</span> Environmental & social studies
-                    </li>
-                  </ul>
+
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="font-medium mb-2">Grade 1-2 (Ages 6-8)</h4>
+                    <ul className="space-y-1 text-sm">
+                      <li className="flex items-center">
+                        <span className="text-secondary mr-2">✓</span>{" "}
+                        Foundational literacy & comprehension
+                      </li>
+                      <li className="flex items-center">
+                        <span className="text-secondary mr-2">✓</span> Basic
+                        arithmetic & problem solving
+                      </li>
+                      <li className="flex items-center">
+                        <span className="text-secondary mr-2">✓</span>{" "}
+                        Environmental & social studies
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="font-medium mb-2">Grade 3-4 (Ages 8-10)</h4>
+                    <ul className="space-y-1 text-sm">
+                      <li className="flex items-center">
+                        <span className="text-secondary mr-2">✓</span> Advanced
+                        reading & research
+                      </li>
+                      <li className="flex items-center">
+                        <span className="text-secondary mr-2">✓</span>{" "}
+                        Multiplication, division & critical thinking
+                      </li>
+                      <li className="flex items-center">
+                        <span className="text-secondary mr-2">✓</span>{" "}
+                        Technology integration & leadership
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-                
-                <div>
-                  <h4 className="font-medium mb-2">Grade 3-4 (Ages 8-10)</h4>
-                  <ul className="space-y-1 text-sm">
-                    <li className="flex items-center">
-                      <span className="text-secondary mr-2">✓</span> Advanced reading & research
-                    </li>
-                    <li className="flex items-center">
-                      <span className="text-secondary mr-2">✓</span> Multiplication, division & critical thinking
-                    </li>
-                    <li className="flex items-center">
-                      <span className="text-secondary mr-2">✓</span> Technology integration & leadership
-                    </li>
-                  </ul>
-                </div>
-              </div>
               </div>
             </div>
           </div>
