@@ -175,10 +175,19 @@ export default function Home() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             {/* Playgroup Card */}
-            <div className="bg-card-bg rounded-3xl p-8 card-shadow card-shadow-hover transition-all">
-              <div className="text-5xl mb-4">🧸</div>
-              <h3 className="text-2xl font-semibold mb-3">Playgroup</h3>
-              <p className="text-foreground/70 mb-4">Ages 2-4 years</p>
+            <div className="bg-card-bg rounded-3xl overflow-hidden card-shadow card-shadow-hover transition-all">
+              <div className="relative h-48 mb-6">
+                <Image
+                  src="/programs-photos/playgroup-class-photo.jpg"
+                  alt="Playgroup classroom with children engaged in activities"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </div>
+              <div className="px-8 pb-8">
+                <h3 className="text-2xl font-semibold mb-3">Playgroup</h3>
+                <p className="text-foreground/70 mb-4">Ages 2-4 years</p>
               <ul className="space-y-2">
                 <li className="flex items-center">
                   <span className="text-secondary mr-2">✓</span> Sensory play
@@ -197,12 +206,22 @@ export default function Home() {
                   development
                 </li>
               </ul>
+              </div>
             </div>
             {/* Pre-Primary Programs Card */}
-            <div className="bg-card-bg rounded-3xl p-8 card-shadow card-shadow-hover transition-all">
-              <div className="text-5xl mb-4">🎨</div>
-              <h3 className="text-2xl font-semibold mb-3">Pre-Primary 1 & 2</h3>
-              <p className="text-foreground/70 mb-6">Ages 4-6 years</p>
+            <div className="bg-card-bg rounded-3xl overflow-hidden card-shadow card-shadow-hover transition-all">
+              <div className="relative h-48 mb-6">
+                <Image
+                  src="/programs-photos/pp2-class-photo.jpg"
+                  alt="Pre-Primary classroom with students learning"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </div>
+              <div className="px-8 pb-8">
+                <h3 className="text-2xl font-semibold mb-3">Pre-Primary 1 & 2</h3>
+                <p className="text-foreground/70 mb-6">Ages 4-6 years</p>
               
               <div className="space-y-6">
                 <div>
@@ -241,12 +260,22 @@ export default function Home() {
                   </ul>
                 </div>
               </div>
+              </div>
             </div>
             {/* Grade 1-4 Card */}
-            <div className="bg-card-bg rounded-3xl p-8 card-shadow card-shadow-hover transition-all">
-              <div className="text-5xl mb-4">📚</div>
-              <h3 className="text-2xl font-semibold mb-3">Grade 1-4</h3>
-              <p className="text-foreground/70 mb-6">Ages 6-10 years</p>
+            <div className="bg-card-bg rounded-3xl overflow-hidden card-shadow card-shadow-hover transition-all">
+              <div className="relative h-48 mb-6">
+                <Image
+                  src="/programs-photos/grade2-classroom.jpg"
+                  alt="Grade school classroom with students at desks"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </div>
+              <div className="px-8 pb-8">
+                <h3 className="text-2xl font-semibold mb-3">Grade 1-4</h3>
+                <p className="text-foreground/70 mb-6">Ages 6-10 years</p>
               
               <div className="space-y-4">
                 <div>
@@ -278,6 +307,7 @@ export default function Home() {
                     </li>
                   </ul>
                 </div>
+              </div>
               </div>
             </div>
           </div>
