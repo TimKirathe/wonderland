@@ -5,9 +5,30 @@ import Image from "next/image";
 import Link from "next/link";
 import JourneyModal from "@/components/JourneyModal";
 import ContactForm from "@/components/ContactForm";
+import HeroCarousel from "@/components/HeroCarousel";
 
 export default function Home() {
   const [isJourneyModalOpen, setIsJourneyModalOpen] = useState(false);
+
+  // Marketing photos for carousel
+  const marketingPhotos = [
+    "/marketing-photos/marketing-photo-1.jpg",
+    "/marketing-photos/marketing-photo-2.jpg",
+    "/marketing-photos/marketing-photo-3.jpg",
+    "/marketing-photos/marketing-photo-4.jpg",
+    "/marketing-photos/marketing-photo-5.jpg",
+    "/marketing-photos/marketing-photo-6.jpg",
+    "/marketing-photos/marketing-photo-7.jpeg",
+    "/marketing-photos/marketing-photo-8.jpg",
+    "/marketing-photos/marketing-photo-9.jpg",
+    "/marketing-photos/marketing-photo-10.jpg",
+    "/marketing-photos/marketing-photo-11.jpg",
+    "/marketing-photos/marketing-photo-12.jpg",
+    "/marketing-photos/marketing-photo-13.jpg",
+    "/marketing-photos/marketing-photo-14.jpg",
+    "/marketing-photos/marketing-photo-15.jpg",
+    "/marketing-photos/marketing-photo-16.jpg",
+  ];
 
   return (
     <div className="min-h-screen">
@@ -61,22 +82,20 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 py-20 overflow-hidden">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6">
+      <section className="relative min-h-screen overflow-hidden">
+        <HeroCarousel images={marketingPhotos}>
+          <div className="container mx-auto px-4 min-h-screen flex items-center">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full mb-6">
                 <span className="text-lg">🏆</span>
                 <span className="text-sm font-semibold">Nurturing Young Minds Since 1976</span>
               </div>
-              <h2 className="text-5xl md:text-6xl font-bold mb-6">
-                <span className="text-gradient">We learn,</span>
-                <br />
-                <span className="text-gradient">We care,</span>
-                <br />
-                <span className="text-gradient">We play</span>
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white">
+                <span className="block">We learn,</span>
+                <span className="block">We care,</span>
+                <span className="block">We play</span>
               </h2>
-              <p className="text-xl text-foreground/80 mb-8">
+              <p className="text-xl text-white/90 mb-8 max-w-xl">
                 Welcome to Wonderland Early Years & Prep School, where every
                 child&apos;s journey begins with wonder, creativity, and endless
                 possibilities.
@@ -84,53 +103,14 @@ export default function Home() {
               <div className="flex">
                 <button
                   onClick={() => setIsJourneyModalOpen(true)}
-                  className="bg-primary text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-primary/90 transition-all transform hover:scale-105"
+                  className="bg-primary text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-primary/90 transition-all transform hover:scale-105 shadow-lg"
                 >
                   Start Your Journey
                 </button>
               </div>
             </div>
-            <div className="relative">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-primary/20 rounded-3xl p-8 animate-float">
-                  <span className="text-6xl">🎨</span>
-                  <p className="mt-2 font-semibold">Creative Arts</p>
-                </div>
-                <div
-                  className="bg-secondary/20 rounded-3xl p-8 animate-float"
-                  style={{ animationDelay: "0.5s" }}
-                >
-                  <span className="text-6xl">📚</span>
-                  <p className="mt-2 font-semibold">Learning Fun</p>
-                </div>
-                <div
-                  className="bg-accent/20 rounded-3xl p-8 animate-float"
-                  style={{ animationDelay: "1s" }}
-                >
-                  <span className="text-6xl">🎮</span>
-                  <p className="mt-2 font-semibold">Play Time</p>
-                </div>
-                <div
-                  className="bg-primary/20 rounded-3xl p-8 animate-float"
-                  style={{ animationDelay: "1.5s" }}
-                >
-                  <span className="text-6xl">🌳</span>
-                  <p className="mt-2 font-semibold">Nature</p>
-                </div>
-              </div>
-            </div>
           </div>
-        </div>
-        {/* Decorative elements */}
-        <div className="absolute top-10 left-10 text-6xl animate-wiggle opacity-20">
-          🌟
-        </div>
-        <div
-          className="absolute bottom-10 right-10 text-6xl animate-wiggle opacity-20"
-          style={{ animationDelay: "0.5s" }}
-        >
-          ☁️
-        </div>
+        </HeroCarousel>
       </section>
 
       {/* About Section */}
