@@ -13,11 +13,11 @@ export default function Home() {
 
   useEffect(() => {
     // Fetch marketing photos dynamically
-    fetch('/api/marketing-photos')
-      .then(res => res.json())
-      .then(data => setMarketingPhotos(data.photos))
-      .catch(error => {
-        console.error('Error fetching marketing photos:', error);
+    fetch("/api/marketing-photos")
+      .then((res) => res.json())
+      .then((data) => setMarketingPhotos(data.photos))
+      .catch((error) => {
+        console.error("Error fetching marketing photos:", error);
         // Fallback to a default set if API fails
         setMarketingPhotos([
           "/marketing-photos/marketing-photo-1.jpg",
@@ -71,7 +71,10 @@ export default function Home() {
                 Contact
               </Link>
             </div>
-            <button className="bg-primary text-white px-3 sm:px-4 py-2 rounded-full hover:bg-primary/90 transition-colors whitespace-nowrap flex-shrink-0 text-sm sm:text-base">
+            <button
+              onClick={() => setIsJourneyModalOpen(true)}
+              className="bg-primary text-white px-3 sm:px-4 py-2 rounded-full hover:bg-primary/90 transition-colors whitespace-nowrap flex-shrink-0 text-sm sm:text-base"
+            >
               Enroll Now
             </button>
           </div>
@@ -79,31 +82,34 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen overflow-hidden">
-        <HeroCarousel images={marketingPhotos.length > 0 ? marketingPhotos : ["/wonderland-logo.svg"]}>
-          <div className="container mx-auto px-4 min-h-screen flex items-center">
+      <section className="relative h-[calc(100vh-88px)] overflow-hidden">
+        <HeroCarousel
+          images={
+            marketingPhotos.length > 0
+              ? marketingPhotos
+              : ["/wonderland-logo.svg"]
+          }
+        >
+          <div className="container mx-auto px-4 md:px-6 lg:px-8 h-full flex items-end pb-16">
             <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full mb-6">
+              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full mb-8">
                 <span className="text-lg">🏆</span>
-                <span className="text-sm font-semibold">Nurturing Young Minds Since 1976</span>
+                <span className="text-sm font-semibold">
+                  Nurturing Young Minds Since 1976
+                </span>
               </div>
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white">
-                <span className="block">We learn,</span>
-                <span className="block">We care,</span>
-                <span className="block">We play</span>
-              </h2>
-              <p className="text-xl text-white/90 mb-8 max-w-xl">
-                Welcome to Wonderland Early Years & Prep School, where every
-                child&apos;s journey begins with wonder, creativity, and endless
-                possibilities.
+              <p className="text-lg md:text-xl text-white/90 mb-10 max-w-xl leading-relaxed">
+                At Wonderland Early Years & Prep School, we give individual
+                attention to every student, ensuring that your child feels safe
+                and loved in an atmosphere of learning, growth and adventure.
               </p>
               <div className="flex">
-                <button
-                  onClick={() => setIsJourneyModalOpen(true)}
-                  className="bg-primary text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-primary/90 transition-all transform hover:scale-105 shadow-lg"
+                <Link
+                  href="#contact"
+                  className="inline-block bg-primary text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-primary/90 transition-all transform hover:scale-105 shadow-lg"
                 >
-                  Start Your Journey
-                </button>
+                  Make an Enquiry
+                </Link>
               </div>
             </div>
           </div>
@@ -545,9 +551,7 @@ export default function Home() {
                 </div>
               </div>
               <div>
-                <h3 className="text-2xl font-semibold mb-6">
-                  Schedule a Visit
-                </h3>
+                <h3 className="text-2xl font-semibold mb-6">Make an Enquiry</h3>
                 <ContactForm />
               </div>
             </div>
@@ -570,11 +574,14 @@ export default function Home() {
                 />
                 <div className="pt-1">
                   <h3 className="text-xl font-bold">Wonderland</h3>
-                  <p className="text-white/70 mt-1">We learn, We care, We play</p>
+                  <p className="text-white/70 mt-1">
+                    We learn, We care, We play
+                  </p>
                 </div>
               </div>
               <p className="text-white/60 text-sm max-w-xs">
-                Nurturing young minds with love, creativity, and endless possibilities.
+                Nurturing young minds with love, creativity, and endless
+                possibilities.
               </p>
             </div>
             <div>
@@ -672,10 +679,13 @@ export default function Home() {
                     className="w-5 h-5 brightness-0 invert"
                   />
                 </a>
-                <span className="text-white/70 text-sm">@wonderlandkindergartenke</span>
+                <span className="text-white/70 text-sm">
+                  @wonderlandkindergartenke
+                </span>
               </div>
               <p className="text-white/60 text-sm">
-                Follow us for updates, events, and moments from our wonderful community.
+                Follow us for updates, events, and moments from our wonderful
+                community.
               </p>
             </div>
           </div>
