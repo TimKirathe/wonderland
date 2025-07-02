@@ -1,6 +1,16 @@
 "use client";
 
+// This component must be a client component because it uses React hooks (useState) 
+// and handles interactive form state management
 import { useState } from "react";
+
+interface ChildInfo {
+  childName: string;
+  dateOfBirth: string;
+  program: string;
+  specialNeeds: string;
+  previousSchool: string;
+}
 
 interface FormData {
   // Parent Information
@@ -9,12 +19,8 @@ interface FormData {
   phone: string;
   relationship: string;
   
-  // Child Information
-  childName: string;
-  dateOfBirth: string;
-  program: string;
-  specialNeeds: string;
-  previousSchool: string;
+  // Children Information (array to support multiple children)
+  children: ChildInfo[];
   
   // Additional Information
   preferredStartDate: string;
@@ -22,24 +28,29 @@ interface FormData {
   message: string;
 }
 
-interface JourneyFormProps {
+type JourneyFormProps = {
   onSubmit: (data: FormData) => void;
   onClose: () => void;
-}
+};
 
 export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
   const [currentStep, setCurrentStep] = useState(1);
-  const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [errors, setErrors] = useState<any>({});
+  const [currentChildIndex, setCurrentChildIndex] = useState(0);
   const [formData, setFormData] = useState<FormData>({
     parentName: "",
     email: "",
     phone: "",
     relationship: "",
-    childName: "",
-    dateOfBirth: "",
-    program: "",
-    specialNeeds: "",
-    previousSchool: "",
+    children: [
+      {
+        childName: "",
+        dateOfBirth: "",
+        program: "",
+        specialNeeds: "",
+        previousSchool: "",
+      }
+    ],
     preferredStartDate: "",
     howHeard: "",
     message: "",
@@ -56,8 +67,60 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
     }
   };
 
+  const handleChildInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+    childIndex: number
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => {
+      const newChildren = [...prev.children];
+      newChildren[childIndex] = {
+        ...newChildren[childIndex],
+        [name]: value
+      };
+      return { ...prev, children: newChildren };
+    });
+    // Clear error when user starts typing
+    if (errors.children && errors.children[childIndex] && errors.children[childIndex][name]) {
+      setErrors((prev: any) => {
+        const newErrors = { ...prev };
+        if (newErrors.children && newErrors.children[childIndex]) {
+          newErrors.children[childIndex][name] = "";
+        }
+        return newErrors;
+      });
+    }
+  };
+
+  const addChild = () => {
+    setFormData((prev) => ({
+      ...prev,
+      children: [...prev.children, {
+        childName: "",
+        dateOfBirth: "",
+        program: "",
+        specialNeeds: "",
+        previousSchool: "",
+      }]
+    }));
+    setCurrentChildIndex(formData.children.length);
+  };
+
+  const removeChild = (index: number) => {
+    if (formData.children.length > 1) {
+      setFormData((prev) => ({
+        ...prev,
+        children: prev.children.filter((_, i) => i !== index)
+      }));
+      // Adjust current child index if needed
+      if (currentChildIndex >= formData.children.length - 1) {
+        setCurrentChildIndex(Math.max(0, formData.children.length - 2));
+      }
+    }
+  };
+
   const validateStep = (step: number): boolean => {
-    const newErrors: Partial<FormData> = {};
+    const newErrors: any = {};
     
     if (step === 1) {
       // Validate parent information
@@ -83,32 +146,51 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
     }
     
     if (step === 2) {
-      // Validate child information
-      if (!formData.childName.trim()) {
-        newErrors.childName = "Child's name is required";
-      }
+      // Validate all children information
+      newErrors.children = [];
+      let hasChildErrors = false;
       
-      if (!formData.dateOfBirth) {
-        newErrors.dateOfBirth = "Date of birth is required";
-      } else {
-        const birthDate = new Date(formData.dateOfBirth);
-        const today = new Date();
-        const age = today.getFullYear() - birthDate.getFullYear();
-        const monthDiff = today.getMonth() - birthDate.getMonth();
-        const dayDiff = today.getDate() - birthDate.getDate();
-        const actualAge = monthDiff < 0 || (monthDiff === 0 && dayDiff < 0) ? age - 1 : age;
+      formData.children.forEach((child, index) => {
+        const childErrors: any = {};
         
-        if (birthDate > today) {
-          newErrors.dateOfBirth = "Date of birth cannot be in the future";
-        } else if (actualAge < 2) {
-          newErrors.dateOfBirth = "Child must be at least 2 years old";
-        } else if (actualAge > 6) {
-          newErrors.dateOfBirth = "Our programs are for children aged 2-6 years";
+        if (!child.childName.trim()) {
+          childErrors.childName = "Child's name is required";
+          hasChildErrors = true;
         }
-      }
+        
+        if (!child.dateOfBirth) {
+          childErrors.dateOfBirth = "Date of birth is required";
+          hasChildErrors = true;
+        } else {
+          const birthDate = new Date(child.dateOfBirth);
+          const today = new Date();
+          const age = today.getFullYear() - birthDate.getFullYear();
+          const monthDiff = today.getMonth() - birthDate.getMonth();
+          const dayDiff = today.getDate() - birthDate.getDate();
+          const actualAge = monthDiff < 0 || (monthDiff === 0 && dayDiff < 0) ? age - 1 : age;
+          
+          if (birthDate > today) {
+            childErrors.dateOfBirth = "Date of birth cannot be in the future";
+            hasChildErrors = true;
+          } else if (actualAge < 2) {
+            childErrors.dateOfBirth = "Child must be at least 2 years old";
+            hasChildErrors = true;
+          } else if (actualAge > 6) {
+            childErrors.dateOfBirth = "Our programs are for children aged 2-6 years";
+            hasChildErrors = true;
+          }
+        }
+        
+        if (!child.program) {
+          childErrors.program = "Please select a program";
+          hasChildErrors = true;
+        }
+        
+        newErrors.children[index] = childErrors;
+      });
       
-      if (!formData.program) {
-        newErrors.program = "Please select a program";
+      if (!hasChildErrors) {
+        delete newErrors.children;
       }
     }
     
@@ -260,84 +342,165 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
       {/* Step 2: Child Information */}
       {currentStep === 2 && (
         <div className="space-y-4">
-          <h3 className="text-xl font-semibold mb-4">Child Information</h3>
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xl font-semibold">
+              {formData.children.length === 1 ? 'Child Information' : `Children Information (${formData.children.length})`}
+            </h3>
+          </div>
           
-          <div>
-            <label className="block text-sm font-medium mb-1">Child&apos;s Name *</label>
-            <input
-              type="text"
-              name="childName"
-              value={formData.childName}
-              onChange={handleInputChange}
-              required
-              className={`w-full px-4 py-3 rounded-lg border ${errors.childName ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:border-primary`}
-            />
-            {errors.childName && (
-              <p className="text-red-500 text-sm mt-1">{errors.childName}</p>
+          {/* Child Tabs */}
+          {formData.children.length > 1 && (
+            <div className="flex flex-wrap gap-2 mb-6">
+              {formData.children.map((child, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => setCurrentChildIndex(index)}
+                  className={`px-4 py-2 rounded-lg transition-colors ${
+                    currentChildIndex === index
+                      ? 'bg-primary text-white'
+                      : 'bg-gray-100 hover:bg-gray-200'
+                  }`}
+                >
+                  {child.childName || `Child ${index + 1}`}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Current Child Form */}
+          <div className="bg-gray-50 rounded-xl p-6 space-y-4">
+            {formData.children.length > 1 && (
+              <div className="flex items-center justify-between mb-4">
+                <h4 className="font-semibold text-lg">
+                  {formData.children[currentChildIndex].childName || `Child ${currentChildIndex + 1}`}
+                </h4>
+                {formData.children.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => removeChild(currentChildIndex)}
+                    className="text-red-600 hover:text-red-700 text-sm font-medium"
+                  >
+                    Remove Child
+                  </button>
+                )}
+              </div>
             )}
+            
+            <div>
+              <label className="block text-sm font-medium mb-1">Child&apos;s Name *</label>
+              <input
+                type="text"
+                name="childName"
+                value={formData.children[currentChildIndex].childName}
+                onChange={(e) => handleChildInputChange(e, currentChildIndex)}
+                required
+                className={`w-full px-4 py-3 rounded-lg border ${
+                  errors.children && errors.children[currentChildIndex] && errors.children[currentChildIndex].childName 
+                    ? 'border-red-500' 
+                    : 'border-gray-300'
+                } focus:outline-none focus:border-primary`}
+              />
+              {errors.children && errors.children[currentChildIndex] && errors.children[currentChildIndex].childName && (
+                <p className="text-red-500 text-sm mt-1">{errors.children[currentChildIndex].childName}</p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">Date of Birth *</label>
+              <input
+                type="date"
+                name="dateOfBirth"
+                value={formData.children[currentChildIndex].dateOfBirth}
+                onChange={(e) => handleChildInputChange(e, currentChildIndex)}
+                required
+                max={new Date().toISOString().split('T')[0]}
+                min={new Date(new Date().setFullYear(new Date().getFullYear() - 6)).toISOString().split('T')[0]}
+                className={`w-full px-4 py-3 rounded-lg border ${
+                  errors.children && errors.children[currentChildIndex] && errors.children[currentChildIndex].dateOfBirth 
+                    ? 'border-red-500' 
+                    : 'border-gray-300'
+                } focus:outline-none focus:border-primary`}
+              />
+              {formData.children[currentChildIndex].dateOfBirth && 
+               (!errors.children || !errors.children[currentChildIndex] || !errors.children[currentChildIndex].dateOfBirth) && (
+                <p className="text-sm text-primary mt-1">{calculateAge(formData.children[currentChildIndex].dateOfBirth)}</p>
+              )}
+              {errors.children && errors.children[currentChildIndex] && errors.children[currentChildIndex].dateOfBirth && (
+                <p className="text-red-500 text-sm mt-1">{errors.children[currentChildIndex].dateOfBirth}</p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">Program Interest *</label>
+              <select
+                name="program"
+                value={formData.children[currentChildIndex].program}
+                onChange={(e) => handleChildInputChange(e, currentChildIndex)}
+                required
+                className={`w-full px-4 py-3 pr-12 rounded-lg border ${
+                  errors.children && errors.children[currentChildIndex] && errors.children[currentChildIndex].program 
+                    ? 'border-red-500' 
+                    : 'border-gray-300'
+                } focus:outline-none focus:border-primary appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2714%27%20height%3D%278%27%20viewBox%3D%270%200%2014%208%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cpath%20d%3D%27M1%201l6%206%206-6%27%20stroke%3D%27%236B7280%27%20stroke-width%3D%272%27%20fill%3D%27none%27%20fill-rule%3D%27evenodd%27%2F%3E%3C%2Fsvg%3E')] bg-[length:14px_8px] bg-[position:right_16px_center] bg-no-repeat`}
+              >
+                <option value="">Select Program</option>
+                <option value="nursery">Nursery (Ages 2-3)</option>
+                <option value="pre-k">Pre-K (Ages 3-4)</option>
+                <option value="kindergarten">Kindergarten (Ages 4-6)</option>
+              </select>
+              {errors.children && errors.children[currentChildIndex] && errors.children[currentChildIndex].program && (
+                <p className="text-red-500 text-sm mt-1">{errors.children[currentChildIndex].program}</p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">Special Needs or Allergies</label>
+              <textarea
+                name="specialNeeds"
+                value={formData.children[currentChildIndex].specialNeeds}
+                onChange={(e) => handleChildInputChange(e, currentChildIndex)}
+                rows={3}
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+                placeholder="Please share any special needs, allergies, or medical conditions"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">Previous School Experience</label>
+              <input
+                type="text"
+                name="previousSchool"
+                value={formData.children[currentChildIndex].previousSchool}
+                onChange={(e) => handleChildInputChange(e, currentChildIndex)}
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+                placeholder="Name of previous school (if any)"
+              />
+            </div>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium mb-1">Date of Birth *</label>
-            <input
-              type="date"
-              name="dateOfBirth"
-              value={formData.dateOfBirth}
-              onChange={handleInputChange}
-              required
-              max={new Date().toISOString().split('T')[0]}
-              min={new Date(new Date().setFullYear(new Date().getFullYear() - 6)).toISOString().split('T')[0]}
-              className={`w-full px-4 py-3 rounded-lg border ${errors.dateOfBirth ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:border-primary`}
-            />
-            {formData.dateOfBirth && !errors.dateOfBirth && (
-              <p className="text-sm text-primary mt-1">{calculateAge(formData.dateOfBirth)}</p>
-            )}
-            {errors.dateOfBirth && (
-              <p className="text-red-500 text-sm mt-1">{errors.dateOfBirth}</p>
-            )}
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium mb-1">Program Interest *</label>
-            <select
-              name="program"
-              value={formData.program}
-              onChange={handleInputChange}
-              required
-              className={`w-full px-4 py-3 pr-12 rounded-lg border ${errors.program ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:border-primary appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2714%27%20height%3D%278%27%20viewBox%3D%270%200%2014%208%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cpath%20d%3D%27M1%201l6%206%206-6%27%20stroke%3D%27%236B7280%27%20stroke-width%3D%272%27%20fill%3D%27none%27%20fill-rule%3D%27evenodd%27%2F%3E%3C%2Fsvg%3E')] bg-[length:14px_8px] bg-[position:right_16px_center] bg-no-repeat`}
+          {/* Add Child Button */}
+          <div className="flex justify-center pt-4">
+            <button
+              type="button"
+              onClick={addChild}
+              className="flex items-center gap-2 px-6 py-3 bg-secondary text-white rounded-full hover:bg-secondary/90 transition-colors"
             >
-              <option value="">Select Program</option>
-              <option value="nursery">Nursery (Ages 2-3)</option>
-              <option value="pre-k">Pre-K (Ages 3-4)</option>
-              <option value="kindergarten">Kindergarten (Ages 4-6)</option>
-            </select>
-            {errors.program && (
-              <p className="text-red-500 text-sm mt-1">{errors.program}</p>
-            )}
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium mb-1">Special Needs or Allergies</label>
-            <textarea
-              name="specialNeeds"
-              value={formData.specialNeeds}
-              onChange={handleInputChange}
-              rows={3}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
-              placeholder="Please share any special needs, allergies, or medical conditions"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium mb-1">Previous School Experience</label>
-            <input
-              type="text"
-              name="previousSchool"
-              value={formData.previousSchool}
-              onChange={handleInputChange}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
-              placeholder="Name of previous school (if any)"
-            />
+              <svg 
+                className="w-5 h-5" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={2} 
+                  d="M12 4v16m8-8H4" 
+                />
+              </svg>
+              Add Another Child
+            </button>
           </div>
         </div>
       )}
@@ -393,8 +556,22 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
             <h4 className="font-semibold mb-2">Review Your Information:</h4>
             <p className="text-sm"><strong>Parent:</strong> {formData.parentName}</p>
             <p className="text-sm"><strong>Email:</strong> {formData.email}</p>
-            <p className="text-sm"><strong>Child:</strong> {formData.childName}</p>
-            <p className="text-sm"><strong>Program:</strong> {formData.program}</p>
+            <p className="text-sm"><strong>Phone:</strong> {formData.phone}</p>
+            <div className="mt-3">
+              <p className="text-sm font-semibold mb-1">
+                {formData.children.length === 1 ? 'Child:' : `Children (${formData.children.length}):`}
+              </p>
+              {formData.children.map((child, index) => (
+                <div key={index} className="ml-4 mb-2">
+                  <p className="text-sm">
+                    <strong>{index + 1}. {child.childName || `Child ${index + 1}`}</strong> - {child.program || 'No program selected'}
+                  </p>
+                  {child.dateOfBirth && (
+                    <p className="text-sm text-gray-600 ml-4">Age: {calculateAge(child.dateOfBirth)}</p>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}

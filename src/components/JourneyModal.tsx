@@ -4,16 +4,20 @@ import { useState } from "react";
 import Modal from "./Modal";
 import JourneyForm from "./JourneyForm";
 
-interface FormData {
-  parentName: string;
-  email: string;
-  phone: string;
-  relationship: string;
+interface ChildInfo {
   childName: string;
   dateOfBirth: string;
   program: string;
   specialNeeds: string;
   previousSchool: string;
+}
+
+interface FormData {
+  parentName: string;
+  email: string;
+  phone: string;
+  relationship: string;
+  children: ChildInfo[];
   preferredStartDate: string;
   howHeard: string;
   message: string;

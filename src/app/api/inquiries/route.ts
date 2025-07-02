@@ -1,14 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createInquiry, type InquiryInsert } from '@/lib/supabase';
-import { sendParentConfirmation, sendStaffNotification } from '@/lib/email';
+import { 
+  sendParentConfirmation, 
+  sendStaffNotification,
+  sendParentConfirmationMultiple,
+  sendStaffNotificationMultiple 
+} from '@/lib/email';
 
 export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
     
-    // Validate required fields
-    const requiredFields = ['parentName', 'email', 'phone', 'relationship', 'childName', 'dateOfBirth', 'program'];
-    for (const field of requiredFields) {
+    // Check if this is the new format with children array
+    const hasChildrenArray = data.children && Array.isArray(data.children);
+    
+    // Validate required parent fields
+    const requiredParentFields = ['parentName', 'email', 'phone', 'relationship'];
+    for (const field of requiredParentFields) {
       if (!data[field]) {
         return NextResponse.json(
           { error: `Missing required field: ${field}` },
@@ -26,55 +34,137 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    // Generate unique inquiry ID
-    const inquiryId = `INQ-${Date.now()}`;
+    // Generate unique inquiry group ID (for multiple children)
+    const inquiryGroupId = `INQ-${Date.now()}`;
+    const savedInquiries = [];
     
-    // Prepare data for database
-    const inquiryData: InquiryInsert = {
-      parent_name: data.parentName,
-      email: data.email,
-      phone: data.phone,
-      relationship: data.relationship,
-      child_name: data.childName,
-      date_of_birth: data.dateOfBirth,
-      program: data.program,
-      special_needs: data.specialNeeds || null,
-      previous_school: data.previousSchool || null,
-      preferred_start_date: data.preferredStartDate || null,
-      how_heard: data.howHeard || null,
-      message: data.message || null,
-      inquiry_id: inquiryId,
-      status: 'new'
-    };
-    
-    // Save to database
-    const savedInquiry = await createInquiry(inquiryData);
-    
-    console.log('New inquiry saved to database:', {
-      id: savedInquiry.id,
-      inquiryId: savedInquiry.inquiry_id,
-      parentName: savedInquiry.parent_name,
-      email: savedInquiry.email,
-      childName: savedInquiry.child_name,
-      program: savedInquiry.program,
-      timestamp: savedInquiry.created_at
-    });
+    if (hasChildrenArray) {
+      // New format with multiple children
+      if (data.children.length === 0) {
+        return NextResponse.json(
+          { error: 'At least one child must be included' },
+          { status: 400 }
+        );
+      }
+      
+      // Validate and save each child
+      for (let i = 0; i < data.children.length; i++) {
+        const child = data.children[i];
+        
+        // Validate required child fields
+        if (!child.childName || !child.dateOfBirth || !child.program) {
+          return NextResponse.json(
+            { error: `Missing required field for child ${i + 1}` },
+            { status: 400 }
+          );
+        }
+        
+        // Prepare data for database
+        const inquiryData: InquiryInsert = {
+          parent_name: data.parentName,
+          email: data.email,
+          phone: data.phone,
+          relationship: data.relationship,
+          child_name: child.childName,
+          date_of_birth: child.dateOfBirth,
+          program: child.program,
+          special_needs: child.specialNeeds || null,
+          previous_school: child.previousSchool || null,
+          preferred_start_date: data.preferredStartDate || null,
+          how_heard: data.howHeard || null,
+          message: data.message || null,
+          inquiry_id: `${inquiryGroupId}-${i + 1}`,
+          status: 'new'
+        };
+        
+        // Save to database
+        const savedInquiry = await createInquiry(inquiryData);
+        savedInquiries.push(savedInquiry);
+        
+        console.log(`New inquiry saved for child ${i + 1}:`, {
+          id: savedInquiry.id,
+          inquiryId: savedInquiry.inquiry_id,
+          parentName: savedInquiry.parent_name,
+          email: savedInquiry.email,
+          childName: savedInquiry.child_name,
+          program: savedInquiry.program,
+          timestamp: savedInquiry.created_at
+        });
+      }
+    } else {
+      // Old format with single child (backward compatibility)
+      const requiredChildFields = ['childName', 'dateOfBirth', 'program'];
+      for (const field of requiredChildFields) {
+        if (!data[field]) {
+          return NextResponse.json(
+            { error: `Missing required field: ${field}` },
+            { status: 400 }
+          );
+        }
+      }
+      
+      // Prepare data for database
+      const inquiryData: InquiryInsert = {
+        parent_name: data.parentName,
+        email: data.email,
+        phone: data.phone,
+        relationship: data.relationship,
+        child_name: data.childName,
+        date_of_birth: data.dateOfBirth,
+        program: data.program,
+        special_needs: data.specialNeeds || null,
+        previous_school: data.previousSchool || null,
+        preferred_start_date: data.preferredStartDate || null,
+        how_heard: data.howHeard || null,
+        message: data.message || null,
+        inquiry_id: inquiryGroupId,
+        status: 'new'
+      };
+      
+      // Save to database
+      const savedInquiry = await createInquiry(inquiryData);
+      savedInquiries.push(savedInquiry);
+      
+      console.log('New inquiry saved to database:', {
+        id: savedInquiry.id,
+        inquiryId: savedInquiry.inquiry_id,
+        parentName: savedInquiry.parent_name,
+        email: savedInquiry.email,
+        childName: savedInquiry.child_name,
+        program: savedInquiry.program,
+        timestamp: savedInquiry.created_at
+      });
+    }
     
     // Send emails asynchronously (don't wait for them to complete)
-    Promise.all([
-      sendParentConfirmation(savedInquiry).catch(err => {
-        console.error('Failed to send parent confirmation email:', err);
-      }),
-      sendStaffNotification(savedInquiry).catch(err => {
-        console.error('Failed to send staff notification email:', err);
-      })
-    ]);
+    // For multiple children, we'll send one email with all children info
+    if (hasChildrenArray && savedInquiries.length > 1) {
+      Promise.all([
+        sendParentConfirmationMultiple(savedInquiries).catch(err => {
+          console.error('Failed to send parent confirmation email:', err);
+        }),
+        sendStaffNotificationMultiple(savedInquiries).catch(err => {
+          console.error('Failed to send staff notification email:', err);
+        })
+      ]);
+    } else {
+      // Single child email (existing functionality)
+      Promise.all([
+        sendParentConfirmation(savedInquiries[0]).catch(err => {
+          console.error('Failed to send parent confirmation email:', err);
+        }),
+        sendStaffNotification(savedInquiries[0]).catch(err => {
+          console.error('Failed to send staff notification email:', err);
+        })
+      ]);
+    }
     
     // Return success response immediately
     return NextResponse.json({
       success: true,
       message: 'Inquiry submitted successfully',
-      inquiryId: savedInquiry.inquiry_id
+      inquiryId: inquiryGroupId,
+      childrenCount: savedInquiries.length
     });
     
   } catch (error) {
