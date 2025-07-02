@@ -359,7 +359,7 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
                   className={`px-4 py-2 rounded-lg transition-colors ${
                     currentChildIndex === index
                       ? 'bg-primary text-white'
-                      : 'bg-gray-100 hover:bg-gray-200'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
                   {child.childName || `Child ${index + 1}`}
@@ -369,7 +369,7 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
           )}
 
           {/* Current Child Form */}
-          <div className="bg-gray-50 rounded-xl p-6 space-y-4">
+          <div className="bg-card-bg rounded-xl p-6 space-y-4">
             {formData.children.length > 1 && (
               <div className="flex items-center justify-between mb-4">
                 <h4 className="font-semibold text-lg">
