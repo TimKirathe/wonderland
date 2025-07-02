@@ -39,7 +39,7 @@ export default function Home() {
                 alt="Wonderland Logo"
                 width={32}
                 height={32}
-                className="h-20 w-16 flex-shrink-0"
+                className="h-16 w-12 sm:h-20 sm:w-16 md:h-24 md:w-20 flex-shrink-0"
               />
               <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gradient truncate">
                 Wonderland Early Years & Prep School
