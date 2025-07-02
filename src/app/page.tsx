@@ -519,8 +519,7 @@ export default function Home() {
                     <div>
                       <p className="font-semibold">Address</p>
                       <p className="text-foreground/70">
-                        Ngei Estate Phase 1, Kalobot road, Langata, Nairobi,
-                        Kenya
+                        Kalobot road, Langata, Nairobi, Kenya
                       </p>
                     </div>
                   </div>
@@ -549,7 +548,7 @@ export default function Home() {
                     <div>
                       <p className="font-semibold">Hours</p>
                       <p className="text-foreground/70">
-                        Monday - Friday: 7:30 AM - 6:00 PM
+                        Monday - Friday: 8:00 AM - 5:00 PM
                       </p>
                     </div>
                   </div>
