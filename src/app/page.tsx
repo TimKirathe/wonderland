@@ -1,18 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import JourneyModal from "@/components/JourneyModal";
 import ContactForm from "@/components/ContactForm";
 import HeroCarousel from "@/components/HeroCarousel";
-import { getMarketingPhotos } from "@/lib/getMarketingPhotos";
-
-// Get marketing photos dynamically at build time
-const marketingPhotos = getMarketingPhotos();
 
 export default function Home() {
   const [isJourneyModalOpen, setIsJourneyModalOpen] = useState(false);
+  const [marketingPhotos, setMarketingPhotos] = useState<string[]>([]);
+
+  useEffect(() => {
+    // Fetch marketing photos dynamically
+    fetch('/api/marketing-photos')
+      .then(res => res.json())
+      .then(data => setMarketingPhotos(data.photos))
+      .catch(error => {
+        console.error('Error fetching marketing photos:', error);
+        // Fallback to a default set if API fails
+        setMarketingPhotos([
+          "/marketing-photos/marketing-photo-1.jpg",
+          "/marketing-photos/marketing-photo-2.jpg",
+          "/marketing-photos/marketing-photo-3.jpg",
+        ]);
+      });
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -67,7 +80,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen overflow-hidden">
-        <HeroCarousel images={marketingPhotos}>
+        <HeroCarousel images={marketingPhotos.length > 0 ? marketingPhotos : ["/wonderland-logo.svg"]}>
           <div className="container mx-auto px-4 min-h-screen flex items-center">
             <div className="max-w-2xl">
               <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full mb-6">

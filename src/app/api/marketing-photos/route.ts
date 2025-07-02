@@ -1,7 +1,8 @@
+import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
-export function getMarketingPhotos(): string[] {
+export async function GET() {
   const photosDirectory = path.join(process.cwd(), 'public', 'marketing-photos');
   
   try {
@@ -18,9 +19,11 @@ export function getMarketingPhotos(): string[] {
       });
     
     // Return the paths relative to the public directory
-    return imageFiles.map(file => `/marketing-photos/${file}`);
+    const photos = imageFiles.map(file => `/marketing-photos/${file}`);
+    
+    return NextResponse.json({ photos });
   } catch (error) {
     console.error('Error reading marketing photos directory:', error);
-    return [];
+    return NextResponse.json({ photos: [] }, { status: 500 });
   }
 }
