@@ -6,29 +6,13 @@ import Link from "next/link";
 import JourneyModal from "@/components/JourneyModal";
 import ContactForm from "@/components/ContactForm";
 import HeroCarousel from "@/components/HeroCarousel";
+import { getMarketingPhotos } from "@/lib/getMarketingPhotos";
+
+// Get marketing photos dynamically at build time
+const marketingPhotos = getMarketingPhotos();
 
 export default function Home() {
   const [isJourneyModalOpen, setIsJourneyModalOpen] = useState(false);
-
-  // Marketing photos for carousel
-  const marketingPhotos = [
-    "/marketing-photos/marketing-photo-1.jpg",
-    "/marketing-photos/marketing-photo-2.jpg",
-    "/marketing-photos/marketing-photo-3.jpg",
-    "/marketing-photos/marketing-photo-4.jpg",
-    "/marketing-photos/marketing-photo-5.jpg",
-    "/marketing-photos/marketing-photo-6.jpg",
-    "/marketing-photos/marketing-photo-7.jpeg",
-    "/marketing-photos/marketing-photo-8.jpg",
-    "/marketing-photos/marketing-photo-9.jpg",
-    "/marketing-photos/marketing-photo-10.jpg",
-    "/marketing-photos/marketing-photo-11.jpg",
-    "/marketing-photos/marketing-photo-12.jpg",
-    "/marketing-photos/marketing-photo-13.jpg",
-    "/marketing-photos/marketing-photo-14.jpg",
-    "/marketing-photos/marketing-photo-15.jpg",
-    "/marketing-photos/marketing-photo-16.jpg",
-  ];
 
   return (
     <div className="min-h-screen">
