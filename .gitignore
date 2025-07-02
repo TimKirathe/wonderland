@@ -51,3 +51,6 @@ browser-screenshots/
 # local CLAUDE files
 CLAUDE.local.md
 .claude/*
+
+# planning files
+PLAN.md
