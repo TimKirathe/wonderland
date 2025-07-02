@@ -11,6 +11,8 @@ import NoSSR from "@/components/NoSSR";
 export default function Home() {
   const [isJourneyModalOpen, setIsJourneyModalOpen] = useState(false);
   const [marketingPhotos, setMarketingPhotos] = useState<string[]>([]);
+  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     // Fetch marketing photos dynamically
@@ -28,10 +30,35 @@ export default function Home() {
       });
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Show navbar when scrolling up or at the top
+      if (currentScrollY < lastScrollY || currentScrollY < 10) {
+        setIsNavbarVisible(true);
+      } 
+      // Hide navbar when scrolling down (with a threshold to prevent jitter)
+      else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsNavbarVisible(false);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollY]);
+
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <nav className="bg-background/95 backdrop-blur-sm shadow-sm sticky top-0 z-50">
+      <nav className={`bg-background/95 backdrop-blur-sm shadow-sm sticky top-0 z-50 transition-transform duration-300 ${
+        isNavbarVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}>
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center space-x-2 flex-shrink min-w-0">
