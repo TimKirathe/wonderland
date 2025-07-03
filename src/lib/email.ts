@@ -13,9 +13,13 @@ const SCHOOL_NAME = "Wonderland Early Years & Prep School";
 // Email template for parent confirmation
 export function getParentConfirmationTemplate(inquiry: Inquiry): string {
   const programNames: Record<string, string> = {
-    nursery: "Nursery (Ages 2-3)",
-    "pre-k": "Pre-K (Ages 3-4)",
-    kindergarten: "Kindergarten (Ages 4-6)",
+    playgroup: "Playgroup (2-4 years old)",
+    "pre-primary-1": "Pre-Primary 1 (4-5 years old)",
+    "pre-primary-2": "Pre-Primary 2 (5-6 years old)",
+    "grade-1": "Grade 1 (6-7 years old)",
+    "grade-2": "Grade 2 (7-8 years old)",
+    "grade-3": "Grade 3 (8-9 years old)",
+    "grade-4": "Grade 4 (9-10 years old)",
   };
 
   return `
@@ -96,9 +100,13 @@ export function getParentConfirmationTemplate(inquiry: Inquiry): string {
 // Email template for staff notification
 export function getStaffNotificationTemplate(inquiry: Inquiry): string {
   const programNames: Record<string, string> = {
-    nursery: "Nursery (Ages 2-3)",
-    "pre-k": "Pre-K (Ages 3-4)",
-    kindergarten: "Kindergarten (Ages 4-6)",
+    playgroup: "Playgroup (2-4 years old)",
+    "pre-primary-1": "Pre-Primary 1 (4-5 years old)",
+    "pre-primary-2": "Pre-Primary 2 (5-6 years old)",
+    "grade-1": "Grade 1 (6-7 years old)",
+    "grade-2": "Grade 2 (7-8 years old)",
+    "grade-3": "Grade 3 (8-9 years old)",
+    "grade-4": "Grade 4 (9-10 years old)",
   };
 
   const relationshipNames: Record<string, string> = {
@@ -423,13 +431,17 @@ export function getParentConfirmationTemplateMultiple(
   inquiries: Inquiry[],
 ): string {
   const programNames: Record<string, string> = {
-    nursery: "Nursery (Ages 2-3)",
-    "pre-k": "Pre-K (Ages 3-4)",
-    kindergarten: "Kindergarten (Ages 4-6)",
+    playgroup: "Playgroup (2-4 years old)",
+    "pre-primary-1": "Pre-Primary 1 (4-5 years old)",
+    "pre-primary-2": "Pre-Primary 2 (5-6 years old)",
+    "grade-1": "Grade 1 (6-7 years old)",
+    "grade-2": "Grade 2 (7-8 years old)",
+    "grade-3": "Grade 3 (8-9 years old)",
+    "grade-4": "Grade 4 (9-10 years old)",
   };
 
   const parent = inquiries[0]; // All inquiries have same parent info
-  const inquiryGroupId = parent.inquiry_id.split("-")[0];
+  const inquiryGroupId = parent.inquiry_id.split("-").slice(0, 2).join("-"); // Get INQ-timestamp
 
   return `
 <!DOCTYPE html>
@@ -525,9 +537,13 @@ export function getStaffNotificationTemplateMultiple(
   inquiries: Inquiry[],
 ): string {
   const programNames: Record<string, string> = {
-    nursery: "Nursery (Ages 2-3)",
-    "pre-k": "Pre-K (Ages 3-4)",
-    kindergarten: "Kindergarten (Ages 4-6)",
+    playgroup: "Playgroup (2-4 years old)",
+    "pre-primary-1": "Pre-Primary 1 (4-5 years old)",
+    "pre-primary-2": "Pre-Primary 2 (5-6 years old)",
+    "grade-1": "Grade 1 (6-7 years old)",
+    "grade-2": "Grade 2 (7-8 years old)",
+    "grade-3": "Grade 3 (8-9 years old)",
+    "grade-4": "Grade 4 (9-10 years old)",
   };
 
   const relationshipNames: Record<string, string> = {
@@ -538,7 +554,7 @@ export function getStaffNotificationTemplateMultiple(
   };
 
   const parent = inquiries[0]; // All inquiries have same parent info
-  const inquiryGroupId = parent.inquiry_id.split("-")[0];
+  const inquiryGroupId = parent.inquiry_id.split("-").slice(0, 2).join("-"); // Get INQ-timestamp
 
   return `
 <!DOCTYPE html>

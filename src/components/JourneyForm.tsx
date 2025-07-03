@@ -37,6 +37,21 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const [errors, setErrors] = useState<any>({});
   const [currentChildIndex, setCurrentChildIndex] = useState(0);
+  
+  // Helper function to get program display name
+  const getProgramDisplayName = (programValue: string): string => {
+    const programNames: Record<string, string> = {
+      playgroup: "Playgroup (2-4 years old)",
+      "pre-primary-1": "Pre-Primary 1 (4-5 years old)",
+      "pre-primary-2": "Pre-Primary 2 (5-6 years old)",
+      "grade-1": "Grade 1 (6-7 years old)",
+      "grade-2": "Grade 2 (7-8 years old)",
+      "grade-3": "Grade 3 (8-9 years old)",
+      "grade-4": "Grade 4 (9-10 years old)",
+    };
+    return programNames[programValue] || programValue;
+  };
+  
   const [formData, setFormData] = useState<FormData>({
     parentName: "",
     email: "",
@@ -191,9 +206,9 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
           } else if (actualAge < 2) {
             childErrors.dateOfBirth = "Child must be at least 2 years old";
             hasChildErrors = true;
-          } else if (actualAge > 6) {
+          } else if (actualAge > 10) {
             childErrors.dateOfBirth =
-              "Our programs are for children aged 2-6 years";
+              "Our programs are for children aged 2-10 years";
             hasChildErrors = true;
           }
         }
@@ -459,7 +474,7 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
                 required
                 max={new Date().toISOString().split("T")[0]}
                 min={
-                  new Date(new Date().setFullYear(new Date().getFullYear() - 6))
+                  new Date(new Date().setFullYear(new Date().getFullYear() - 10))
                     .toISOString()
                     .split("T")[0]
                 }
@@ -506,9 +521,17 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
                 } focus:outline-none focus:border-primary appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2714%27%20height%3D%278%27%20viewBox%3D%270%200%2014%208%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cpath%20d%3D%27M1%201l6%206%206-6%27%20stroke%3D%27%236B7280%27%20stroke-width%3D%272%27%20fill%3D%27none%27%20fill-rule%3D%27evenodd%27%2F%3E%3C%2Fsvg%3E')] bg-[length:14px_8px] bg-[position:right_16px_center] bg-no-repeat`}
               >
                 <option value="">Select Program</option>
-                <option value="nursery">Nursery (Ages 2-3)</option>
-                <option value="pre-k">Pre-K (Ages 3-4)</option>
-                <option value="kindergarten">Kindergarten (Ages 4-6)</option>
+                <option value="playgroup">Playgroup (2-4 years old)</option>
+                <option value="pre-primary-1">
+                  Pre-Primary 1 (4-5 years old)
+                </option>
+                <option value="pre-primary-2">
+                  Pre-Primary 2 (5-6 years old)
+                </option>
+                <option value="grade-1">Grade 1 (6-7 years old)</option>
+                <option value="grade-2">Grade 2 (7-8 years old)</option>
+                <option value="grade-3">Grade 3 (8-9 years old)</option>
+                <option value="grade-4">Grade 4 (9-10 years old)</option>
               </select>
               {errors.children &&
                 errors.children[currentChildIndex] &&
@@ -650,7 +673,7 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
                     <strong>
                       {index + 1}. {child.childName || `Child ${index + 1}`}
                     </strong>{" "}
-                    - {child.program || "No program selected"}
+                    - {getProgramDisplayName(child.program) || "No program selected"}
                   </p>
                   {child.dateOfBirth && (
                     <p className="text-sm text-gray-600 ml-4">
@@ -704,4 +727,3 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
     </form>
   );
 }
-
