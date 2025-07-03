@@ -52,7 +52,7 @@ export function getParentConfirmationTemplate(inquiry: Inquiry): string {
         <h3>Application Summary:</h3>
         <p><strong>Reference Number:</strong> ${inquiry.inquiry_id}</p>
         <p><strong>Child's Name:</strong> ${inquiry.child_name}</p>
-        <p><strong>Program of Interest:</strong> ${programNames[inquiry.program] || inquiry.program}</p>
+        <p><strong>Class of Interest:</strong> ${programNames[inquiry.program] || inquiry.program}</p>
         <p><strong>Submitted On:</strong> ${new Date(
           inquiry.created_at || Date.now(),
         ).toLocaleDateString("en-US", {
@@ -171,7 +171,7 @@ export function getStaffNotificationTemplate(inquiry: Inquiry): string {
           <span class="label">Age:</span> <span class="value">${calculateAge(inquiry.date_of_birth)} years old</span>
         </div>
         <div class="field">
-          <span class="label">Program Interest:</span> <span class="value highlight">${programNames[inquiry.program] || inquiry.program}</span>
+          <span class="label">Class:</span> <span class="value highlight">${programNames[inquiry.program] || inquiry.program}</span>
         </div>
         ${
           inquiry.special_needs
@@ -419,7 +419,9 @@ export async function sendStaffInformationRequestNotification(
 }
 
 // Email template for parent confirmation (multiple children)
-export function getParentConfirmationTemplateMultiple(inquiries: Inquiry[]): string {
+export function getParentConfirmationTemplateMultiple(
+  inquiries: Inquiry[],
+): string {
   const programNames: Record<string, string> = {
     nursery: "Nursery (Ages 2-3)",
     "pre-k": "Pre-K (Ages 3-4)",
@@ -427,7 +429,7 @@ export function getParentConfirmationTemplateMultiple(inquiries: Inquiry[]): str
   };
 
   const parent = inquiries[0]; // All inquiries have same parent info
-  const inquiryGroupId = parent.inquiry_id.split('-')[0];
+  const inquiryGroupId = parent.inquiry_id.split("-")[0];
 
   return `
 <!DOCTYPE html>
@@ -456,9 +458,9 @@ export function getParentConfirmationTemplateMultiple(inquiries: Inquiry[]): str
     <div class="content">
       <p>Dear ${parent.parent_name},</p>
       
-      <p>Thank you for your interest in <strong>${SCHOOL_NAME}</strong>. We're thrilled that you're considering us for your ${inquiries.length === 1 ? 'child\'s' : 'children\'s'} educational journey!</p>
+      <p>Thank you for your interest in <strong>${SCHOOL_NAME}</strong>. We're thrilled that you're considering us for your ${inquiries.length === 1 ? "child's" : "children's"} educational journey!</p>
       
-      <p>We have successfully received your ${inquiries.length === 1 ? 'application' : `applications for ${inquiries.length} children`} and ${inquiries.length === 1 ? 'it is' : 'they are'} being reviewed by our admissions team.</p>
+      <p>We have successfully received your ${inquiries.length === 1 ? "application" : `applications for ${inquiries.length} children`} and ${inquiries.length === 1 ? "it is" : "they are"} being reviewed by our admissions team.</p>
       
       <div class="info-box">
         <h3>Application Summary:</h3>
@@ -475,20 +477,24 @@ export function getParentConfirmationTemplateMultiple(inquiries: Inquiry[]): str
       </div>
 
       <h3>Children Information:</h3>
-      ${inquiries.map((inquiry, index) => `
+      ${inquiries
+        .map(
+          (inquiry, index) => `
         <div class="child-card">
           <h4 style="margin-top: 0; color: #4ecdc4;">Child ${index + 1}: ${inquiry.child_name}</h4>
           <p style="margin: 5px 0;"><strong>Program:</strong> ${programNames[inquiry.program] || inquiry.program}</p>
           <p style="margin: 5px 0;"><strong>Age:</strong> ${calculateAge(inquiry.date_of_birth)} years old</p>
-          ${inquiry.special_needs ? `<p style="margin: 5px 0;"><strong>Special Needs/Allergies:</strong> ${inquiry.special_needs}</p>` : ''}
+          ${inquiry.special_needs ? `<p style="margin: 5px 0;"><strong>Special Needs/Allergies:</strong> ${inquiry.special_needs}</p>` : ""}
         </div>
-      `).join('')}
+      `,
+        )
+        .join("")}
       
       <h2>What Happens Next?</h2>
       <ol>
-        <li><strong>Application Review:</strong> Our admissions team will carefully review your ${inquiries.length === 1 ? 'application' : 'applications'} within 2-3 business days.</li>
+        <li><strong>Application Review:</strong> Our admissions team will carefully review your ${inquiries.length === 1 ? "application" : "applications"} within 2-3 business days.</li>
         <li><strong>School Tour:</strong> We'll contact you to schedule a personal tour of our facilities, if you'd like.</li>
-        <li><strong>Meet & Greet:</strong> If a school tour is scheduled, you and your ${inquiries.length === 1 ? 'child' : 'children'} will have the opportunity to meet our teachers and see our classrooms in action.</li>
+        <li><strong>Meet & Greet:</strong> If a school tour is scheduled, you and your ${inquiries.length === 1 ? "child" : "children"} will have the opportunity to meet our teachers and see our classrooms in action.</li>
         <li><strong>Enrollment:</strong> Upon acceptance, we'll guide you through the enrollment process.</li>
       </ol>
       
@@ -498,7 +504,7 @@ export function getParentConfirmationTemplateMultiple(inquiries: Inquiry[]): str
         <li>📞 Phone: ${STAFF_PHONE}</li>
       </ul>
       
-      <p>We look forward to welcoming your ${inquiries.length === 1 ? 'child' : 'children'} to our Wonderland family!</p>
+      <p>We look forward to welcoming your ${inquiries.length === 1 ? "child" : "children"} to our Wonderland family!</p>
       
       <p>Warm regards,<br>
       The Admissions Team<br>
@@ -515,7 +521,9 @@ export function getParentConfirmationTemplateMultiple(inquiries: Inquiry[]): str
 }
 
 // Email template for staff notification (multiple children)
-export function getStaffNotificationTemplateMultiple(inquiries: Inquiry[]): string {
+export function getStaffNotificationTemplateMultiple(
+  inquiries: Inquiry[],
+): string {
   const programNames: Record<string, string> = {
     nursery: "Nursery (Ages 2-3)",
     "pre-k": "Pre-K (Ages 3-4)",
@@ -530,7 +538,7 @@ export function getStaffNotificationTemplateMultiple(inquiries: Inquiry[]): stri
   };
 
   const parent = inquiries[0]; // All inquiries have same parent info
-  const inquiryGroupId = parent.inquiry_id.split('-')[0];
+  const inquiryGroupId = parent.inquiry_id.split("-")[0];
 
   return `
 <!DOCTYPE html>
@@ -580,7 +588,9 @@ export function getStaffNotificationTemplateMultiple(inquiries: Inquiry[]): stri
 
       <div class="section">
         <h2>Children Information (${inquiries.length} children)</h2>
-        ${inquiries.map((inquiry, index) => `
+        ${inquiries
+          .map(
+            (inquiry, index) => `
           <div class="child-section">
             <h3 style="margin-top: 0; color: #333;">Child ${index + 1}: ${inquiry.child_name}</h3>
             <div class="field">
@@ -596,7 +606,7 @@ export function getStaffNotificationTemplateMultiple(inquiries: Inquiry[]): stri
               <span class="label">Age:</span> <span class="value">${calculateAge(inquiry.date_of_birth)} years old</span>
             </div>
             <div class="field">
-              <span class="label">Program Interest:</span> <span class="value highlight">${programNames[inquiry.program] || inquiry.program}</span>
+              <span class="label">Class:</span> <span class="value highlight">${programNames[inquiry.program] || inquiry.program}</span>
             </div>
             ${
               inquiry.special_needs
@@ -617,7 +627,9 @@ export function getStaffNotificationTemplateMultiple(inquiries: Inquiry[]): stri
                 : ""
             }
           </div>
-        `).join('')}
+        `,
+          )
+          .join("")}
       </div>
 
       <div class="section">
@@ -662,12 +674,12 @@ export function getStaffNotificationTemplateMultiple(inquiries: Inquiry[]): stri
 
       <div class="section" style="background-color: #ffe66d;">
         <h2 style="color: #333;">Action Required</h2>
-        <p>Please review ${inquiries.length === 1 ? 'this inquiry' : 'these inquiries'} and contact the parent within 2-3 business days.</p>
+        <p>Please review ${inquiries.length === 1 ? "this inquiry" : "these inquiries"} and contact the parent within 2-3 business days.</p>
         <p><strong>Quick Actions:</strong></p>
         <ul style="margin: 5px 0;">
           <li>Call ${parent.parent_name} at ${parent.phone}</li>
           <li>Send follow-up email to ${parent.email}</li>
-          <li>Schedule a school tour for ${inquiries.length} ${inquiries.length === 1 ? 'child' : 'children'}</li>
+          <li>Schedule a school tour for ${inquiries.length} ${inquiries.length === 1 ? "child" : "children"}</li>
         </ul>
       </div>
     </div>
