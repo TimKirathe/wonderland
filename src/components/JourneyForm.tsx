@@ -25,6 +25,7 @@ interface FormData {
   // Additional Information
   preferredStartDate: string;
   howHeard: string;
+  howHeardOther?: string;
   message: string;
 }
 
@@ -68,6 +69,7 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
     ],
     preferredStartDate: "",
     howHeard: "",
+    howHeardOther: "",
     message: "",
   });
 
@@ -276,7 +278,7 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form className="space-y-6">
       {/* Progress Indicator */}
       <div className="flex items-center justify-center space-x-2 mb-8">
         {[1, 2, 3].map((step) => (
@@ -637,6 +639,22 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
             </select>
           </div>
 
+          {formData.howHeard === "other" && (
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                Please specify
+              </label>
+              <input
+                type="text"
+                name="howHeardOther"
+                value={formData.howHeardOther || ""}
+                onChange={handleInputChange}
+                placeholder="Tell us how you heard about us"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+              />
+            </div>
+          )}
+
           <div>
             <label className="block text-sm font-medium mb-1">
               Message or Questions
@@ -711,7 +729,7 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
           </button>
         )}
 
-        {currentStep < 4 ? (
+        {currentStep < 3 ? (
           <button
             type="button"
             onClick={handleNext}
@@ -721,7 +739,8 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
           </button>
         ) : (
           <button
-            type="submit"
+            type="button"
+            onClick={handleSubmit}
             className="px-6 py-3 bg-primary text-white rounded-full hover:bg-primary/90 transition-colors"
           >
             Submit Application
