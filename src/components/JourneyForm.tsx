@@ -37,7 +37,7 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const [errors, setErrors] = useState<any>({});
   const [currentChildIndex, setCurrentChildIndex] = useState(0);
-  
+
   // Helper function to get program display name
   const getProgramDisplayName = (programValue: string): string => {
     const programNames: Record<string, string> = {
@@ -51,7 +51,7 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
     };
     return programNames[programValue] || programValue;
   };
-  
+
   const [formData, setFormData] = useState<FormData>({
     parentName: "",
     email: "",
@@ -406,7 +406,7 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
                   className={`px-4 py-2 rounded-lg transition-colors ${
                     currentChildIndex === index
                       ? "bg-primary text-white"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                      : "bg-transparent text-white hover:bg-gray-100 hover:text-gray-700"
                   }`}
                 >
                   {child.childName || `Child ${index + 1}`}
@@ -474,7 +474,9 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
                 required
                 max={new Date().toISOString().split("T")[0]}
                 min={
-                  new Date(new Date().setFullYear(new Date().getFullYear() - 10))
+                  new Date(
+                    new Date().setFullYear(new Date().getFullYear() - 10),
+                  )
                     .toISOString()
                     .split("T")[0]
                 }
@@ -673,7 +675,9 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
                     <strong>
                       {index + 1}. {child.childName || `Child ${index + 1}`}
                     </strong>{" "}
-                    - {getProgramDisplayName(child.program) || "No program selected"}
+                    -{" "}
+                    {getProgramDisplayName(child.program) ||
+                      "No program selected"}
                   </p>
                   {child.dateOfBirth && (
                     <p className="text-sm text-gray-600 ml-4">

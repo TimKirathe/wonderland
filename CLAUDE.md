@@ -24,8 +24,6 @@ npm run lint
 
 ## Working With The Browser
 
-- Look for browser screenshots in ./brower-screenshots/
-
 ## Git
 
 ### Commit style
@@ -35,6 +33,7 @@ npm run lint
 - Make sure that you group tasks which are logically related into a single commit.
 - Perform git commits every time a task or set of related tasks are completed.
 - **Always ask for approval before making commits.**
+- **Don't add contributions to the commits. You are acting on my behalf, therefore are making the commits as if I am the one making them**
 
 #### Conventional Commits Format
 
@@ -58,10 +57,12 @@ npm run lint
   - The changes, while small, stand alone logically
   - Think: "Could I describe each change in a commit message without referencing the others?"
 
-### General Notes
+## General Notes
 
 - If you create a file that you are unsure about whether or not it should be gitignored. Ask before proceeding.
 - Make sure that any files/directories that you create which contain sensitive information are put inside the .gitignore file.
+- Look for browser screenshots in ./brower-screenshots/
+- Whenever you make a plan, write it to PLAN.md ensuring that you overwrite what is there already, unless it has pending points. If it does, confirm with me whether or not you should proceed.
 
 ## Architecture
 
