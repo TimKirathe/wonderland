@@ -22,6 +22,10 @@ npm run start
 npm run lint
 ```
 
+## Working With The Browser
+
+- Look for browser screenshots in ./brower-screenshots/
+
 ## Git
 
 ### Commit style
@@ -33,6 +37,7 @@ npm run lint
 - **Always ask for approval before making commits.**
 
 #### Conventional Commits Format
+
 - Use scope in format: `type(scope): description` (e.g., `feat(contact): add email validation`)
 - Only include body/footer content if additional explanation is needed to explain the why behind what was done or to make the description understandable
 - Breaking changes notation:
@@ -40,6 +45,7 @@ npm run lint
   - Option 2: Include `BREAKING CHANGE:` in commit footer
 
 #### Grouping Changes
+
 - **Commit small related fixes together if:**
   - They are tightly related (e.g., fixing typos in the same function or fixing a bug and its related test)
   - The group of changes forms a logical unit that's easier to understand as a whole
