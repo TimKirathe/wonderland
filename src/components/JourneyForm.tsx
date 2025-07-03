@@ -711,7 +711,7 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
           </button>
         )}
 
-        {currentStep < 3 ? (
+        {currentStep < 4 ? (
           <button
             type="button"
             onClick={handleNext}
