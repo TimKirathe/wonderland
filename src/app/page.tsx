@@ -205,7 +205,7 @@ export default function Home() {
             <div className="bg-card-bg rounded-3xl overflow-hidden card-shadow card-shadow-hover transition-all">
               <div className="relative h-48 mb-6">
                 <Image
-                  src="/programs-photos/playgroup-class-photo.jpg"
+                  src="/programs-photos/playgroup-girl-coloring.jpg"
                   alt="Playgroup classroom with children engaged in activities"
                   fill
                   className="object-cover"
@@ -235,7 +235,7 @@ export default function Home() {
             <div className="bg-card-bg rounded-3xl overflow-hidden card-shadow card-shadow-hover transition-all">
               <div className="relative h-48 mb-6">
                 <Image
-                  src="/programs-photos/pp2-class-photo.jpg"
+                  src="/programs-photos/child-in-pp2-writing-blurred.png"
                   alt="Pre-Primary classroom with students learning"
                   fill
                   className="object-cover"
@@ -276,7 +276,7 @@ export default function Home() {
             <div className="bg-card-bg rounded-3xl overflow-hidden card-shadow card-shadow-hover transition-all">
               <div className="relative h-48 mb-6">
                 <Image
-                  src="/programs-photos/grade2-classroom.jpg"
+                  src="/programs-photos/child-in-grade1.jpg"
                   alt="Grade school classroom with students at desks"
                   fill
                   className="object-cover"
@@ -422,46 +422,26 @@ export default function Home() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-card-bg rounded-3xl p-8 card-shadow">
-              <div className="flex mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-primary text-xl">
-                    ⭐
-                  </span>
-                ))}
-              </div>
               <p className="text-foreground/70 mb-4">
-                &quot;My daughter loves going to Wonderland every day. The
-                teachers are amazing and she&apos;s learned so much!&quot;
+                &quot;I am thankful for the Wonderland team. I am very happy
+                about the decision I made three years ago to bring my children
+                here. I have watched them grow and develop skills!&quot;
               </p>
-              <p className="font-semibold">- Sarah M.</p>
+              <p className="font-semibold">- Wonderland Parent</p>
             </div>
             <div className="bg-card-bg rounded-3xl p-8 card-shadow">
-              <div className="flex mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-primary text-xl">
-                    ⭐
-                  </span>
-                ))}
-              </div>
               <p className="text-foreground/70 mb-4">
-                &quot;The perfect balance of learning and play. My son has grown
-                so much in confidence since joining.&quot;
+                &quot;The team that is here are so dedicated! I admire the
+                values that they have instilled in my child.&quot;
               </p>
-              <p className="font-semibold">- David L.</p>
+              <p className="font-semibold">- Wonderland Parent</p>
             </div>
             <div className="bg-card-bg rounded-3xl p-8 card-shadow">
-              <div className="flex mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-primary text-xl">
-                    ⭐
-                  </span>
-                ))}
-              </div>
               <p className="text-foreground/70 mb-4">
-                &quot;Wonderland truly lives up to its name. It&apos;s a magical
-                place where children thrive and grow.&quot;
+                &quot;My child has grown in leaps and bounds with how she is
+                able to express herself.&quot;
               </p>
-              <p className="font-semibold">- Emma K.</p>
+              <p className="font-semibold">- Wonderland Parent</p>
             </div>
           </div>
         </div>
