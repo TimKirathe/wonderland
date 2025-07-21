@@ -162,9 +162,7 @@ export default function Home() {
                 Caring Environment
               </h3>
               <p className="text-foreground/70">
-                Keeping with our established reputation for excellence, We
-                educate young children in an atmosphere of Christian love,
-                culture, and Biblical values.
+                Excellence in Christian education with love and Biblical values.
               </p>
             </div>
             <div className="text-center">
@@ -173,9 +171,7 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-semibold mb-2">Quality Education</h3>
               <p className="text-foreground/70">
-                Our teachers are thoroughly trained in the new CBC curriculum.
-                We inspire our young learners to be productive members of our
-                society.
+                CBC-trained teachers inspiring productive young learners.
               </p>
             </div>
             <div className="text-center">
@@ -184,9 +180,7 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-semibold mb-2">Co-Curricluum</h3>
               <p className="text-foreground/70">
-                Your child will never lack something to do. The wide range of
-                extra-curricular activities that we offer include: Abacus,
-                Swimmining, Football, Skating, and Ballet!
+                Abacus, Swimming, Football, Skating, Ballet, and more exciting activities!
               </p>
             </div>
           </div>
