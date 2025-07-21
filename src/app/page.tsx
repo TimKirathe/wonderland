@@ -7,6 +7,8 @@ import JourneyModal from "@/components/JourneyModal";
 import ContactForm from "@/components/ContactForm";
 import HeroCarousel from "@/components/HeroCarousel";
 import NoSSR from "@/components/NoSSR";
+import VisionMission from "@/components/VisionMission";
+import EducationPhilosophy from "@/components/EducationPhilosophy";
 
 export default function Home() {
   const [isJourneyModalOpen, setIsJourneyModalOpen] = useState(false);
@@ -188,8 +190,12 @@ export default function Home() {
               </p>
             </div>
           </div>
+          <VisionMission />
         </div>
       </section>
+
+      {/* Education Philosophy Section */}
+      <EducationPhilosophy />
 
       {/* Programs Section */}
       <section
