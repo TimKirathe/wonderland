@@ -9,12 +9,24 @@ import HeroCarousel from "@/components/HeroCarousel";
 import NoSSR from "@/components/NoSSR";
 import VisionMission from "@/components/VisionMission";
 import EducationPhilosophy from "@/components/EducationPhilosophy";
+import ReviewCard from "@/components/ReviewCard";
+import ReviewCardSkeleton from "@/components/ReviewCardSkeleton";
+
+interface Review {
+  id: string;
+  text: string;
+  parent_name: string;
+  date: string;
+}
 
 export default function Home() {
   const [isJourneyModalOpen, setIsJourneyModalOpen] = useState(false);
   const [marketingPhotos, setMarketingPhotos] = useState<string[]>([]);
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [reviewsLoading, setReviewsLoading] = useState(true);
+  const [reviewsError, setReviewsError] = useState(false);
 
   useEffect(() => {
     // Fetch marketing photos dynamically
@@ -29,6 +41,23 @@ export default function Home() {
           "/marketing-photos/marketing-photo-2.jpg",
           "/marketing-photos/marketing-photo-3.jpg",
         ]);
+      });
+  }, []);
+
+  useEffect(() => {
+    // Fetch reviews
+    fetch("/api/reviews")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.reviews) {
+          setReviews(data.reviews);
+        }
+        setReviewsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching reviews:", error);
+        setReviewsError(true);
+        setReviewsLoading(false);
       });
   }, []);
 
@@ -421,28 +450,30 @@ export default function Home() {
             What Parents Say
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-card-bg rounded-3xl p-8 card-shadow">
-              <p className="text-foreground/70 mb-4">
-                &quot;I am thankful for the Wonderland team. I am very happy
-                about the decision I made three years ago to bring my children
-                here. I have watched them grow and develop skills!&quot;
-              </p>
-              <p className="font-semibold">- Wonderland Parent</p>
-            </div>
-            <div className="bg-card-bg rounded-3xl p-8 card-shadow">
-              <p className="text-foreground/70 mb-4">
-                &quot;The team that is here are so dedicated! I admire the
-                values that they have instilled in my child.&quot;
-              </p>
-              <p className="font-semibold">- Wonderland Parent</p>
-            </div>
-            <div className="bg-card-bg rounded-3xl p-8 card-shadow">
-              <p className="text-foreground/70 mb-4">
-                &quot;My child has grown in leaps and bounds with how she is
-                able to express herself.&quot;
-              </p>
-              <p className="font-semibold">- Wonderland Parent</p>
-            </div>
+            {reviewsLoading ? (
+              <>
+                <ReviewCardSkeleton />
+                <ReviewCardSkeleton />
+                <ReviewCardSkeleton />
+              </>
+            ) : reviewsError ? (
+              <div className="col-span-3 text-center">
+                <p className="text-foreground/70">Unable to load reviews at the moment.</p>
+              </div>
+            ) : reviews.length > 0 ? (
+              reviews.slice(0, 3).map((review) => (
+                <ReviewCard
+                  key={review.id}
+                  text={review.text}
+                  parentName={review.parent_name}
+                  date={review.date}
+                />
+              ))
+            ) : (
+              <div className="col-span-3 text-center">
+                <p className="text-foreground/70">No reviews available yet.</p>
+              </div>
+            )}
           </div>
         </div>
       </section>
