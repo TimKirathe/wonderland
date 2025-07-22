@@ -9,8 +9,7 @@ import HeroCarousel from "@/components/HeroCarousel";
 import NoSSR from "@/components/NoSSR";
 import VisionMission from "@/components/VisionMission";
 import EducationPhilosophy from "@/components/EducationPhilosophy";
-import ReviewCard from "@/components/ReviewCard";
-import ReviewCardSkeleton from "@/components/ReviewCardSkeleton";
+import ReviewsCarousel from "@/components/ReviewsCarousel";
 
 interface Review {
   id: string;
@@ -449,32 +448,11 @@ export default function Home() {
           <h2 className="text-4xl font-bold text-center mb-12">
             What Parents Say
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {reviewsLoading ? (
-              <>
-                <ReviewCardSkeleton />
-                <ReviewCardSkeleton />
-                <ReviewCardSkeleton />
-              </>
-            ) : reviewsError ? (
-              <div className="col-span-3 text-center">
-                <p className="text-foreground/70">Unable to load reviews at the moment.</p>
-              </div>
-            ) : reviews.length > 0 ? (
-              reviews.slice(0, 3).map((review) => (
-                <ReviewCard
-                  key={review.id}
-                  text={review.text}
-                  parentName={review.parent_name}
-                  date={review.date}
-                />
-              ))
-            ) : (
-              <div className="col-span-3 text-center">
-                <p className="text-foreground/70">No reviews available yet.</p>
-              </div>
-            )}
-          </div>
+          <ReviewsCarousel 
+            reviews={reviews}
+            loading={reviewsLoading}
+            error={reviewsError}
+          />
         </div>
       </section>
 
