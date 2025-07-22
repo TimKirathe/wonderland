@@ -32,7 +32,11 @@ export default function ReviewsCarousel({ reviews, loading, error }: ReviewsCaro
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => Math.min(reviews.length - reviewsPerPage, prev + reviewsPerPage));
+    setCurrentIndex((prev) => {
+      const nextIndex = prev + reviewsPerPage;
+      // Allow navigation to the last page even if it has fewer items
+      return nextIndex < reviews.length ? nextIndex : prev;
+    });
   };
 
   const currentReviews = reviews.slice(currentIndex, currentIndex + reviewsPerPage);
@@ -43,7 +47,13 @@ export default function ReviewsCarousel({ reviews, loading, error }: ReviewsCaro
   return (
     <div className="relative">
       {/* Reviews Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className={`grid grid-cols-1 gap-8 ${
+        currentReviews.length === 1 
+          ? "md:grid-cols-1 md:max-w-md md:mx-auto" 
+          : currentReviews.length === 2 
+          ? "md:grid-cols-2 md:max-w-2xl md:mx-auto" 
+          : "md:grid-cols-3"
+      }`}>
         {loading ? (
           <>
             <ReviewCardSkeleton />
