@@ -28,15 +28,17 @@ export default function ReviewsCarousel({ reviews, loading, error }: ReviewsCaro
   }, [reviews]);
 
   const handlePrevious = () => {
-    setCurrentIndex((prev) => (prev - reviewsPerPage < 0 ? Math.max(0, reviews.length - reviewsPerPage) : prev - reviewsPerPage));
+    setCurrentIndex((prev) => Math.max(0, prev - reviewsPerPage));
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev + reviewsPerPage >= reviews.length ? 0 : prev + reviewsPerPage));
+    setCurrentIndex((prev) => Math.min(reviews.length - reviewsPerPage, prev + reviewsPerPage));
   };
 
   const currentReviews = reviews.slice(currentIndex, currentIndex + reviewsPerPage);
   const currentPage = Math.floor(currentIndex / reviewsPerPage) + 1;
+  const isFirstPage = currentIndex === 0;
+  const isLastPage = currentIndex + reviewsPerPage >= reviews.length;
 
   return (
     <div className="relative">
@@ -74,7 +76,12 @@ export default function ReviewsCarousel({ reviews, loading, error }: ReviewsCaro
           {/* Previous Button */}
           <button
             onClick={handlePrevious}
-            className="bg-primary/10 hover:bg-primary/20 text-primary p-3 rounded-full transition-all transform hover:scale-110 card-shadow"
+            disabled={isFirstPage}
+            className={`p-3 rounded-full transition-all card-shadow ${
+              isFirstPage 
+                ? "bg-foreground/10 text-foreground/30 cursor-not-allowed" 
+                : "bg-primary/10 hover:bg-primary/20 text-primary transform hover:scale-110"
+            }`}
             aria-label="Previous reviews"
           >
             <svg
@@ -111,7 +118,12 @@ export default function ReviewsCarousel({ reviews, loading, error }: ReviewsCaro
           {/* Next Button */}
           <button
             onClick={handleNext}
-            className="bg-primary/10 hover:bg-primary/20 text-primary p-3 rounded-full transition-all transform hover:scale-110 card-shadow"
+            disabled={isLastPage}
+            className={`p-3 rounded-full transition-all card-shadow ${
+              isLastPage 
+                ? "bg-foreground/10 text-foreground/30 cursor-not-allowed" 
+                : "bg-primary/10 hover:bg-primary/20 text-primary transform hover:scale-110"
+            }`}
             aria-label="Next reviews"
           >
             <svg
