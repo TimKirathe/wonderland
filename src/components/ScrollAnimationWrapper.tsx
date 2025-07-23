@@ -7,7 +7,7 @@ interface ScrollAnimationWrapperProps {
   children: ReactNode;
   delay?: number;
   className?: string;
-  animation?: 'fadeUp' | 'fadeIn' | 'scaleIn' | 'slideRight' | 'slideLeft' | 'bounceIn';
+  animation?: 'fadeUp' | 'fadeIn' | 'scaleIn' | 'slideRight' | 'slideLeft' | 'bounceIn' | 'scaleRotate' | 'expandCenter' | 'pulse';
   threshold?: number;
 }
 
@@ -21,7 +21,9 @@ export default function ScrollAnimationWrapper({
   const { ref, isVisible } = useScrollAnimation({ threshold });
 
   const getAnimationClasses = () => {
-    const baseClasses = 'transition-all duration-700 ease-out';
+    // Use ease-in for card animations, ease-out for others
+    const useEaseIn = ['scaleRotate', 'expandCenter', 'pulse'].includes(animation);
+    const baseClasses = `transition-all duration-700 ${useEaseIn ? 'ease-in' : 'ease-out'}`;
     
     const animationVariants = {
       fadeUp: {
@@ -46,6 +48,18 @@ export default function ScrollAnimationWrapper({
       },
       bounceIn: {
         initial: 'opacity-0 scale-75',
+        animate: 'opacity-100 scale-100',
+      },
+      scaleRotate: {
+        initial: 'opacity-0 scale-90 rotate-3',
+        animate: 'opacity-100 scale-100 rotate-0',
+      },
+      expandCenter: {
+        initial: 'opacity-0 scale-0',
+        animate: 'opacity-100 scale-100',
+      },
+      pulse: {
+        initial: 'opacity-0 scale-95',
         animate: 'opacity-100 scale-100',
       },
     };
