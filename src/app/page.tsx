@@ -10,6 +10,7 @@ import NoSSR from "@/components/NoSSR";
 import VisionMission from "@/components/VisionMission";
 import EducationPhilosophy from "@/components/EducationPhilosophy";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
+import ScrollAnimationWrapper from "@/components/ScrollAnimationWrapper";
 
 interface Review {
   id: string;
@@ -174,45 +175,63 @@ export default function Home() {
       <section id="about" className="py-20 bg-primary/5">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Welcome to Wonderland</h2>
-            <p className="text-xl text-foreground/70 max-w-3xl mx-auto">
-              At Wonderland Early Years & Prep School, we believe every child is
-              unique and special. Our environment fosters creativity, curiosity,
-              and confidence in young learners.
-            </p>
+            <ScrollAnimationWrapper animation="fadeUp" delay={0}>
+              <h2 className="text-4xl font-bold mb-4">Welcome to Wonderland</h2>
+            </ScrollAnimationWrapper>
+            <ScrollAnimationWrapper animation="fadeUp" delay={200}>
+              <p className="text-xl text-foreground/70 max-w-3xl mx-auto">
+                At Wonderland Early Years & Prep School, we believe every child is
+                unique and special. Our environment fosters creativity, curiosity,
+                and confidence in young learners.
+              </p>
+            </ScrollAnimationWrapper>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="bg-primary/10 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-4xl">❤️</span>
+            <ScrollAnimationWrapper animation="fadeUp" delay={400}>
+              <div className="text-center">
+                <ScrollAnimationWrapper animation="bounceIn" delay={600} className="inline-block">
+                  <div className="bg-primary/10 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-500 hover:scale-110">
+                    <span className="text-4xl">❤️</span>
+                  </div>
+                </ScrollAnimationWrapper>
+                <h3 className="text-2xl font-semibold mb-2">
+                  Caring Environment
+                </h3>
+                <p className="text-foreground/70">
+                  Excellence in Christian education with love and Biblical values.
+                </p>
               </div>
-              <h3 className="text-2xl font-semibold mb-2">
-                Caring Environment
-              </h3>
-              <p className="text-foreground/70">
-                Excellence in Christian education with love and Biblical values.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="bg-secondary/10 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-4xl">🎓</span>
+            </ScrollAnimationWrapper>
+            <ScrollAnimationWrapper animation="fadeUp" delay={600}>
+              <div className="text-center">
+                <ScrollAnimationWrapper animation="bounceIn" delay={800} className="inline-block">
+                  <div className="bg-secondary/10 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-500 hover:scale-110">
+                    <span className="text-4xl">🎓</span>
+                  </div>
+                </ScrollAnimationWrapper>
+                <h3 className="text-2xl font-semibold mb-2">Quality Education</h3>
+                <p className="text-foreground/70">
+                  CBC-trained teachers inspiring productive young learners.
+                </p>
               </div>
-              <h3 className="text-2xl font-semibold mb-2">Quality Education</h3>
-              <p className="text-foreground/70">
-                CBC-trained teachers inspiring productive young learners.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="bg-accent/10 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-4xl">🎯</span>
+            </ScrollAnimationWrapper>
+            <ScrollAnimationWrapper animation="fadeUp" delay={800}>
+              <div className="text-center">
+                <ScrollAnimationWrapper animation="bounceIn" delay={1000} className="inline-block">
+                  <div className="bg-accent/10 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-500 hover:scale-110">
+                    <span className="text-4xl">🎯</span>
+                  </div>
+                </ScrollAnimationWrapper>
+                <h3 className="text-2xl font-semibold mb-2">Co-Curricluum</h3>
+                <p className="text-foreground/70">
+                  Abacus, Swimming, Football, Skating, Ballet, and more exciting activities!
+                </p>
               </div>
-              <h3 className="text-2xl font-semibold mb-2">Co-Curricluum</h3>
-              <p className="text-foreground/70">
-                Abacus, Swimming, Football, Skating, Ballet, and more exciting activities!
-              </p>
-            </div>
+            </ScrollAnimationWrapper>
           </div>
-          <VisionMission />
+          <ScrollAnimationWrapper animation="fadeUp" delay={1000}>
+            <VisionMission />
+          </ScrollAnimationWrapper>
         </div>
       </section>
 
