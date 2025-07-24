@@ -7,7 +7,7 @@ interface ScrollAnimationWrapperProps {
   children: ReactNode;
   delay?: number;
   className?: string;
-  animation?: 'fadeUp' | 'fadeIn' | 'scaleIn' | 'slideRight' | 'slideLeft' | 'bounceIn' | 'scaleRotate' | 'expandCenter' | 'pulse' | 'slideDownRight' | 'cascadeUp' | 'zoomFade' | 'slideRotateLeft' | 'popIn' | 'floatUp' | 'driftIn' | 'spiralIn' | 'slideInBounce' | 'expandUp' | 'slideUp' | 'fadeSlideUp';
+  animation?: 'fadeUp' | 'fadeIn' | 'scaleIn' | 'slideRight' | 'slideLeft' | 'bounceIn' | 'scaleRotate' | 'expandCenter' | 'pulse' | 'slideDownRight' | 'cascadeUp' | 'zoomFade' | 'slideRotateLeft' | 'popIn' | 'floatUp' | 'driftIn' | 'spiralIn' | 'slideInBounce' | 'expandUp' | 'slideUp' | 'fadeSlideUp' | 'revealUp' | 'staggerFadeIn';
   threshold?: number;
 }
 
@@ -111,6 +111,14 @@ export default function ScrollAnimationWrapper({
       fadeSlideUp: {
         initial: 'opacity-0 translate-y-6',
         animate: 'opacity-100 translate-y-0',
+      },
+      revealUp: {
+        initial: 'opacity-0 translate-y-4',
+        animate: 'opacity-100 translate-y-0',
+      },
+      staggerFadeIn: {
+        initial: 'opacity-0',
+        animate: 'opacity-100',
       },
     };
 

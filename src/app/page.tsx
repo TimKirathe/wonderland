@@ -593,139 +593,165 @@ export default function Home() {
       <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 md:gap-12">
-            <div className="md:col-span-2 xl:col-span-1">
-              <div className="flex items-start space-x-2 mb-4">
-                <Image
-                  src="/wonderland-logo.svg"
-                  alt="Wonderland Logo"
-                  width={48}
-                  height={48}
-                  className="h-20 w-16 flex-shrink-0"
-                />
-                <div className="pt-1">
-                  <h3 className="text-xl font-bold">Wonderland</h3>
-                  <p className="text-white/70 mt-1">
-                    We learn, We care, We play
-                  </p>
-                </div>
-              </div>
-              <p className="text-white/60 text-sm max-w-xs">
-                Nurturing young minds with love, creativity, and endless
-                possibilities.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-white/70">
-                <li>
-                  <Link
-                    href="#about"
-                    className="hover:text-white transition-colors text-sm"
-                  >
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#programs"
-                    className="hover:text-white transition-colors text-sm"
-                  >
-                    What We Offer
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href=""
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setIsJourneyModalOpen(true);
-                    }}
-                    className="hover:text-white transition-colors text-sm"
-                  >
-                    Enroll Now
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#contact"
-                    className="hover:text-white transition-colors text-sm"
-                  >
-                    Contact
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">What We Offer</h4>
-              <ul className="space-y-2 text-white/70">
-                <li>
-                  <Link
-                    href="#programs"
-                    className="hover:text-white transition-colors text-sm"
-                  >
-                    Playgroup
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#programs"
-                    className="hover:text-white transition-colors text-sm"
-                  >
-                    Pre-Primary 1 & 2
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#programs"
-                    className="hover:text-white transition-colors text-sm"
-                  >
-                    Grade 1-4
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#programs"
-                    className="hover:text-white transition-colors text-sm"
-                  >
-                    All Stages
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div className="md:col-span-2 xl:col-span-1">
-              <h4 className="font-semibold mb-4">Connect With Us</h4>
-              <div className="flex items-center space-x-4 mb-4">
-                <a
-                  href="https://www.instagram.com/wonderlandkindergartenke/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-white/10 p-3 rounded-full hover:bg-white/20 transition-colors"
-                  aria-label="Follow us on Instagram"
-                >
+            <ScrollAnimationWrapper animation="revealUp" delay={0}>
+              <div className="md:col-span-2 xl:col-span-1">
+                <div className="flex items-start space-x-2 mb-4">
                   <Image
-                    src="/social-media/instagram.svg"
-                    alt="Instagram"
-                    width={20}
-                    height={20}
-                    className="w-5 h-5 brightness-0 invert"
+                    src="/wonderland-logo.svg"
+                    alt="Wonderland Logo"
+                    width={48}
+                    height={48}
+                    className="h-20 w-16 flex-shrink-0"
                   />
-                </a>
-                <span className="text-white/70 text-sm">
-                  @wonderlandkindergartenke
-                </span>
+                  <div className="pt-1">
+                    <h3 className="text-xl font-bold">Wonderland</h3>
+                    <p className="text-white/70 mt-1">
+                      We learn, We care, We play
+                    </p>
+                  </div>
+                </div>
+                <p className="text-white/60 text-sm max-w-xs">
+                  Nurturing young minds with love, creativity, and endless
+                  possibilities.
+                </p>
               </div>
-              <p className="text-white/60 text-sm">
-                Follow us for updates, events, and moments from our wonderful
-                community.
+            </ScrollAnimationWrapper>
+            <div>
+              <ScrollAnimationWrapper animation="staggerFadeIn" delay={200}>
+                <h4 className="font-semibold mb-4">Quick Links</h4>
+              </ScrollAnimationWrapper>
+              <ul className="space-y-2 text-white/70">
+                <ScrollAnimationWrapper animation="staggerFadeIn" delay={300}>
+                  <li>
+                    <Link
+                      href="#about"
+                      className="hover:text-white transition-colors text-sm"
+                    >
+                      About Us
+                    </Link>
+                  </li>
+                </ScrollAnimationWrapper>
+                <ScrollAnimationWrapper animation="staggerFadeIn" delay={400}>
+                  <li>
+                    <Link
+                      href="#programs"
+                      className="hover:text-white transition-colors text-sm"
+                    >
+                      What We Offer
+                    </Link>
+                  </li>
+                </ScrollAnimationWrapper>
+                <ScrollAnimationWrapper animation="staggerFadeIn" delay={500}>
+                  <li>
+                    <Link
+                      href=""
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setIsJourneyModalOpen(true);
+                      }}
+                      className="hover:text-white transition-colors text-sm"
+                    >
+                      Enroll Now
+                    </Link>
+                  </li>
+                </ScrollAnimationWrapper>
+                <ScrollAnimationWrapper animation="staggerFadeIn" delay={600}>
+                  <li>
+                    <Link
+                      href="#contact"
+                      className="hover:text-white transition-colors text-sm"
+                    >
+                      Contact
+                    </Link>
+                  </li>
+                </ScrollAnimationWrapper>
+              </ul>
+            </div>
+            <div>
+              <ScrollAnimationWrapper animation="staggerFadeIn" delay={300}>
+                <h4 className="font-semibold mb-4">What We Offer</h4>
+              </ScrollAnimationWrapper>
+              <ul className="space-y-2 text-white/70">
+                <ScrollAnimationWrapper animation="staggerFadeIn" delay={400}>
+                  <li>
+                    <Link
+                      href="#programs"
+                      className="hover:text-white transition-colors text-sm"
+                    >
+                      Playgroup
+                    </Link>
+                  </li>
+                </ScrollAnimationWrapper>
+                <ScrollAnimationWrapper animation="staggerFadeIn" delay={500}>
+                  <li>
+                    <Link
+                      href="#programs"
+                      className="hover:text-white transition-colors text-sm"
+                    >
+                      Pre-Primary 1 & 2
+                    </Link>
+                  </li>
+                </ScrollAnimationWrapper>
+                <ScrollAnimationWrapper animation="staggerFadeIn" delay={600}>
+                  <li>
+                    <Link
+                      href="#programs"
+                      className="hover:text-white transition-colors text-sm"
+                    >
+                      Grade 1-4
+                    </Link>
+                  </li>
+                </ScrollAnimationWrapper>
+                <ScrollAnimationWrapper animation="staggerFadeIn" delay={700}>
+                  <li>
+                    <Link
+                      href="#programs"
+                      className="hover:text-white transition-colors text-sm"
+                    >
+                      All Stages
+                    </Link>
+                  </li>
+                </ScrollAnimationWrapper>
+              </ul>
+            </div>
+            <ScrollAnimationWrapper animation="slideLeft" delay={400}>
+              <div className="md:col-span-2 xl:col-span-1">
+                <h4 className="font-semibold mb-4">Connect With Us</h4>
+                <div className="flex items-center space-x-4 mb-4">
+                  <a
+                    href="https://www.instagram.com/wonderlandkindergartenke/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white/10 p-3 rounded-full hover:bg-white/20 transition-colors"
+                    aria-label="Follow us on Instagram"
+                  >
+                    <Image
+                      src="/social-media/instagram.svg"
+                      alt="Instagram"
+                      width={20}
+                      height={20}
+                      className="w-5 h-5 brightness-0 invert"
+                    />
+                  </a>
+                  <span className="text-white/70 text-sm">
+                    @wonderlandkindergartenke
+                  </span>
+                </div>
+                <p className="text-white/60 text-sm">
+                  Follow us for updates, events, and moments from our wonderful
+                  community.
+                </p>
+              </div>
+            </ScrollAnimationWrapper>
+          </div>
+          <ScrollAnimationWrapper animation="fadeIn" delay={600}>
+            <div className="border-t border-white/20 mt-12 pt-8 text-center text-white/70">
+              <p className="text-sm">
+                &copy; 2025 Wonderland Early Years & Prep School. All rights
+                reserved.
               </p>
             </div>
-          </div>
-          <div className="border-t border-white/20 mt-12 pt-8 text-center text-white/70">
-            <p className="text-sm">
-              &copy; 2025 Wonderland Early Years & Prep School. All rights
-              reserved.
-            </p>
-          </div>
+          </ScrollAnimationWrapper>
         </div>
       </footer>
 
