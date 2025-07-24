@@ -7,7 +7,7 @@ interface ScrollAnimationWrapperProps {
   children: ReactNode;
   delay?: number;
   className?: string;
-  animation?: 'fadeUp' | 'fadeIn' | 'scaleIn' | 'slideRight' | 'slideLeft' | 'bounceIn' | 'scaleRotate' | 'expandCenter' | 'pulse' | 'slideDownRight' | 'cascadeUp' | 'zoomFade' | 'slideRotateLeft' | 'popIn';
+  animation?: 'fadeUp' | 'fadeIn' | 'scaleIn' | 'slideRight' | 'slideLeft' | 'bounceIn' | 'scaleRotate' | 'expandCenter' | 'pulse' | 'slideDownRight' | 'cascadeUp' | 'zoomFade' | 'slideRotateLeft' | 'popIn' | 'floatUp' | 'driftIn';
   threshold?: number;
 }
 
@@ -23,7 +23,8 @@ export default function ScrollAnimationWrapper({
   const getAnimationClasses = () => {
     // Use ease-in for card animations, ease-out for others
     const useEaseIn = ['scaleRotate', 'expandCenter', 'pulse', 'popIn'].includes(animation);
-    const baseClasses = `transition-all duration-700 ${useEaseIn ? 'ease-in' : 'ease-out'}`;
+    const useEaseInOut = ['floatUp', 'driftIn'].includes(animation);
+    const baseClasses = `transition-all duration-700 ${useEaseIn ? 'ease-in' : useEaseInOut ? 'ease-in-out' : 'ease-out'}`;
     
     const animationVariants = {
       fadeUp: {
@@ -81,6 +82,14 @@ export default function ScrollAnimationWrapper({
       popIn: {
         initial: 'opacity-0 scale-50',
         animate: 'opacity-100 scale-100',
+      },
+      floatUp: {
+        initial: 'opacity-0 translate-y-16 translate-x-2',
+        animate: 'opacity-100 translate-y-0 translate-x-0',
+      },
+      driftIn: {
+        initial: 'opacity-0 translate-x-20 rotate-1',
+        animate: 'opacity-100 translate-x-0 rotate-0',
       },
     };
 
