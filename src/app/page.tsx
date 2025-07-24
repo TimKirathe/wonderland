@@ -373,12 +373,15 @@ export default function Home() {
       {/* Features Section */}
       <section className="py-20 bg-secondary/5">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">
-            Why Choose Wonderland?
-          </h2>
+          <ScrollAnimationWrapper animation="zoomFade" delay={0}>
+            <h2 className="text-4xl font-bold text-center mb-12">
+              Why Choose Wonderland?
+            </h2>
+          </ScrollAnimationWrapper>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Video Column */}
-            <div className="relative">
+            <ScrollAnimationWrapper animation="slideRotateLeft" delay={200}>
+              <div className="relative">
               <div className="rounded-3xl overflow-hidden card-shadow">
                 <video
                   className="w-full h-full object-cover"
@@ -396,13 +399,17 @@ export default function Home() {
                 </video>
               </div>
             </div>
+            </ScrollAnimationWrapper>
 
             {/* Features Column */}
             <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <div className="bg-primary/10 p-3 rounded-full flex-shrink-0">
-                  <span className="text-2xl">👩‍🏫</span>
-                </div>
+              <ScrollAnimationWrapper animation="slideLeft" delay={400}>
+                <div className="flex items-start space-x-4">
+                  <ScrollAnimationWrapper animation="popIn" delay={600} className="inline-block">
+                    <div className="bg-primary/10 p-3 rounded-full flex-shrink-0">
+                      <span className="text-2xl">👩‍🏫</span>
+                    </div>
+                  </ScrollAnimationWrapper>
                 <div>
                   <h3 className="text-xl font-semibold mb-2">
                     Qualified Teachers
@@ -413,10 +420,14 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div className="flex items-start space-x-4">
-                <div className="bg-secondary/10 p-3 rounded-full flex-shrink-0">
-                  <span className="text-2xl">🏫</span>
-                </div>
+              </ScrollAnimationWrapper>
+              <ScrollAnimationWrapper animation="slideLeft" delay={700}>
+                <div className="flex items-start space-x-4">
+                  <ScrollAnimationWrapper animation="popIn" delay={900} className="inline-block">
+                    <div className="bg-secondary/10 p-3 rounded-full flex-shrink-0">
+                      <span className="text-2xl">🏫</span>
+                    </div>
+                  </ScrollAnimationWrapper>
                 <div>
                   <h3 className="text-xl font-semibold mb-2">
                     Safe Facilities
@@ -426,10 +437,14 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div className="flex items-start space-x-4">
-                <div className="bg-accent/10 p-3 rounded-full flex-shrink-0">
-                  <span className="text-2xl">🍎</span>
-                </div>
+              </ScrollAnimationWrapper>
+              <ScrollAnimationWrapper animation="slideLeft" delay={1000}>
+                <div className="flex items-start space-x-4">
+                  <ScrollAnimationWrapper animation="popIn" delay={1200} className="inline-block">
+                    <div className="bg-accent/10 p-3 rounded-full flex-shrink-0">
+                      <span className="text-2xl">🍎</span>
+                    </div>
+                  </ScrollAnimationWrapper>
                 <div>
                   <h3 className="text-xl font-semibold mb-2">Healthy Meals</h3>
                   <p className="text-foreground/70">
@@ -437,10 +452,14 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div className="flex items-start space-x-4">
-                <div className="bg-primary/10 p-3 rounded-full flex-shrink-0">
-                  <span className="text-2xl">👨‍👩‍👧‍👦</span>
-                </div>
+              </ScrollAnimationWrapper>
+              <ScrollAnimationWrapper animation="slideLeft" delay={1300}>
+                <div className="flex items-start space-x-4">
+                  <ScrollAnimationWrapper animation="popIn" delay={1500} className="inline-block">
+                    <div className="bg-primary/10 p-3 rounded-full flex-shrink-0">
+                      <span className="text-2xl">👨‍👩‍👧‍👦</span>
+                    </div>
+                  </ScrollAnimationWrapper>
                 <div>
                   <h3 className="text-xl font-semibold mb-2">
                     Parent Partnership
@@ -450,10 +469,14 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div className="flex items-start space-x-4">
-                <div className="bg-accent/10 p-3 rounded-full flex-shrink-0">
-                  <span className="text-2xl">🎪</span>
-                </div>
+              </ScrollAnimationWrapper>
+              <ScrollAnimationWrapper animation="slideLeft" delay={1600}>
+                <div className="flex items-start space-x-4">
+                  <ScrollAnimationWrapper animation="popIn" delay={1800} className="inline-block">
+                    <div className="bg-accent/10 p-3 rounded-full flex-shrink-0">
+                      <span className="text-2xl">🎪</span>
+                    </div>
+                  </ScrollAnimationWrapper>
                 <div>
                   <h3 className="text-xl font-semibold mb-2">
                     Extra Activities
@@ -464,6 +487,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
+              </ScrollAnimationWrapper>
             </div>
           </div>
         </div>

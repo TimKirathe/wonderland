@@ -7,7 +7,7 @@ interface ScrollAnimationWrapperProps {
   children: ReactNode;
   delay?: number;
   className?: string;
-  animation?: 'fadeUp' | 'fadeIn' | 'scaleIn' | 'slideRight' | 'slideLeft' | 'bounceIn' | 'scaleRotate' | 'expandCenter' | 'pulse' | 'slideDownRight' | 'cascadeUp';
+  animation?: 'fadeUp' | 'fadeIn' | 'scaleIn' | 'slideRight' | 'slideLeft' | 'bounceIn' | 'scaleRotate' | 'expandCenter' | 'pulse' | 'slideDownRight' | 'cascadeUp' | 'zoomFade' | 'slideRotateLeft' | 'popIn';
   threshold?: number;
 }
 
@@ -22,7 +22,7 @@ export default function ScrollAnimationWrapper({
 
   const getAnimationClasses = () => {
     // Use ease-in for card animations, ease-out for others
-    const useEaseIn = ['scaleRotate', 'expandCenter', 'pulse'].includes(animation);
+    const useEaseIn = ['scaleRotate', 'expandCenter', 'pulse', 'popIn'].includes(animation);
     const baseClasses = `transition-all duration-700 ${useEaseIn ? 'ease-in' : 'ease-out'}`;
     
     const animationVariants = {
@@ -69,6 +69,18 @@ export default function ScrollAnimationWrapper({
       cascadeUp: {
         initial: 'opacity-0 translate-y-12 scale-95',
         animate: 'opacity-100 translate-y-0 scale-100',
+      },
+      zoomFade: {
+        initial: 'opacity-0 scale-110',
+        animate: 'opacity-100 scale-100',
+      },
+      slideRotateLeft: {
+        initial: 'opacity-0 -translate-x-16 -rotate-2',
+        animate: 'opacity-100 translate-x-0 rotate-0',
+      },
+      popIn: {
+        initial: 'opacity-0 scale-50',
+        animate: 'opacity-100 scale-100',
       },
     };
 
