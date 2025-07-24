@@ -7,7 +7,7 @@ interface ScrollAnimationWrapperProps {
   children: ReactNode;
   delay?: number;
   className?: string;
-  animation?: 'fadeUp' | 'fadeIn' | 'scaleIn' | 'slideRight' | 'slideLeft' | 'bounceIn' | 'scaleRotate' | 'expandCenter' | 'pulse';
+  animation?: 'fadeUp' | 'fadeIn' | 'scaleIn' | 'slideRight' | 'slideLeft' | 'bounceIn' | 'scaleRotate' | 'expandCenter' | 'pulse' | 'slideDownRight' | 'cascadeUp';
   threshold?: number;
 }
 
@@ -61,6 +61,14 @@ export default function ScrollAnimationWrapper({
       pulse: {
         initial: 'opacity-0 scale-95',
         animate: 'opacity-100 scale-100',
+      },
+      slideDownRight: {
+        initial: 'opacity-0 -translate-x-12 -translate-y-12',
+        animate: 'opacity-100 translate-x-0 translate-y-0',
+      },
+      cascadeUp: {
+        initial: 'opacity-0 translate-y-12 scale-95',
+        animate: 'opacity-100 translate-y-0 scale-100',
       },
     };
 

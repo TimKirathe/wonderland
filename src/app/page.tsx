@@ -244,12 +244,15 @@ export default function Home() {
         className="py-20 bg-gradient-to-br from-primary/5 to-secondary/5"
       >
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">
-            What We Offer
-          </h2>
+          <ScrollAnimationWrapper animation="cascadeUp" delay={0}>
+            <h2 className="text-4xl font-bold text-center mb-12">
+              What We Offer
+            </h2>
+          </ScrollAnimationWrapper>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             {/* Playgroup Card */}
-            <div className="bg-card-bg rounded-3xl overflow-hidden card-shadow card-shadow-hover transition-all">
+            <ScrollAnimationWrapper animation="slideDownRight" delay={200}>
+              <div className="bg-card-bg rounded-3xl overflow-hidden card-shadow card-shadow-hover transition-all">
               <div className="relative h-48 mb-6">
                 <Image
                   src="/programs-photos/playgroup-girl-coloring.jpg"
@@ -278,8 +281,10 @@ export default function Home() {
                 </ul>
               </div>
             </div>
+            </ScrollAnimationWrapper>
             {/* Pre-Primary Programs Card */}
-            <div className="bg-card-bg rounded-3xl overflow-hidden card-shadow card-shadow-hover transition-all">
+            <ScrollAnimationWrapper animation="slideDownRight" delay={500}>
+              <div className="bg-card-bg rounded-3xl overflow-hidden card-shadow card-shadow-hover transition-all">
               <div className="relative h-48 mb-6">
                 <Image
                   src="/programs-photos/child-in-pp2-writing-blurred.png"
@@ -319,8 +324,10 @@ export default function Home() {
                 </ul>
               </div>
             </div>
+            </ScrollAnimationWrapper>
             {/* Grade 1-4 Card */}
-            <div className="bg-card-bg rounded-3xl overflow-hidden card-shadow card-shadow-hover transition-all">
+            <ScrollAnimationWrapper animation="slideDownRight" delay={800}>
+              <div className="bg-card-bg rounded-3xl overflow-hidden card-shadow card-shadow-hover transition-all">
               <div className="relative h-48 mb-6">
                 <Image
                   src="/programs-photos/child-in-grade1.jpg"
@@ -358,6 +365,7 @@ export default function Home() {
                 </ul>
               </div>
             </div>
+            </ScrollAnimationWrapper>
           </div>
         </div>
       </section>
