@@ -7,7 +7,7 @@ interface ScrollAnimationWrapperProps {
   children: ReactNode;
   delay?: number;
   className?: string;
-  animation?: 'fadeUp' | 'fadeIn' | 'scaleIn' | 'slideRight' | 'slideLeft' | 'bounceIn' | 'scaleRotate' | 'expandCenter' | 'pulse' | 'slideDownRight' | 'cascadeUp' | 'zoomFade' | 'slideRotateLeft' | 'popIn' | 'floatUp' | 'driftIn';
+  animation?: 'fadeUp' | 'fadeIn' | 'scaleIn' | 'slideRight' | 'slideLeft' | 'bounceIn' | 'scaleRotate' | 'expandCenter' | 'pulse' | 'slideDownRight' | 'cascadeUp' | 'zoomFade' | 'slideRotateLeft' | 'popIn' | 'floatUp' | 'driftIn' | 'spiralIn' | 'slideInBounce' | 'expandUp' | 'slideUp' | 'fadeSlideUp';
   threshold?: number;
 }
 
@@ -22,9 +22,10 @@ export default function ScrollAnimationWrapper({
 
   const getAnimationClasses = () => {
     // Use ease-in for card animations, ease-out for others
-    const useEaseIn = ['scaleRotate', 'expandCenter', 'pulse', 'popIn'].includes(animation);
+    const useEaseIn = ['scaleRotate', 'expandCenter', 'pulse', 'popIn', 'spiralIn', 'expandUp'].includes(animation);
     const useEaseInOut = ['floatUp', 'driftIn'].includes(animation);
-    const baseClasses = `transition-all duration-700 ${useEaseIn ? 'ease-in' : useEaseInOut ? 'ease-in-out' : 'ease-out'}`;
+    const useBounce = ['slideInBounce'].includes(animation);
+    const baseClasses = `transition-all duration-700 ${useBounce ? 'ease-[cubic-bezier(0.68,-0.55,0.265,1.55)]' : useEaseIn ? 'ease-in' : useEaseInOut ? 'ease-in-out' : 'ease-out'}`;
     
     const animationVariants = {
       fadeUp: {
@@ -90,6 +91,26 @@ export default function ScrollAnimationWrapper({
       driftIn: {
         initial: 'opacity-0 translate-x-20 rotate-1',
         animate: 'opacity-100 translate-x-0 rotate-0',
+      },
+      spiralIn: {
+        initial: 'opacity-0 scale-0 rotate-180',
+        animate: 'opacity-100 scale-100 rotate-0',
+      },
+      slideInBounce: {
+        initial: 'opacity-0 -translate-x-12',
+        animate: 'opacity-100 translate-x-0',
+      },
+      expandUp: {
+        initial: 'opacity-0 scale-y-0 translate-y-8',
+        animate: 'opacity-100 scale-y-100 translate-y-0',
+      },
+      slideUp: {
+        initial: 'opacity-0 translate-y-12',
+        animate: 'opacity-100 translate-y-0',
+      },
+      fadeSlideUp: {
+        initial: 'opacity-0 translate-y-6',
+        animate: 'opacity-100 translate-y-0',
       },
     };
 

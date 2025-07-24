@@ -515,58 +515,74 @@ export default function Home() {
       <section id="contact" className="py-20 bg-accent/5">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-bold text-center mb-12">
-              Get In Touch
-            </h2>
+            <ScrollAnimationWrapper animation="spiralIn" delay={0}>
+              <h2 className="text-4xl font-bold text-center mb-12">
+                Get In Touch
+              </h2>
+            </ScrollAnimationWrapper>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div>
-                <h3 className="text-2xl font-semibold mb-6">Visit Us</h3>
+                <ScrollAnimationWrapper animation="slideUp" delay={200}>
+                  <h3 className="text-2xl font-semibold mb-6">Visit Us</h3>
+                </ScrollAnimationWrapper>
                 <div className="space-y-4">
-                  <div className="flex items-start space-x-3">
-                    <span className="text-2xl">📍</span>
-                    <div>
-                      <p className="font-semibold">Address</p>
-                      <p className="text-foreground/70">
-                        Kalobot road, Langata, Nairobi, Kenya
-                      </p>
+                  <ScrollAnimationWrapper animation="slideInBounce" delay={400}>
+                    <div className="flex items-start space-x-3">
+                      <span className="text-2xl">📍</span>
+                      <div>
+                        <p className="font-semibold">Address</p>
+                        <p className="text-foreground/70">
+                          Kalobot road, Langata, Nairobi, Kenya
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <span className="text-2xl">📞</span>
-                    <div>
-                      <p className="font-semibold">Phone</p>
-                      <p className="text-foreground/70">
-                        <a href="tel:+254738626219">+254 738 626 219</a>
-                      </p>
+                  </ScrollAnimationWrapper>
+                  <ScrollAnimationWrapper animation="slideInBounce" delay={600}>
+                    <div className="flex items-start space-x-3">
+                      <span className="text-2xl">📞</span>
+                      <div>
+                        <p className="font-semibold">Phone</p>
+                        <p className="text-foreground/70">
+                          <a href="tel:+254738626219">+254 738 626 219</a>
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <span className="text-2xl">✉️</span>
-                    <div>
-                      <p className="font-semibold">Email</p>
-                      <p className="text-foreground/70">
-                        <a href="mailto:info@wonderlandkindergarten.sc.ke">
-                          info@wonderlandkindergarten.sc.ke
-                        </a>
-                      </p>
+                  </ScrollAnimationWrapper>
+                  <ScrollAnimationWrapper animation="slideInBounce" delay={800}>
+                    <div className="flex items-start space-x-3">
+                      <span className="text-2xl">✉️</span>
+                      <div>
+                        <p className="font-semibold">Email</p>
+                        <p className="text-foreground/70">
+                          <a href="mailto:info@wonderlandkindergarten.sc.ke">
+                            info@wonderlandkindergarten.sc.ke
+                          </a>
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <span className="text-2xl">🕐</span>
-                    <div>
-                      <p className="font-semibold">Hours</p>
-                      <p className="text-foreground/70">
-                        Monday - Friday: 8:00 AM - 5:00 PM
-                      </p>
+                  </ScrollAnimationWrapper>
+                  <ScrollAnimationWrapper animation="slideInBounce" delay={1000}>
+                    <div className="flex items-start space-x-3">
+                      <span className="text-2xl">🕐</span>
+                      <div>
+                        <p className="font-semibold">Hours</p>
+                        <p className="text-foreground/70">
+                          Monday - Friday: 8:00 AM - 5:00 PM
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  </ScrollAnimationWrapper>
                 </div>
               </div>
               <div>
-                <h3 className="text-2xl font-semibold mb-6">Make an Enquiry</h3>
-                <NoSSR>
-                  <ContactForm />
-                </NoSSR>
+                <ScrollAnimationWrapper animation="fadeSlideUp" delay={300}>
+                  <h3 className="text-2xl font-semibold mb-6">Make an Enquiry</h3>
+                </ScrollAnimationWrapper>
+                <ScrollAnimationWrapper animation="expandUp" delay={600}>
+                  <NoSSR>
+                    <ContactForm />
+                  </NoSSR>
+                </ScrollAnimationWrapper>
               </div>
             </div>
           </div>
