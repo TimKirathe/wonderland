@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import ReviewCard from "./ReviewCard";
 import ReviewCardSkeleton from "./ReviewCardSkeleton";
+import ReviewModal from "./ReviewModal";
 
 interface Review {
   id: string;
@@ -21,6 +22,7 @@ export default function ReviewsCarousel({ reviews, loading, error }: ReviewsCaro
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [selectedReview, setSelectedReview] = useState<Review | null>(null);
   const reviewsPerPage = 1; // Always focus on single card
   const carouselRef = useRef<HTMLDivElement>(null);
   const autoScrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -134,7 +136,7 @@ export default function ReviewsCarousel({ reviews, loading, error }: ReviewsCaro
 
   return (
     <div 
-      className="relative overflow-hidden" 
+      className="relative" 
       ref={carouselRef}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -152,7 +154,7 @@ export default function ReviewsCarousel({ reviews, loading, error }: ReviewsCaro
             <p className="text-foreground/70">Unable to load reviews at the moment.</p>
           </div>
         ) : reviews.length > 0 ? (
-          <div className="relative" style={{ perspective: '1200px' }}>
+          <div className="relative overflow-hidden" style={{ perspective: '1200px' }}>
             {/* Sliding Container with 3D perspective */}
             <div 
               className="flex gap-12 transition-all duration-700 will-change-transform"
@@ -173,25 +175,25 @@ export default function ReviewsCarousel({ reviews, loading, error }: ReviewsCaro
                     return {
                       opacity: 1,
                       transform: 'scale(1.1) translateZ(0)',
-                      zIndex: 30,
+                      position: 'relative' as const,
                     };
                   } else if (isAdjacent) {
                     return {
                       opacity: 0.7,
                       transform: 'scale(0.85) translateZ(-50px)',
-                      zIndex: 20,
+                      position: 'relative' as const,
                     };
                   } else if (isVisible) {
                     return {
                       opacity: 0.3,
                       transform: 'scale(0.7) translateZ(-100px)',
-                      zIndex: 10,
+                      position: 'relative' as const,
                     };
                   } else {
                     return {
                       opacity: 0,
                       transform: 'scale(0.6) translateZ(-150px)',
-                      zIndex: 0,
+                      position: 'relative' as const,
                     };
                   }
                 };
@@ -210,6 +212,7 @@ export default function ReviewsCarousel({ reviews, loading, error }: ReviewsCaro
                       parentName={review.parent_name}
                       date={review.date}
                       isActive={isActive}
+                      onSeeMore={() => setSelectedReview(review)}
                     />
                   </div>
                 );
@@ -296,6 +299,16 @@ export default function ReviewsCarousel({ reviews, loading, error }: ReviewsCaro
             </svg>
           </button>
         </div>
+      )}
+      
+      {/* Review Modal - rendered at the root level */}
+      {selectedReview && (
+        <ReviewModal
+          isOpen={!!selectedReview}
+          onClose={() => setSelectedReview(null)}
+          text={selectedReview.text}
+          parentName={selectedReview.parent_name}
+        />
       )}
     </div>
   );
