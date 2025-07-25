@@ -20,8 +20,10 @@ interface ReviewsCarouselProps {
 export default function ReviewsCarousel({ reviews, loading, error }: ReviewsCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const reviewsPerPage = 1; // Always focus on single card
   const carouselRef = useRef<HTMLDivElement>(null);
+  const autoScrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const totalPages = reviews.length; // Each review is now a page
 
   // Reset to first page when reviews change
@@ -31,6 +33,9 @@ export default function ReviewsCarousel({ reviews, loading, error }: ReviewsCaro
 
   const handlePrevious = () => {
     if (isTransitioning) return;
+    
+    // Pause auto-scroll on manual navigation
+    setIsPaused(true);
     
     setIsTransitioning(true);
     setCurrentIndex((prev) => Math.max(0, prev - 1));
@@ -43,10 +48,14 @@ export default function ReviewsCarousel({ reviews, loading, error }: ReviewsCaro
   const handleNext = () => {
     if (isTransitioning) return;
     
+    // Pause auto-scroll on manual navigation
+    setIsPaused(true);
+    
     setIsTransitioning(true);
     setCurrentIndex((prev) => {
       const nextIndex = prev + 1;
-      return nextIndex < reviews.length ? nextIndex : prev;
+      // Loop back to first review when reaching the end
+      return nextIndex < reviews.length ? nextIndex : 0;
     });
     
     setTimeout(() => {
@@ -56,6 +65,9 @@ export default function ReviewsCarousel({ reviews, loading, error }: ReviewsCaro
 
   const goToPage = (pageIndex: number) => {
     if (isTransitioning) return;
+    
+    // Pause auto-scroll on manual navigation
+    setIsPaused(true);
     
     setIsTransitioning(true);
     setCurrentIndex(pageIndex);
@@ -98,8 +110,35 @@ export default function ReviewsCarousel({ reviews, loading, error }: ReviewsCaro
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Auto-scroll functionality
+  useEffect(() => {
+    // Only auto-scroll if not paused, not loading/error, and have multiple reviews
+    if (!isPaused && !loading && !error && reviews.length > 1) {
+      autoScrollIntervalRef.current = setInterval(() => {
+        setCurrentIndex((prev) => {
+          const nextIndex = prev + 1;
+          // Loop back to first review when reaching the end
+          return nextIndex < reviews.length ? nextIndex : 0;
+        });
+      }, 10000); // 10 seconds
+
+      // Cleanup interval on unmount or when dependencies change
+      return () => {
+        if (autoScrollIntervalRef.current) {
+          clearInterval(autoScrollIntervalRef.current);
+          autoScrollIntervalRef.current = null;
+        }
+      };
+    }
+  }, [isPaused, loading, error, reviews.length]);
+
   return (
-    <div className="relative overflow-hidden" ref={carouselRef}>
+    <div 
+      className="relative overflow-hidden" 
+      ref={carouselRef}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       {/* Reviews Container with Sliding Animation */}
       <div className="relative">
         {loading ? (
