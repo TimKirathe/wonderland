@@ -7,9 +7,10 @@ interface ReviewCardProps {
   text: string;
   parentName: string;
   date?: string;
+  isActive?: boolean;
 }
 
-export default function ReviewCard({ text, parentName }: ReviewCardProps) {
+export default function ReviewCard({ text, parentName, isActive = true }: ReviewCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const CHARACTER_LIMIT = 200;
   const shouldTruncate = text.length > CHARACTER_LIMIT;
@@ -25,7 +26,7 @@ export default function ReviewCard({ text, parentName }: ReviewCardProps) {
           <p className="text-foreground/70 mb-4">
             &quot;{displayText}&quot;
           </p>
-          {shouldTruncate && (
+          {shouldTruncate && isActive && (
             <button
               onClick={() => setIsModalOpen(true)}
               className="text-primary hover:text-primary/80 text-sm font-medium transition-colors mb-4"

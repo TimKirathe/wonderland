@@ -170,6 +170,7 @@ export default function ReviewsCarousel({ reviews, loading, error }: ReviewsCaro
                       text={review.text}
                       parentName={review.parent_name}
                       date={review.date}
+                      isActive={isActive}
                     />
                   </div>
                 );
