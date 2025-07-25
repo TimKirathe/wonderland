@@ -176,13 +176,6 @@ export default function ReviewsCarousel({ reviews, loading, error }: ReviewsCaro
               })}
             </div>
             
-            {/* Gradient Overlays for Visual Polish */}
-            {currentIndex > 0 && (
-              <div className="absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-background to-transparent pointer-events-none z-40" />
-            )}
-            {!isLastPage && (
-              <div className="absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-background to-transparent pointer-events-none z-40" />
-            )}
           </div>
         ) : (
           <div className="text-center py-12">
