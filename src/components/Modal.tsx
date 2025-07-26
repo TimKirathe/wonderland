@@ -110,7 +110,7 @@ export default function Modal({ isOpen, onClose, children, title }: ModalProps) 
           {title && (
             <div className="bg-primary/5 px-4 py-4 sm:px-6">
               <div className="flex items-center justify-between">
-                <h3 id="modal-title" className="text-2xl font-semibold leading-6 text-foreground">
+                <h3 id="modal-title" className="text-2xl font-semibold leading-6 text-foreground font-primary">
                   {title}
                 </h3>
                 <button

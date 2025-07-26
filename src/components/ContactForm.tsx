@@ -140,10 +140,10 @@ export default function ContactForm() {
               />
             </svg>
             <div>
-              <p className="text-sm text-green-800 font-medium">
+              <p className="text-sm text-green-800 font-medium font-secondary">
                 Request submitted successfully!
               </p>
-              <p className="text-sm text-green-700 mt-1">
+              <p className="text-sm text-green-700 mt-1 font-secondary">
                 We&apos;ll contact you within 24 hours with more information.
               </p>
             </div>
@@ -166,10 +166,10 @@ export default function ContactForm() {
               />
             </svg>
             <div className="flex-1">
-              <p className="text-sm text-red-800 font-medium">
+              <p className="text-sm text-red-800 font-medium font-secondary">
                 Error submitting request
               </p>
-              <p className="text-sm text-red-700 mt-1">{errorMessage}</p>
+              <p className="text-sm text-red-700 mt-1 font-secondary">{errorMessage}</p>
             </div>
           </div>
         </div>
@@ -182,12 +182,12 @@ export default function ContactForm() {
           value={formData.parentName}
           onChange={handleInputChange}
           placeholder="Parent's Name"
-          className={`w-full px-4 py-3 rounded-lg border ${errors.parentName ? "border-red-500" : "border-gray-300"} focus:outline-none focus:border-primary`}
+          className={`w-full px-4 py-3 rounded-lg border ${errors.parentName ? "border-red-500" : "border-gray-300"} focus:outline-none focus:border-primary font-secondary`}
           disabled={isSubmitting}
           suppressHydrationWarning
         />
         {errors.parentName && (
-          <p className="text-red-500 text-sm mt-1">{errors.parentName}</p>
+          <p className="text-red-500 text-sm mt-1 font-secondary">{errors.parentName}</p>
         )}
       </div>
 
@@ -198,12 +198,12 @@ export default function ContactForm() {
           value={formData.email}
           onChange={handleInputChange}
           placeholder="Email Address"
-          className={`w-full px-4 py-3 rounded-lg border ${errors.email ? "border-red-500" : "border-gray-300"} focus:outline-none focus:border-primary`}
+          className={`w-full px-4 py-3 rounded-lg border ${errors.email ? "border-red-500" : "border-gray-300"} focus:outline-none focus:border-primary font-secondary`}
           disabled={isSubmitting}
           suppressHydrationWarning
         />
         {errors.email && (
-          <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+          <p className="text-red-500 text-sm mt-1 font-secondary">{errors.email}</p>
         )}
       </div>
 
@@ -214,12 +214,12 @@ export default function ContactForm() {
           value={formData.phone}
           onChange={handleInputChange}
           placeholder="Phone Number"
-          className={`w-full px-4 py-3 rounded-lg border ${errors.phone ? "border-red-500" : "border-gray-300"} focus:outline-none focus:border-primary`}
+          className={`w-full px-4 py-3 rounded-lg border ${errors.phone ? "border-red-500" : "border-gray-300"} focus:outline-none focus:border-primary font-secondary`}
           disabled={isSubmitting}
           suppressHydrationWarning
         />
         {errors.phone && (
-          <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+          <p className="text-red-500 text-sm mt-1 font-secondary">{errors.phone}</p>
         )}
       </div>
 
@@ -228,19 +228,19 @@ export default function ContactForm() {
           name="childAge"
           value={formData.childAge}
           onChange={handleInputChange}
-          className={`w-full px-4 py-3 pr-12 rounded-lg border ${errors.childAge ? "border-red-500" : "border-gray-300"} focus:outline-none focus:border-primary appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2714%27%20height%3D%278%27%20viewBox%3D%270%200%2014%208%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cpath%20d%3D%27M1%201l6%206%206-6%27%20stroke%3D%27%236B7280%27%20stroke-width%3D%272%27%20fill%3D%27none%27%20fill-rule%3D%27evenodd%27%2F%3E%3C%2Fsvg%3E')] bg-[length:14px_8px] bg-[position:right_16px_center] bg-no-repeat`}
+          className={`w-full px-4 py-3 pr-12 rounded-lg border ${errors.childAge ? "border-red-500" : "border-gray-300"} focus:outline-none focus:border-primary appearance-none bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2714%27%20height%3D%278%27%20viewBox%3D%270%200%2014%208%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cpath%20d%3D%27M1%201l6%206%206-6%27%20stroke%3D%27%236B7280%27%20stroke-width%3D%272%27%20fill%3D%27none%27%20fill-rule%3D%27evenodd%27%2F%3E%3C%2Fsvg%3E')] bg-[length:14px_8px] bg-[position:right_16px_center] bg-no-repeat font-secondary`}
           disabled={isSubmitting}
           suppressHydrationWarning
         >
-          <option value="">Select Child&apos;s Age</option>
-          <option value="2 years">2 years</option>
-          <option value="3 years">3 years</option>
-          <option value="4 years">4 years</option>
-          <option value="5 years">5 years</option>
-          <option value="6 years">6 years</option>
+          <option value="" className="font-secondary">Select Child&apos;s Age</option>
+          <option value="2 years" className="font-secondary">2 years</option>
+          <option value="3 years" className="font-secondary">3 years</option>
+          <option value="4 years" className="font-secondary">4 years</option>
+          <option value="5 years" className="font-secondary">5 years</option>
+          <option value="6 years" className="font-secondary">6 years</option>
         </select>
         {errors.childAge && (
-          <p className="text-red-500 text-sm mt-1">{errors.childAge}</p>
+          <p className="text-red-500 text-sm mt-1 font-secondary">{errors.childAge}</p>
         )}
       </div>
 
@@ -251,7 +251,7 @@ export default function ContactForm() {
           onChange={handleInputChange}
           placeholder="Message (Optional)"
           rows={4}
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary font-secondary"
           disabled={isSubmitting}
           suppressHydrationWarning
         />
@@ -260,7 +260,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className={`w-full py-3 rounded-lg font-semibold transition-colors ${
+        className={`w-full py-3 rounded-lg font-semibold transition-colors font-primary ${
           isSubmitting
             ? "bg-gray-400 text-white cursor-not-allowed"
             : "bg-primary text-white hover:bg-primary/90"

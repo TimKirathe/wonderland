@@ -42,7 +42,7 @@ export default function ReviewModal({ isOpen, onClose, text, parentName }: Revie
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex justify-between items-start mb-6">
-            <h3 className="text-2xl font-semibold">Parent Review</h3>
+            <h3 className="text-2xl font-semibold font-primary">Parent Review</h3>
             <button
               onClick={onClose}
               className="text-foreground/50 hover:text-foreground transition-colors"
@@ -65,10 +65,10 @@ export default function ReviewModal({ isOpen, onClose, text, parentName }: Revie
           </div>
           
           <div className="space-y-4">
-            <p className="text-foreground/70 text-lg leading-relaxed">
+            <p className="text-foreground/70 text-lg leading-relaxed font-secondary">
               &quot;{text}&quot;
             </p>
-            <p className="font-semibold text-lg">- {parentName}</p>
+            <p className="font-semibold text-lg font-secondary">- {parentName}</p>
           </div>
         </div>
       </div>

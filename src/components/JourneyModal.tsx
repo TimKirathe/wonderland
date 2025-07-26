@@ -90,7 +90,7 @@ export default function JourneyModal({ isOpen, onClose }: JourneyModalProps) {
             <div className="absolute inset-0 bg-white/80 flex items-center justify-center z-10 rounded-3xl">
               <div className="text-center">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-                <p className="text-lg font-medium">Submitting your application...</p>
+                <p className="text-lg font-medium font-secondary">Submitting your application...</p>
               </div>
             </div>
           )}
@@ -101,8 +101,8 @@ export default function JourneyModal({ isOpen, onClose }: JourneyModalProps) {
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                 </svg>
                 <div className="flex-1">
-                  <p className="text-sm text-red-800 font-medium">Error submitting application</p>
-                  <p className="text-sm text-red-700 mt-1">{error}</p>
+                  <p className="text-sm text-red-800 font-medium font-secondary">Error submitting application</p>
+                  <p className="text-sm text-red-700 mt-1 font-secondary">{error}</p>
                 </div>
               </div>
             </div>
@@ -126,11 +126,11 @@ export default function JourneyModal({ isOpen, onClose }: JourneyModalProps) {
               />
             </svg>
           </div>
-          <h3 className="text-2xl font-semibold mb-4">Application Submitted!</h3>
-          <p className="text-foreground/70 mb-2">
+          <h3 className="text-2xl font-semibold mb-4 font-primary">Application Submitted!</h3>
+          <p className="text-foreground/70 mb-2 font-secondary">
             Thank you for your interest in Wonderland Early Years & Prep School.
           </p>
-          <p className="text-foreground/70">
+          <p className="text-foreground/70 font-secondary">
             We&apos;ll review your application and contact you within 2-3 business days.
           </p>
         </div>

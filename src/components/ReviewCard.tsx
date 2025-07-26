@@ -19,19 +19,19 @@ export default function ReviewCard({ text, parentName, isActive = true, onSeeMor
   return (
     <div className="bg-card-bg rounded-3xl p-8 card-shadow h-full flex flex-col">
       <div className="flex-grow">
-        <p className="text-foreground/70 mb-4">
+        <p className="text-foreground/70 mb-4 font-secondary">
           &quot;{displayText}&quot;
         </p>
         {shouldTruncate && isActive && onSeeMore && (
           <button
             onClick={onSeeMore}
-            className="text-primary hover:text-primary/80 text-sm font-medium transition-colors mb-4"
+            className="text-primary hover:text-primary/80 text-sm font-medium transition-colors mb-4 font-secondary"
           >
             See More
           </button>
         )}
       </div>
-      <p className="font-semibold mt-auto">- {parentName}</p>
+      <p className="font-semibold mt-auto font-secondary">- {parentName}</p>
     </div>
   );
 }
