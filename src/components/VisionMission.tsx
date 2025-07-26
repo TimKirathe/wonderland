@@ -1,17 +1,29 @@
+import Image from "next/image";
+
 export default function VisionMission() {
   return (
     <div className="mt-16">
-      <div className="text-center mb-12">
-        <h3 className="text-3xl font-bold mb-6 font-primary">
-          Our Beliefs & Values
-        </h3>
-        <p className="text-lg text-foreground/70 max-w-3xl mx-auto font-secondary">
-          We believe that every child is unique and deserving of a nurturing
-          environment. Our community is built on the values of godliness, love,
-          hard work, and collaboration. We strive to provide a thorough,
-          hands-on, and fun educational experience that prepares our students
-          for a lifetime of learning, leadership, and service.
-        </p>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12 max-w-6xl mx-auto">
+        <div className="relative h-64 lg:h-80 rounded-3xl overflow-hidden">
+          <Image
+            src="/class-photo.jpg"
+            alt="Class Photo"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div className="text-center lg:text-left">
+          <h3 className="text-3xl font-bold mb-6 font-primary">
+            Our Beliefs & Values
+          </h3>
+          <p className="text-lg text-foreground/70 font-secondary">
+            We believe that every child is unique and deserving of a nurturing
+            environment. Our community is built on the values of godliness,
+            love, hard work, and collaboration. We strive to provide a thorough,
+            hands-on, and fun educational experience that prepares our students
+            for a lifetime of learning, leadership, and service.
+          </p>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">

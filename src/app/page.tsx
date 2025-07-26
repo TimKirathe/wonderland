@@ -177,19 +177,31 @@ export default function Home() {
       {/* About Section */}
       <section id="about" className="py-20 bg-primary/5">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <ScrollAnimationWrapper animation="fadeUp" delay={0}>
-              <h2 className="text-4xl font-bold mb-4 font-primary">
-                Who We Are
-              </h2>
-            </ScrollAnimationWrapper>
-            <ScrollAnimationWrapper animation="fadeUp" delay={200}>
-              <p className="text-xl text-foreground/70 max-w-3xl mx-auto">
-                Wonderland Early Years & Prep School is a private school based
-                in Nairobi, Kenya. We have a rich history of 45+ years in
-                operation, and a proven track record of providing an excellent
-                learning environment for young children.
-              </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12 max-w-6xl mx-auto">
+            <div className="text-center lg:text-left">
+              <ScrollAnimationWrapper animation="fadeUp" delay={0}>
+                <h2 className="text-4xl font-bold mb-4 font-primary">
+                  Who We Are
+                </h2>
+              </ScrollAnimationWrapper>
+              <ScrollAnimationWrapper animation="fadeUp" delay={200}>
+                <p className="text-xl text-foreground/70">
+                  Wonderland Early Years & Prep School is a private school based
+                  in Nairobi, Kenya. We have a rich history of 45+ years in
+                  operation, and a proven track record of providing an excellent
+                  learning environment for young children.
+                </p>
+              </ScrollAnimationWrapper>
+            </div>
+            <ScrollAnimationWrapper animation="slideLeft" delay={400}>
+              <div className="relative w-48 h-72 lg:w-64 lg:h-96 mx-auto rounded-3xl overflow-hidden">
+                <Image
+                  src="/student-smiling.jpg"
+                  alt="Student Smiling"
+                  fill
+                  className="object-cover"
+                />
+              </div>
             </ScrollAnimationWrapper>
           </div>
           <ScrollAnimationWrapper animation="fadeUp" delay={1000}>
