@@ -8,6 +8,7 @@ interface ContactFormData {
   phone: string;
   childAge: string;
   message: string;
+  website?: string; // Honeypot field
 }
 
 export default function ContactForm() {
@@ -17,6 +18,7 @@ export default function ContactForm() {
     phone: "",
     childAge: "",
     message: "",
+    website: "", // Honeypot field
   });
 
   const [errors, setErrors] = useState<Partial<ContactFormData>>({});
@@ -73,6 +75,24 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Check honeypot field - if filled, it's likely a bot
+    if (formData.website) {
+      // Silently reject but show success to confuse bots
+      setSubmitStatus("success");
+      setTimeout(() => {
+        setFormData({
+          parentName: "",
+          email: "",
+          phone: "",
+          childAge: "",
+          message: "",
+          website: "",
+        });
+        setSubmitStatus("idle");
+      }, 3000);
+      return;
+    }
+
     if (!validate()) {
       return;
     }
@@ -106,6 +126,7 @@ export default function ContactForm() {
         phone: "",
         childAge: "",
         message: "",
+        website: "",
       });
 
       // Reset success message after 5 seconds
@@ -280,6 +301,18 @@ export default function ContactForm() {
           className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary font-secondary"
           disabled={isSubmitting}
           suppressHydrationWarning
+        />
+      </div>
+
+      {/* Honeypot field - hidden from real users */}
+      <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
+        <input
+          type="text"
+          name="website"
+          value={formData.website}
+          onChange={handleInputChange}
+          tabIndex={-1}
+          autoComplete="off"
         />
       </div>
 

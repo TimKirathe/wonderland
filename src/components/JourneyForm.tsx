@@ -27,6 +27,7 @@ interface FormData {
   howHeard: string;
   howHeardOther?: string;
   message: string;
+  website?: string; // Honeypot field
 }
 
 type JourneyFormProps = {
@@ -71,6 +72,7 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
     howHeard: "",
     howHeardOther: "",
     message: "",
+    website: "", // Honeypot field
   });
 
   const handleInputChange = (
@@ -258,6 +260,14 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
     }
 
     if (isValid) {
+      // Check honeypot field - if filled, it's likely a bot
+      if (formData.website) {
+        // Silently reject but act like success
+        setTimeout(() => {
+          onClose();
+        }, 1000);
+        return;
+      }
       onSubmit(formData);
     }
   };
@@ -279,6 +289,18 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
 
   return (
     <form className="space-y-6">
+      {/* Honeypot field - hidden from real users */}
+      <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
+        <input
+          type="text"
+          name="website"
+          value={formData.website}
+          onChange={handleInputChange}
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+      
       {/* Progress Indicator */}
       <div className="flex items-center justify-center space-x-2 mb-8">
         {[1, 2, 3].map((step) => (
