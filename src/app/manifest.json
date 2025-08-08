@@ -1,21 +1,26 @@
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+  "name": "Wonderland Early Years & Prep School",
+  "short_name": "Wonderland",
+  "description": "A nurturing environment where children learn, care, and play together",
+  "start_url": "/",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     },
     {
       "src": "/web-app-manifest-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
   ],
-  "theme_color": "#ffffff",
+  "theme_color": "#ff6b6b",
   "background_color": "#ffffff",
-  "display": "standalone"
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "categories": ["education", "kids"],
+  "lang": "en"
 }
