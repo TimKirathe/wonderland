@@ -124,7 +124,11 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4" suppressHydrationWarning>
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-4"
+      suppressHydrationWarning
+    >
       {submitStatus === "success" && (
         <div className="bg-green-50 border border-green-200 rounded-lg p-4">
           <div className="flex items-start">
@@ -144,7 +148,7 @@ export default function ContactForm() {
                 Request submitted successfully!
               </p>
               <p className="text-sm text-green-700 mt-1 font-secondary">
-                We&apos;ll contact you within 24 hours with more information.
+                We&apos;ll contact you within 72 hours with more information.
               </p>
             </div>
           </div>
@@ -169,7 +173,9 @@ export default function ContactForm() {
               <p className="text-sm text-red-800 font-medium font-secondary">
                 Error submitting request
               </p>
-              <p className="text-sm text-red-700 mt-1 font-secondary">{errorMessage}</p>
+              <p className="text-sm text-red-700 mt-1 font-secondary">
+                {errorMessage}
+              </p>
             </div>
           </div>
         </div>
@@ -187,7 +193,9 @@ export default function ContactForm() {
           suppressHydrationWarning
         />
         {errors.parentName && (
-          <p className="text-red-500 text-sm mt-1 font-secondary">{errors.parentName}</p>
+          <p className="text-red-500 text-sm mt-1 font-secondary">
+            {errors.parentName}
+          </p>
         )}
       </div>
 
@@ -203,7 +211,9 @@ export default function ContactForm() {
           suppressHydrationWarning
         />
         {errors.email && (
-          <p className="text-red-500 text-sm mt-1 font-secondary">{errors.email}</p>
+          <p className="text-red-500 text-sm mt-1 font-secondary">
+            {errors.email}
+          </p>
         )}
       </div>
 
@@ -219,7 +229,9 @@ export default function ContactForm() {
           suppressHydrationWarning
         />
         {errors.phone && (
-          <p className="text-red-500 text-sm mt-1 font-secondary">{errors.phone}</p>
+          <p className="text-red-500 text-sm mt-1 font-secondary">
+            {errors.phone}
+          </p>
         )}
       </div>
 
@@ -232,15 +244,29 @@ export default function ContactForm() {
           disabled={isSubmitting}
           suppressHydrationWarning
         >
-          <option value="" className="font-secondary">Select Child&apos;s Age</option>
-          <option value="2 years" className="font-secondary">2 years</option>
-          <option value="3 years" className="font-secondary">3 years</option>
-          <option value="4 years" className="font-secondary">4 years</option>
-          <option value="5 years" className="font-secondary">5 years</option>
-          <option value="6 years" className="font-secondary">6 years</option>
+          <option value="" className="font-secondary">
+            Select Child&apos;s Age
+          </option>
+          <option value="2 years" className="font-secondary">
+            2 years
+          </option>
+          <option value="3 years" className="font-secondary">
+            3 years
+          </option>
+          <option value="4 years" className="font-secondary">
+            4 years
+          </option>
+          <option value="5 years" className="font-secondary">
+            5 years
+          </option>
+          <option value="6 years" className="font-secondary">
+            6 years
+          </option>
         </select>
         {errors.childAge && (
-          <p className="text-red-500 text-sm mt-1 font-secondary">{errors.childAge}</p>
+          <p className="text-red-500 text-sm mt-1 font-secondary">
+            {errors.childAge}
+          </p>
         )}
       </div>
 
@@ -297,4 +323,3 @@ export default function ContactForm() {
     </form>
   );
 }
-

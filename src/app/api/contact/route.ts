@@ -4,10 +4,12 @@ import {
   type InformationRequestInsert,
 } from "@/lib/supabase";
 import { sendStaffInformationRequestNotification } from "@/lib/email";
+import { contactRateLimiter, withRateLimit } from "@/lib/rate-limit";
 
 export async function POST(request: NextRequest) {
-  try {
-    const data = await request.json();
+  return withRateLimit(request, contactRateLimiter, async () => {
+    try {
+      const data = await request.json();
 
     // Validate required fields
     const requiredFields = ["parentName", "email", "phone", "childAge"];
@@ -112,6 +114,7 @@ export async function POST(request: NextRequest) {
       { error: "Failed to process request. Please try again." },
       { status: 500 },
     );
-  }
+    }
+  });
 }
 

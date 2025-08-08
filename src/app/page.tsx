@@ -561,8 +561,8 @@ export default function Home() {
                       <div>
                         <p className="font-semibold font-secondary">Email</p>
                         <p className="text-foreground/70 font-secondary">
-                          <a href="mailto:info@wonderlandkindergarten.sc.ke">
-                            info@wonderlandkindergarten.sc.ke
+                          <a href="mailto:info@wonderlandke.com">
+                            info@wonderlandke.com
                           </a>
                         </p>
                       </div>

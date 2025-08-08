@@ -383,7 +383,7 @@ export function getInformationRequestTemplate(
 
       <div class="section" style="background-color: #fff3cd; border-left: 4px solid #ffe66d;">
         <h2 style="color: #856404;">Quick Response Required</h2>
-        <p>This parent is requesting information about ${SCHOOL_NAME}. Please respond within 24 hours.</p>
+        <p>This parent is requesting information about ${SCHOOL_NAME}. Please respond within 72 hours.</p>
         <p><strong>Suggested Actions:</strong></p>
         <ul style="margin: 5px 0;">
           <li>Send information packet via email</li>

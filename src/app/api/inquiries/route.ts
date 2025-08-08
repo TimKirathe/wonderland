@@ -6,10 +6,12 @@ import {
   sendParentConfirmationMultiple,
   sendStaffNotificationMultiple 
 } from '@/lib/email';
+import { inquiryRateLimiter, withRateLimit } from '@/lib/rate-limit';
 
 export async function POST(request: NextRequest) {
-  try {
-    const data = await request.json();
+  return withRateLimit(request, inquiryRateLimiter, async () => {
+    try {
+      const data = await request.json();
     
     // Check if this is the new format with children array
     const hasChildrenArray = data.children && Array.isArray(data.children);
@@ -194,5 +196,6 @@ export async function POST(request: NextRequest) {
       { error: 'Failed to process inquiry. Please try again.' },
       { status: 500 }
     );
-  }
+    }
+  });
 }
