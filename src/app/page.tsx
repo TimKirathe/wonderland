@@ -11,6 +11,8 @@ import VisionMission from "@/components/VisionMission";
 import EducationPhilosophy from "@/components/EducationPhilosophy";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
 import ScrollAnimationWrapper from "@/components/ScrollAnimationWrapper";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import PhotoSkeleton from "@/components/PhotoSkeleton";
 
 interface Review {
   id: string;
@@ -22,6 +24,7 @@ interface Review {
 export default function Home() {
   const [isJourneyModalOpen, setIsJourneyModalOpen] = useState(false);
   const [marketingPhotos, setMarketingPhotos] = useState<string[]>([]);
+  const [photosLoading, setPhotosLoading] = useState(true);
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -30,9 +33,13 @@ export default function Home() {
 
   useEffect(() => {
     // Fetch marketing photos dynamically
+    setPhotosLoading(true);
     fetch("/api/marketing-photos")
       .then((res) => res.json())
-      .then((data) => setMarketingPhotos(data.photos))
+      .then((data) => {
+        setMarketingPhotos(data.photos);
+        setPhotosLoading(false);
+      })
       .catch((error) => {
         console.error("Error fetching marketing photos:", error);
         // Fallback to a default set if API fails
@@ -41,6 +48,7 @@ export default function Home() {
           "/marketing-photos/marketing-photo-2.jpg",
           "/marketing-photos/marketing-photo-3.jpg",
         ]);
+        setPhotosLoading(false);
       });
   }, []);
 
@@ -138,37 +146,39 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative h-[calc(100vh-88px)] overflow-hidden">
-        <HeroCarousel
-          images={
-            marketingPhotos.length > 0
-              ? marketingPhotos
-              : ["/wonderland-logo.svg"]
-          }
-        >
-          <div className="container mx-auto px-4 md:px-6 lg:px-8 h-full flex items-end pb-16">
-            <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full mb-8">
-                <span className="text-lg">🏆</span>
-                <span className="text-sm font-semibold font-secondary">
-                  Nurturing Young Minds Since 1976
-                </span>
-              </div>
-              <p className="text-lg md:text-xl text-white/90 mb-10 max-w-xl leading-relaxed">
-                At Wonderland Early Years & Prep School, we give individual
-                attention to every student, ensuring that your child feels safe
-                and loved in an atmosphere of learning, growth and adventure.
-              </p>
-              <div className="flex">
-                <Link
-                  href="#contact"
-                  className="inline-block bg-primary text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-primary/90 transition-all transform hover:scale-105 shadow-lg font-primary"
-                >
-                  Make an Enquiry
-                </Link>
+        {photosLoading ? (
+          <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+            <LoadingSpinner size="lg" color="primary" />
+          </div>
+        ) : (
+          <HeroCarousel
+            images={marketingPhotos}
+          >
+            <div className="container mx-auto px-4 md:px-6 lg:px-8 h-full flex items-end pb-16">
+              <div className="max-w-2xl">
+                <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full mb-8">
+                  <span className="text-lg">🏆</span>
+                  <span className="text-sm font-semibold font-secondary">
+                    Nurturing Young Minds Since 1976
+                  </span>
+                </div>
+                <p className="text-lg md:text-xl text-white/90 mb-10 max-w-xl leading-relaxed">
+                  At Wonderland Early Years & Prep School, we give individual
+                  attention to every student, ensuring that your child feels safe
+                  and loved in an atmosphere of learning, growth and adventure.
+                </p>
+                <div className="flex">
+                  <Link
+                    href="#contact"
+                    className="inline-block bg-primary text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-primary/90 transition-all transform hover:scale-105 shadow-lg font-primary"
+                  >
+                    Make an Enquiry
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
-        </HeroCarousel>
+          </HeroCarousel>
+        )}
       </section>
 
       {/* Education Philosophy Section */}
