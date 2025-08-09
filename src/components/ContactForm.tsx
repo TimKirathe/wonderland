@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useDataFast } from "@/hooks/useDataFast";
 
 interface ContactFormData {
   parentName: string;
@@ -12,6 +13,8 @@ interface ContactFormData {
 }
 
 export default function ContactForm() {
+  const { trackContactRequest, trackFormSubmission } = useDataFast();
+  
   const [formData, setFormData] = useState<ContactFormData>({
     parentName: "",
     email: "",
@@ -118,6 +121,10 @@ export default function ContactForm() {
 
       console.log("Information request submitted successfully:", result);
       setSubmitStatus("success");
+      
+      // Track successful form submission
+      trackContactRequest();
+      trackFormSubmission('contact-form', true);
 
       // Reset form after success
       setFormData({

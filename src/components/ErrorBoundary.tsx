@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { errorTracker } from '@/lib/sentry';
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
@@ -26,6 +27,13 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // Log error to error reporting service
     console.error('Error caught by boundary:', error, errorInfo);
+    
+    // Send to error tracking
+    errorTracker.captureException(error, {
+      extra: {
+        componentStack: errorInfo.componentStack,
+      },
+    });
   }
 
   render() {

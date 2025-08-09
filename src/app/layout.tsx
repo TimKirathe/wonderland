@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import "./font-styles.css";
 import FontProvider from "@/components/FontProvider";
 import StructuredData from "@/components/StructuredData";
 import ScreenReaderAnnouncements from "@/components/ScreenReaderAnnouncements";
+import PerformanceMonitor from "@/components/PerformanceMonitor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -74,6 +76,14 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <StructuredData />
+        {process.env.NEXT_PUBLIC_DATAFAST_WEBSITE_ID && (
+          <Script
+            data-website-id={process.env.NEXT_PUBLIC_DATAFAST_WEBSITE_ID}
+            data-domain={process.env.NEXT_PUBLIC_DATAFAST_DOMAIN || 'wonderlandke.com'}
+            src="https://datafa.st/js/script.js"
+            strategy="afterInteractive"
+          />
+        )}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -93,6 +103,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <PerformanceMonitor />
         <FontProvider />
         <ScreenReaderAnnouncements />
         {children}
