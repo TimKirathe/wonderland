@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { errorTracker } from '@/lib/sentry';
+import { errorTracker } from '@/lib/errorTracking';
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;

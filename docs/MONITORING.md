@@ -52,18 +52,18 @@ The DataFast script is proxied through your own domain to bypass ad blockers:
 
 ## 2. Error Tracking
 
-### Setup
-- Add your Sentry DSN to `.env.local` (optional):
-  ```
-  NEXT_PUBLIC_SENTRY_DSN=https://xxxxx@sentry.io/xxxxx
-  ```
-- Errors are automatically captured and logged
+### Overview
+Error tracking is handled through DataFast custom events. No additional setup required beyond DataFast configuration.
+
+### Automatic Error Tracking
+- Global error handlers catch unhandled errors and promise rejections
+- React Error Boundaries catch component errors
+- Errors are tracked as custom events in DataFast
 - In development, errors are logged to console
-- In production, errors are sent to the monitoring endpoint
 
 ### Manual Error Tracking
 ```typescript
-import { errorTracker } from '@/lib/sentry';
+import { errorTracker } from '@/lib/errorTracking';
 
 // Capture exception
 try {
@@ -78,6 +78,11 @@ try {
 // Capture message
 errorTracker.captureMessage('User completed enrollment', 'info');
 ```
+
+### Viewing Errors in DataFast
+- Errors appear as custom events with type 'error'
+- Filter by event type in DataFast dashboard to see all errors
+- Error details include message, stack trace, URL, and user agent
 
 ## 3. Performance Monitoring
 
@@ -136,7 +141,6 @@ Configure your monitoring service (e.g., UptimeRobot, Pingdom) to check:
 ### Recommended Tools
 - **DataFast**: Traffic, user behavior, and performance analytics
 - **Google Search Console**: SEO and search performance
-- **Sentry**: Error tracking (when configured)
 - **UptimeRobot**: Uptime monitoring (free tier available)
 
 ## 6. Alert Configuration
