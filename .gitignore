@@ -47,8 +47,7 @@ yarn-error.log*
 next-env.d.ts
 
 # log files
-runtime.log
-browser-tools.log
+*.log
 
 # screenshots
 browser-screenshots/
@@ -64,3 +63,34 @@ PLAN.md
 public/marketing-photos
 public/programs-photos
 public/wonderland-school-video-1.mp4
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+*.tmp
+
+# Database files
+*.sqlite
+*.sqlite3
+*.db
+
+# Certificates and keys
+*.key
+*.cert
+*.crt
+*.pem
+!public/*.pem
+
+# Supabase local files
+supabase/.branches
+supabase/.temp
