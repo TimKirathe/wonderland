@@ -349,11 +349,27 @@ export default async function Home() {
               </ScrollAnimationWrapper>
             </div>
             <ScrollAnimationWrapper animation="fadeIn" delay={600}>
-              <div className="border-t border-white/20 mt-12 pt-8 text-center text-white/70">
-                <p className="text-sm font-secondary">
-                  &copy; 2025 Wonderland Early Years & Prep School. All rights
-                  reserved.
-                </p>
+              <div className="border-t border-white/20 mt-12 pt-8">
+                <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+                  <p className="text-sm font-secondary text-white/70">
+                    &copy; 2025 Wonderland Early Years & Prep School. All rights
+                    reserved.
+                  </p>
+                  <div className="flex gap-6 text-sm font-secondary">
+                    <Link 
+                      href="/privacy" 
+                      className="text-white/70 hover:text-white transition-colors"
+                    >
+                      Privacy Policy
+                    </Link>
+                    <Link 
+                      href="/terms" 
+                      className="text-white/70 hover:text-white transition-colors"
+                    >
+                      Terms of Service
+                    </Link>
+                  </div>
+                </div>
               </div>
             </ScrollAnimationWrapper>
           </div>

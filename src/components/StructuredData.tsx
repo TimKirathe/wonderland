@@ -14,8 +14,10 @@ export default function StructuredData() {
           "A nurturing environment where children learn, care, and play together. Offering quality education programs from Playgroup to Grade 4.",
         address: {
           "@type": "PostalAddress",
-          addressCountry: "KE",
+          streetAddress: "Kalobot Road, Langata",
+          addressLocality: "Nairobi",
           addressRegion: "Nairobi",
+          addressCountry: "KE",
         },
         geo: {
           "@type": "GeoCoordinates",
