@@ -9,6 +9,7 @@ import HeroCarousel from "@/components/HeroCarousel";
 import NoSSR from "@/components/NoSSR";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
 import ScrollAnimationWrapper from "@/components/ScrollAnimationWrapper";
+import OfflineIndicator from "@/components/OfflineIndicator";
 
 interface Review {
   id: string;
@@ -422,6 +423,9 @@ export default function HomeClient({ initialPhotos, initialReviews }: HomeClient
         isOpen={isJourneyModalOpen}
         onClose={() => setIsJourneyModalOpen(false)}
       />
+
+      {/* Offline Indicator */}
+      <OfflineIndicator />
     </div>
   );
 }
