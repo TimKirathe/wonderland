@@ -14,7 +14,7 @@ declare global {
 
 export function useDataFast() {
   const trackEvent = useCallback((eventName: string, properties?: Record<string, unknown>) => {
-    if (typeof window !== 'undefined' && window.datafast) {
+    if (typeof window !== 'undefined' && window.datafast && typeof window.datafast.push === 'function') {
       window.datafast.push(['trackEvent', eventName, properties]);
     } else if (process.env.NODE_ENV === 'development') {
       console.log('DataFast Event:', eventName, properties);
