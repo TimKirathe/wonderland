@@ -180,18 +180,6 @@ export default function HomeClient({
                 </p>
               </ScrollAnimationWrapper>
             </div>
-            <ScrollAnimationWrapper animation="slideLeft" delay={400}>
-              <div className="relative w-48 h-72 lg:w-64 lg:h-96 mx-auto rounded-3xl overflow-hidden">
-                <Image
-                  src="/student-smiling.jpg"
-                  alt="Student Smiling"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 192px, 256px"
-                  loading="lazy"
-                />
-              </div>
-            </ScrollAnimationWrapper>
           </div>
           <ScrollAnimationWrapper animation="fadeUp" delay={1000}>
             <VisionMission />
