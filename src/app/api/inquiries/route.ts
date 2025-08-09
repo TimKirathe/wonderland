@@ -138,35 +138,68 @@ export async function POST(request: NextRequest) {
       });
     }
     
-    // Send emails asynchronously (don't wait for them to complete)
+    // Send emails and wait for them to complete
     // For multiple children, we'll send one email with all children info
-    if (hasChildrenArray && savedInquiries.length > 1) {
-      Promise.all([
-        sendParentConfirmationMultiple(savedInquiries).catch(err => {
-          console.error('Failed to send parent confirmation email:', err);
-        }),
-        sendStaffNotificationMultiple(savedInquiries).catch(err => {
-          console.error('Failed to send staff notification email:', err);
-        })
-      ]);
-    } else {
-      // Single child email (existing functionality)
-      Promise.all([
-        sendParentConfirmation(savedInquiries[0]).catch(err => {
-          console.error('Failed to send parent confirmation email:', err);
-        }),
-        sendStaffNotification(savedInquiries[0]).catch(err => {
-          console.error('Failed to send staff notification email:', err);
-        })
-      ]);
+    let emailsSent = { parent: false, staff: false };
+    
+    try {
+      if (hasChildrenArray && savedInquiries.length > 1) {
+        const [parentResult, staffResult] = await Promise.all([
+          sendParentConfirmationMultiple(savedInquiries).catch(err => {
+            console.error('Failed to send parent confirmation email:', err);
+            return false;
+          }),
+          sendStaffNotificationMultiple(savedInquiries).catch(err => {
+            console.error('Failed to send staff notification email:', err);
+            return false;
+          })
+        ]);
+        emailsSent = { parent: parentResult, staff: staffResult };
+      } else {
+        // Single child email (existing functionality)
+        const [parentResult, staffResult] = await Promise.all([
+          sendParentConfirmation(savedInquiries[0]).catch(err => {
+            console.error('Failed to send parent confirmation email:', err);
+            return false;
+          }),
+          sendStaffNotification(savedInquiries[0]).catch(err => {
+            console.error('Failed to send staff notification email:', err);
+            return false;
+          })
+        ]);
+        emailsSent = { parent: parentResult, staff: staffResult };
+      }
+      
+      // Log email sending results
+      console.log('Email sending results:', emailsSent);
+      
+      // Warn if emails failed but don't fail the whole request
+      if (!emailsSent.parent) {
+        console.warn('Parent confirmation email was not sent successfully');
+      }
+      if (!emailsSent.staff) {
+        console.warn('Staff notification email was not sent successfully');
+      }
+    } catch (emailError) {
+      console.error('Error during email sending:', emailError);
+      // Continue even if emails fail - the inquiry is already saved
     }
     
-    // Return success response immediately
+    // Return success response with email status
     return NextResponse.json({
       success: true,
       message: 'Inquiry submitted successfully',
       inquiryId: inquiryGroupId,
-      childrenCount: savedInquiries.length
+      childrenCount: savedInquiries.length,
+      emailStatus: {
+        parentConfirmation: emailsSent.parent,
+        staffNotification: emailsSent.staff,
+        message: emailsSent.parent && emailsSent.staff 
+          ? 'Confirmation emails have been sent successfully'
+          : emailsSent.parent 
+          ? 'Confirmation email sent to parent'
+          : 'Your inquiry has been saved. We will contact you soon.'
+      }
     });
     
   } catch (error) {

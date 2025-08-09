@@ -279,6 +279,15 @@ export async function sendParentConfirmation(
   inquiry: Inquiry,
 ): Promise<boolean> {
   try {
+    // Check if email configuration is properly set
+    if (!FROM_EMAIL || !process.env.RESEND_API_KEY) {
+      console.error("Email configuration missing:", {
+        hasFromEmail: !!FROM_EMAIL,
+        hasApiKey: !!process.env.RESEND_API_KEY
+      });
+      return false;
+    }
+
     const html = getParentConfirmationTemplate(inquiry);
 
     const data = await resend.emails.send({
@@ -288,10 +297,18 @@ export async function sendParentConfirmation(
       html,
     });
 
-    console.log("Parent confirmation email sent:", data);
+    console.log("Parent confirmation email sent successfully:", {
+      data,
+      to: inquiry.email,
+      childName: inquiry.child_name
+    });
     return true;
   } catch (error) {
-    console.error("Error sending parent confirmation email:", error);
+    console.error("Error sending parent confirmation email:", {
+      error: error instanceof Error ? error.message : error,
+      to: inquiry.email,
+      childName: inquiry.child_name
+    });
     return false;
   }
 }
@@ -301,6 +318,16 @@ export async function sendStaffNotification(
   inquiry: Inquiry,
 ): Promise<boolean> {
   try {
+    // Check if email configuration is properly set
+    if (!FROM_EMAIL || !STAFF_EMAIL || !process.env.RESEND_API_KEY) {
+      console.error("Email configuration missing for staff notification:", {
+        hasFromEmail: !!FROM_EMAIL,
+        hasStaffEmail: !!STAFF_EMAIL,
+        hasApiKey: !!process.env.RESEND_API_KEY
+      });
+      return false;
+    }
+
     const html = getStaffNotificationTemplate(inquiry);
 
     const data = await resend.emails.send({
@@ -311,10 +338,19 @@ export async function sendStaffNotification(
       replyTo: inquiry.email, // Allow staff to reply directly to the parent
     });
 
-    console.log("Staff notification email sent:", data);
+    console.log("Staff notification email sent successfully:", {
+      data,
+      to: STAFF_EMAIL,
+      replyTo: inquiry.email,
+      childName: inquiry.child_name
+    });
     return true;
   } catch (error) {
-    console.error("Error sending staff notification email:", error);
+    console.error("Error sending staff notification email:", {
+      error: error instanceof Error ? error.message : error,
+      to: STAFF_EMAIL,
+      from: FROM_EMAIL
+    });
     return false;
   }
 }
