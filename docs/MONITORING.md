@@ -43,6 +43,13 @@ trackEvent('button_click', {
 - View real-time data, conversion funnels, and performance metrics
 - DataFast is automatically disabled on localhost to prevent tracking development traffic
 
+### Ad Blocker Bypass
+The DataFast script is proxied through your own domain to bypass ad blockers:
+- Script is served from `/df/script.js` instead of `datafa.st`
+- Events are sent to `/df/events` instead of directly to DataFast
+- This ensures analytics data is collected even when users have ad blockers enabled
+- The proxy is configured in `next.config.ts` using Next.js rewrites
+
 ## 2. Error Tracking
 
 ### Setup

@@ -6,6 +6,19 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
+  // Proxy DataFast to bypass ad blockers
+  async rewrites() {
+    return [
+      {
+        source: '/df/script.js',
+        destination: 'https://datafa.st/js/script.js',
+      },
+      {
+        source: '/df/events',
+        destination: 'https://datafa.st/api/events',
+      }
+    ];
+  },
   // CORS headers for API routes
   async headers() {
     return [
