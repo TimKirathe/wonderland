@@ -45,8 +45,8 @@ trackEvent('button_click', {
 
 ### Ad Blocker Bypass
 The DataFast script is proxied through your own domain to bypass ad blockers:
-- Script is served from `/df/script.js` instead of `datafa.st`
-- Events are sent to `/df/events` instead of directly to DataFast
+- Script is served from `/js/script.js` instead of `datafa.st`
+- Events are sent to `/api/events` instead of directly to DataFast
 - This ensures analytics data is collected even when users have ad blockers enabled
 - The proxy is configured in `next.config.ts` using Next.js rewrites
 

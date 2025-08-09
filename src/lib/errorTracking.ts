@@ -16,15 +16,14 @@ class ErrorTracker {
     }
 
     // Track error with DataFast in production
-    if (typeof window !== 'undefined' && window.datafast) {
-      window.datafast.push(['trackEvent', 'error', {
-        message: error.message,
-        stack: error.stack,
-        url: window.location.href,
-        userAgent: navigator.userAgent,
-        ...context?.extra,
-        tags: JSON.stringify(context?.tags || {}),
-      }]);
+    if (typeof window !== 'undefined' && typeof window.datafast === 'function') {
+      window.datafast('error', {
+        message: error.message?.slice(0, 255) || '',
+        stack: error.stack?.slice(0, 255) || '',
+        url: window.location.href.slice(0, 255),
+        user_agent: navigator.userAgent.slice(0, 255),
+        tags: JSON.stringify(context?.tags || {}).slice(0, 255),
+      });
     }
   }
 
@@ -36,13 +35,12 @@ class ErrorTracker {
     }
 
     // Track message with DataFast in production
-    if (typeof window !== 'undefined' && window.datafast) {
-      window.datafast.push(['trackEvent', `log_${level}`, {
-        message,
-        url: window.location.href,
-        ...context?.extra,
-        tags: JSON.stringify(context?.tags || {}),
-      }]);
+    if (typeof window !== 'undefined' && typeof window.datafast === 'function') {
+      window.datafast(`log_${level}`, {
+        message: message.slice(0, 255),
+        url: window.location.href.slice(0, 255),
+        tags: JSON.stringify(context?.tags || {}).slice(0, 255),
+      });
     }
   }
 

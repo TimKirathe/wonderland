@@ -10,11 +10,11 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: '/df/script.js',
+        source: '/js/script.js',
         destination: 'https://datafa.st/js/script.js',
       },
       {
-        source: '/df/events',
+        source: '/api/events',
         destination: 'https://datafa.st/api/events',
       }
     ];

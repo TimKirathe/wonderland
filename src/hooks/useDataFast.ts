@@ -2,20 +2,27 @@
 
 import { useCallback } from 'react';
 
-type DataFastEvent = ['trackEvent', string, Record<string, unknown>?];
-
 declare global {
   interface Window {
-    datafast?: {
-      push: (event: DataFastEvent) => void;
-    };
+    datafast?: (goalName: string, properties?: Record<string, string>) => void;
   }
 }
 
 export function useDataFast() {
   const trackEvent = useCallback((eventName: string, properties?: Record<string, unknown>) => {
-    if (typeof window !== 'undefined' && window.datafast && typeof window.datafast.push === 'function') {
-      window.datafast.push(['trackEvent', eventName, properties]);
+    if (typeof window !== 'undefined' && typeof window.datafast === 'function') {
+      // Convert properties to strings as required by DataFast
+      const stringProperties: Record<string, string> = {};
+      if (properties) {
+        Object.entries(properties).forEach(([key, value]) => {
+          // Ensure key follows DataFast rules: lowercase, max 32 chars
+          const cleanKey = key.toLowerCase().replace(/[^a-z0-9_-]/g, '_').slice(0, 32);
+          // Convert value to string, max 255 chars
+          stringProperties[cleanKey] = String(value).slice(0, 255);
+        });
+      }
+      // Call DataFast with the correct API
+      window.datafast(eventName.toLowerCase().replace(/[^a-z0-9_-]/g, '_').slice(0, 32), stringProperties);
     } else if (process.env.NODE_ENV === 'development') {
       console.log('DataFast Event:', eventName, properties);
     }

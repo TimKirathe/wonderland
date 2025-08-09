@@ -81,48 +81,14 @@ export default function RootLayout({
       <head>
         <StructuredData />
         <script
+          id="datafast-queue"
           dangerouslySetInnerHTML={{
             __html: `
-              // Initialize DataFast mock BEFORE the real DataFast script loads
-              // This ensures window.datafast.push is always available
-              (function() {
-                // Store the original push method if DataFast was already initialized
-                var originalPush = window.datafast && window.datafast.push;
-                
-                // Create our mock/wrapper
-                window.datafast = window.datafast || [];
-                
-                // Always ensure push is a function
-                if (typeof window.datafast.push !== 'function') {
-                  window.datafast.push = function(event) {
-                    // In development or when DataFast is disabled, just log
-                    if (window.location.hostname === 'localhost' || window.location.protocol === 'file:') {
-                      console.log('DataFast Event (Mock):', event);
-                    } else if (originalPush && typeof originalPush === 'function') {
-                      // If we had an original push method, use it
-                      originalPush.call(window.datafast, event);
-                    } else {
-                      // Otherwise just log
-                      console.log('DataFast Event (Fallback):', event);
-                    }
-                  };
-                }
-                
-                // Monitor for changes to window.datafast and fix it if needed
-                var checkInterval = setInterval(function() {
-                  if (window.datafast && typeof window.datafast.push !== 'function') {
-                    console.log('DataFast push method was removed, restoring mock...');
-                    window.datafast.push = function(event) {
-                      console.log('DataFast Event (Restored):', event);
-                    };
-                  }
-                }, 100);
-                
-                // Stop checking after 5 seconds
-                setTimeout(function() {
-                  clearInterval(checkInterval);
-                }, 5000);
-              })();
+              // Initialize DataFast queue as per DataFast documentation
+              window.datafast = window.datafast || function() {
+                window.datafast.q = window.datafast.q || [];
+                window.datafast.q.push(arguments);
+              };
               
               if ('serviceWorker' in navigator) {
                 window.addEventListener('load', function() {
