@@ -42,7 +42,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
               Oops! Something went wrong
             </h2>
             <p className="text-gray-600 mb-6">
-              We're sorry, but this section couldn't load properly.
+              We&apos;re sorry, but this section couldn&apos;t load properly.
             </p>
             <div className="flex gap-4 justify-center">
               <button

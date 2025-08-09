@@ -37,7 +37,7 @@ type JourneyFormProps = {
 
 export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
   const [currentStep, setCurrentStep] = useState(1);
-  const [errors, setErrors] = useState<any>({});
+  const [errors, setErrors] = useState<Record<string, string | Record<string, string>[]>>({});
   const [currentChildIndex, setCurrentChildIndex] = useState(0);
 
   // Helper function to get program display name
@@ -109,7 +109,7 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
       errors.children[childIndex] &&
       errors.children[childIndex][name]
     ) {
-      setErrors((prev: any) => {
+      setErrors((prev) => {
         const newErrors = { ...prev };
         if (newErrors.children && newErrors.children[childIndex]) {
           newErrors.children[childIndex][name] = "";
@@ -150,7 +150,7 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
   };
 
   const validateStep = (step: number): boolean => {
-    const newErrors: any = {};
+    const newErrors: Record<string, string | Record<string, string>[]> = {};
 
     if (step === 1) {
       // Validate parent information
@@ -185,7 +185,7 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
       let hasChildErrors = false;
 
       formData.children.forEach((child, index) => {
-        const childErrors: any = {};
+        const childErrors: Record<string, string> = {};
 
         if (!child.childName.trim()) {
           childErrors.childName = "Child's name is required";

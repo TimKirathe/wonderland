@@ -6,12 +6,12 @@
 :root {
   --background: #fdfbf7;
   --foreground: #2d3748;
-  --primary: #FF8C42;
-  --secondary: #0080CC;
-  --accent: #FFA500;
-  --tertiary: #FF1493;
-  --quaternary: #9370DB;
-  --success: #6B8E23;
+  --primary: #D86A2C; /* Darkened for better contrast (was #FF8C42) */
+  --secondary: #0066A4; /* Darkened for better contrast (was #0080CC) */
+  --accent: #CC8400; /* Darkened for better contrast (was #FFA500) */
+  --tertiary: #CC0066; /* Darkened for better contrast (was #FF1493) */
+  --quaternary: #7B4DB3; /* Darkened for better contrast (was #9370DB) */
+  --success: #5A7520; /* Darkened for better contrast (was #6B8E23) */
   --card-bg: #fff7f3;
   --card-border: #f0f0f0;
   

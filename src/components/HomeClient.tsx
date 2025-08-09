@@ -61,6 +61,8 @@ export default function HomeClient({ initialPhotos, initialReviews }: HomeClient
 
       {/* Navigation */}
       <nav
+        role="navigation"
+        aria-label="Main navigation"
         className={`bg-background/95 backdrop-blur-sm shadow-sm sticky top-0 z-50 transition-transform duration-300 ${
           isNavbarVisible ? "translate-y-0" : "-translate-y-full"
         }`}
@@ -111,7 +113,9 @@ export default function HomeClient({ initialPhotos, initialReviews }: HomeClient
       </nav>
 
       {/* Hero Section */}
-      <section className="relative h-[calc(100vh-88px)] overflow-hidden">
+      <section 
+        aria-label="Welcome to Wonderland School"
+        className="relative h-[calc(100vh-88px)] overflow-hidden">
         <HeroCarousel
           images={initialPhotos}
         >

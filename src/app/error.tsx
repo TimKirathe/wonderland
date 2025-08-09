@@ -25,10 +25,10 @@ export default function Error({
         
         <div className="mb-8">
           <p className="text-xl text-gray-600 mb-4">
-            We're sorry, but something unexpected happened.
+            We&apos;re sorry, but something unexpected happened.
           </p>
           <p className="text-lg text-gray-500">
-            Our team has been notified and we're working to fix this issue.
+            Our team has been notified and we&apos;re working to fix this issue.
           </p>
         </div>
 

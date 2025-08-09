@@ -11,10 +11,10 @@ export default function NotFound() {
         
         <div className="mb-8">
           <p className="text-xl text-gray-600 mb-4">
-            It looks like you've wandered off the playground!
+            It looks like you&apos;ve wandered off the playground!
           </p>
           <p className="text-lg text-gray-500">
-            The page you're looking for doesn't exist or has been moved.
+            The page you&apos;re looking for doesn&apos;t exist or has been moved.
           </p>
         </div>
 
