@@ -1,12 +1,10 @@
-import { useDataFast } from '@/hooks/useDataFast';
-
 interface ErrorContext {
   user?: {
     id?: string;
     email?: string;
   };
   tags?: Record<string, string>;
-  extra?: Record<string, any>;
+  extra?: Record<string, unknown>;
 }
 
 class ErrorTracker {

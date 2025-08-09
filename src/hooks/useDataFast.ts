@@ -2,16 +2,18 @@
 
 import { useCallback } from 'react';
 
+type DataFastEvent = ['trackEvent', string, Record<string, unknown>?];
+
 declare global {
   interface Window {
     datafast?: {
-      push: (event: any[]) => void;
+      push: (event: DataFastEvent) => void;
     };
   }
 }
 
 export function useDataFast() {
-  const trackEvent = useCallback((eventName: string, properties?: Record<string, any>) => {
+  const trackEvent = useCallback((eventName: string, properties?: Record<string, unknown>) => {
     if (typeof window !== 'undefined' && window.datafast) {
       window.datafast.push(['trackEvent', eventName, properties]);
     } else if (process.env.NODE_ENV === 'development') {

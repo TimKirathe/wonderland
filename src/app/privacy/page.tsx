@@ -28,7 +28,7 @@ export default function PrivacyPolicy() {
             </p>
             
             <p>
-              Wonderland Early Years & Prep School ("we," "our," or "us") is committed to protecting the privacy and security of the personal information of our students, parents, guardians, and website visitors. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or interact with our services.
+              Wonderland Early Years & Prep School (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting the privacy and security of the personal information of our students, parents, guardians, and website visitors. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or interact with our services.
             </p>
 
             <h2 className="text-2xl font-semibold mt-8 mb-4 font-primary">1. Information We Collect</h2>
@@ -56,7 +56,7 @@ export default function PrivacyPolicy() {
             <p>We use the collected information for the following purposes:</p>
             <ul className="list-disc pl-6 space-y-2">
               <li>Processing admission applications and enrollment</li>
-              <li>Communicating with parents and guardians about their children's education</li>
+              <li>Communicating with parents and guardians about their children&apos;s education</li>
               <li>Providing educational services and support</li>
               <li>Ensuring the safety and well-being of students</li>
               <li>Sending newsletters and school updates (with consent)</li>
@@ -85,7 +85,7 @@ export default function PrivacyPolicy() {
               <li>Staff training on data protection and privacy</li>
             </ul>
 
-            <h2 className="text-2xl font-semibold mt-8 mb-4 font-primary">5. Children's Privacy</h2>
+            <h2 className="text-2xl font-semibold mt-8 mb-4 font-primary">5. Children&apos;s Privacy</h2>
             <p>
               Our website is not intended for children under the age of 13 to use without parental supervision. We do not knowingly collect personal information directly from children under 13 without parental consent. If you believe we have collected information from a child under 13 without proper consent, please contact us immediately.
             </p>
@@ -117,7 +117,7 @@ export default function PrivacyPolicy() {
 
             <h2 className="text-2xl font-semibold mt-8 mb-4 font-primary">10. Changes to This Privacy Policy</h2>
             <p>
-              We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. We will notify you of any material changes by posting the updated policy on our website with a new "Last Updated" date.
+              We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. We will notify you of any material changes by posting the updated policy on our website with a new &quot;Last Updated&quot; date.
             </p>
 
             <h2 className="text-2xl font-semibold mt-8 mb-4 font-primary">11. Contact Us</h2>

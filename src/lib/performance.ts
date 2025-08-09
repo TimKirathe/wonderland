@@ -8,9 +8,17 @@ export interface PerformanceMetrics {
   timeToInteractive?: number;
 }
 
+interface PerformanceEventTiming extends PerformanceEntry {
+  processingStart: number;
+}
+
+interface LayoutShift extends PerformanceEntry {
+  hadRecentInput: boolean;
+  value: number;
+}
+
 class PerformanceMonitor {
   private metrics: PerformanceMetrics = {};
-  private observer: PerformanceObserver | null = null;
 
   constructor() {
     if (typeof window !== 'undefined') {
@@ -65,7 +73,7 @@ class PerformanceMonitor {
       // First Input Delay (FID)
       const fidObserver = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          const fidEntry = entry as any;
+          const fidEntry = entry as PerformanceEventTiming;
           this.metrics.firstInputDelay = fidEntry.processingStart - fidEntry.startTime;
           this.reportMetrics();
         }
@@ -76,8 +84,9 @@ class PerformanceMonitor {
       let clsValue = 0;
       const clsObserver = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          if (!(entry as any).hadRecentInput) {
-            clsValue += (entry as any).value;
+          const layoutShiftEntry = entry as LayoutShift;
+          if (!layoutShiftEntry.hadRecentInput) {
+            clsValue += layoutShiftEntry.value;
             this.metrics.cumulativeLayoutShift = clsValue;
           }
         }
@@ -106,7 +115,7 @@ class PerformanceMonitor {
 
       try {
         longTaskObserver.observe({ entryTypes: ['longtask'] });
-      } catch (e) {
+      } catch {
         // Long task monitoring not supported
       }
     }

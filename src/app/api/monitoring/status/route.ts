@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
 // This endpoint can be used by external monitoring services
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     // Collect system status
     const status = {
@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
         'Cache-Control': 'no-cache, no-store, must-revalidate',
       },
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       {
         service: 'Wonderland Early Years & Prep School',

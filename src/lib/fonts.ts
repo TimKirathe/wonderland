@@ -4,7 +4,7 @@
 export const fontConfig = {
   // Primary font for headings and branding
   primary: {
-    current: "comic-sans", // Change this to test different fonts
+    current: "comic-sans" as const, // Change this to test different fonts
     options: {
       "geist-sans": {
         className: "font-sans",
@@ -63,7 +63,7 @@ export const fontConfig = {
 
   // Secondary font for body text and UI elements
   secondary: {
-    current: "nunito", // Change this to test different fonts
+    current: "nunito" as const, // Change this to test different fonts
     options: {
       "geist-sans": {
         className: "font-sans",

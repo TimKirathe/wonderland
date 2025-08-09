@@ -28,7 +28,7 @@ export default function TermsOfService() {
             </p>
             
             <p>
-              Welcome to Wonderland Early Years & Prep School. These Terms of Service ("Terms") govern your use of our website and services. By accessing or using our website, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use our website or services.
+              Welcome to Wonderland Early Years & Prep School. These Terms of Service (&quot;Terms&quot;) govern your use of our website and services. By accessing or using our website, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use our website or services.
             </p>
 
             <h2 className="text-2xl font-semibold mt-8 mb-4 font-primary">1. Acceptance of Terms</h2>
@@ -77,7 +77,7 @@ export default function TermsOfService() {
             </p>
             <ul className="list-disc pl-6 space-y-2">
               <li>Timely payment of all tuition and fees</li>
-              <li>Understanding the school's refund and withdrawal policies</li>
+              <li>Understanding the school&apos;s refund and withdrawal policies</li>
               <li>Providing accurate financial information when required</li>
             </ul>
 
@@ -101,19 +101,19 @@ export default function TermsOfService() {
             <ul className="list-disc pl-6 space-y-2">
               <li>You own or control all rights to the submissions</li>
               <li>The submissions are accurate and not misleading</li>
-              <li>The submissions do not violate any third party's rights</li>
+              <li>The submissions do not violate any third party&apos;s rights</li>
             </ul>
 
             <h2 className="text-2xl font-semibold mt-8 mb-4 font-primary">8. Disclaimers</h2>
             
             <h3 className="text-xl font-semibold mt-6 mb-3 font-primary">Website Information</h3>
             <p>
-              The information on our website is provided on an "as is" basis. While we strive to keep information accurate and up-to-date, we make no warranties or representations about the completeness, accuracy, reliability, suitability, or availability of the information, products, services, or related graphics contained on the website.
+              The information on our website is provided on an &quot;as is&quot; basis. While we strive to keep information accurate and up-to-date, we make no warranties or representations about the completeness, accuracy, reliability, suitability, or availability of the information, products, services, or related graphics contained on the website.
             </p>
 
             <h3 className="text-xl font-semibold mt-6 mb-3 font-primary">Educational Outcomes</h3>
             <p>
-              We do not guarantee specific educational outcomes or results. Each child's progress depends on various factors including individual abilities, effort, and parental support.
+              We do not guarantee specific educational outcomes or results. Each child&apos;s progress depends on various factors including individual abilities, effort, and parental support.
             </p>
 
             <h2 className="text-2xl font-semibold mt-8 mb-4 font-primary">9. Limitation of Liability</h2>

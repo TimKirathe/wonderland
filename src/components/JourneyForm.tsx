@@ -35,9 +35,18 @@ type JourneyFormProps = {
   onClose: () => void;
 };
 
+type FormErrors = {
+  parentName?: string;
+  email?: string;
+  phone?: string;
+  relationship?: string;
+  children?: Record<string, string>[];
+  [key: string]: string | Record<string, string>[] | undefined;
+};
+
 export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
   const [currentStep, setCurrentStep] = useState(1);
-  const [errors, setErrors] = useState<Record<string, string | Record<string, string>[]>>({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [currentChildIndex, setCurrentChildIndex] = useState(0);
 
   // Helper function to get program display name
@@ -106,13 +115,14 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
     // Clear error when user starts typing
     if (
       errors.children &&
+      Array.isArray(errors.children) &&
       errors.children[childIndex] &&
-      errors.children[childIndex][name]
+      (errors.children[childIndex] as Record<string, string>)[name]
     ) {
       setErrors((prev) => {
         const newErrors = { ...prev };
-        if (newErrors.children && newErrors.children[childIndex]) {
-          newErrors.children[childIndex][name] = "";
+        if (newErrors.children && Array.isArray(newErrors.children) && newErrors.children[childIndex]) {
+          (newErrors.children[childIndex] as Record<string, string>)[name] = "";
         }
         return newErrors;
       });
@@ -150,7 +160,7 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
   };
 
   const validateStep = (step: number): boolean => {
-    const newErrors: Record<string, string | Record<string, string>[]> = {};
+    const newErrors: FormErrors = {};
 
     if (step === 1) {
       // Validate parent information
@@ -181,7 +191,7 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
 
     if (step === 2) {
       // Validate all children information
-      newErrors.children = [];
+      const childrenErrors: Record<string, string>[] = [];
       let hasChildErrors = false;
 
       formData.children.forEach((child, index) => {
@@ -222,11 +232,11 @@ export default function JourneyForm({ onSubmit, onClose }: JourneyFormProps) {
           hasChildErrors = true;
         }
 
-        newErrors.children[index] = childErrors;
+        childrenErrors[index] = childErrors;
       });
 
-      if (!hasChildErrors) {
-        delete newErrors.children;
+      if (hasChildErrors) {
+        newErrors.children = childrenErrors;
       }
     }
 

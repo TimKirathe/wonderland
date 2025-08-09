@@ -23,6 +23,7 @@ export default function ReviewsCarousel({ reviews, loading, error }: ReviewsCaro
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [selectedReview, setSelectedReview] = useState<Review | null>(null);
+  const [cardWidth, setCardWidth] = useState<string>('400px'); // Default width for SSR
   const reviewsPerPage = 1; // Always focus on single card
   const carouselRef = useRef<HTMLDivElement>(null);
   const autoScrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -101,9 +102,20 @@ export default function ReviewsCarousel({ reviews, loading, error }: ReviewsCaro
     return 0;
   };
 
-  // Force re-render on window resize to update transform calculations
+  // Update card width and force re-render on window resize
   useEffect(() => {
+    const updateCardWidth = () => {
+      if (typeof window !== 'undefined') {
+        const width = window.innerWidth >= 768 ? '400px' : 'calc(100vw - 64px)';
+        setCardWidth(width);
+      }
+    };
+
+    // Set initial width
+    updateCardWidth();
+
     const handleResize = () => {
+      updateCardWidth();
       // Force re-render by updating state
       setCurrentIndex((prev) => prev);
     };
@@ -203,7 +215,7 @@ export default function ReviewsCarousel({ reviews, loading, error }: ReviewsCaro
                     key={review.id}
                     className="flex-shrink-0 transition-all duration-700 ease-out"
                     style={{
-                      width: window.innerWidth >= 768 ? '400px' : 'calc(100vw - 64px)',
+                      width: cardWidth,
                       ...getCardStyle(),
                     }}
                   >

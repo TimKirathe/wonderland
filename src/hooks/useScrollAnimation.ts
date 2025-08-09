@@ -19,6 +19,13 @@ export function useScrollAnimation({
     const element = ref.current;
     if (!element) return;
 
+    // Check if IntersectionObserver is available (not in SSR)
+    if (typeof window === 'undefined' || !window.IntersectionObserver) {
+      // Fallback: show content immediately if IntersectionObserver is not available
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
