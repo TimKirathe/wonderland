@@ -85,7 +85,8 @@ export default async function Home() {
       <HomeClient initialPhotos={marketingPhotos} initialReviews={reviews} />
 
       {/* Education Philosophy Section */}
-      <EducationPhilosophy />
+      <main id="main-content">
+        <EducationPhilosophy />
 
       {/* About Section */}
       <section id="about" className="py-20 bg-primary/5">
@@ -415,6 +416,7 @@ export default async function Home() {
       {/* Contact Section is rendered in HomeClient for interactivity */}
 
       {/* Footer is rendered in HomeClient for interactivity */}
+      </main>
     </>
   );
 }
