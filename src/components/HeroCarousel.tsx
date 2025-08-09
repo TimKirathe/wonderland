@@ -81,8 +81,10 @@ export default function HeroCarousel({
               alt={`Wonderland kindergarten photo ${index + 1}`}
               fill
               priority={index === 0}
+              loading={index === 0 ? "eager" : "lazy"}
               className="object-cover"
               sizes="100vw"
+              quality={85}
             />
           </div>
         ))}

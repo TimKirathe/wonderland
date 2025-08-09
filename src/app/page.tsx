@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import JourneyModal from "@/components/JourneyModal";
-import ContactForm from "@/components/ContactForm";
+import DynamicJourneyModal from "@/components/DynamicJourneyModal";
+import DynamicContactForm from "@/components/DynamicContactForm";
 import HeroCarousel from "@/components/HeroCarousel";
 import NoSSR from "@/components/NoSSR";
 import VisionMission from "@/components/VisionMission";
@@ -13,6 +13,7 @@ import ReviewsCarousel from "@/components/ReviewsCarousel";
 import ScrollAnimationWrapper from "@/components/ScrollAnimationWrapper";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import PhotoSkeleton from "@/components/PhotoSkeleton";
+import LazyVideo from "@/components/LazyVideo";
 
 interface Review {
   id: string;
@@ -106,9 +107,10 @@ export default function Home() {
               <Image
                 src="/wonderland-logo.svg"
                 alt="Wonderland Logo"
-                width={32}
-                height={32}
+                width={80}
+                height={96}
                 className="h-16 w-12 sm:h-20 sm:w-16 md:h-24 md:w-20 flex-shrink-0"
+                priority
               />
               <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gradient truncate font-primary">
                 Wonderland Early Years & Prep School
@@ -210,6 +212,8 @@ export default function Home() {
                   alt="Student Smiling"
                   fill
                   className="object-cover"
+                  sizes="(max-width: 1024px) 192px, 256px"
+                  loading="lazy"
                 />
               </div>
             </ScrollAnimationWrapper>
@@ -242,6 +246,7 @@ export default function Home() {
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    loading="lazy"
                   />
                 </div>
                 <div className="px-8 pb-8">
@@ -278,6 +283,7 @@ export default function Home() {
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    loading="lazy"
                   />
                 </div>
                 <div className="px-8 pb-8">
@@ -323,6 +329,7 @@ export default function Home() {
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    loading="lazy"
                   />
                 </div>
                 <div className="px-8 pb-8">
@@ -375,20 +382,16 @@ export default function Home() {
             <ScrollAnimationWrapper animation="slideRotateLeft" delay={200}>
               <div className="relative">
                 <div className="rounded-3xl overflow-hidden card-shadow">
-                  <video
+                  <LazyVideo
+                    src="/wonderland-school-video-1.mp4"
+                    poster="/video-poster.jpg"
                     className="w-full h-full object-cover"
                     autoPlay
                     loop
                     muted
                     playsInline
                     controls
-                  >
-                    <source
-                      src="/wonderland-school-video-1.mp4"
-                      type="video/mp4"
-                    />
-                    Your browser does not support the video tag.
-                  </video>
+                  />
                 </div>
               </div>
             </ScrollAnimationWrapper>
@@ -602,7 +605,7 @@ export default function Home() {
                 </ScrollAnimationWrapper>
                 <ScrollAnimationWrapper animation="expandUp" delay={600}>
                   <NoSSR>
-                    <ContactForm />
+                    <DynamicContactForm />
                   </NoSSR>
                 </ScrollAnimationWrapper>
               </div>
@@ -621,9 +624,10 @@ export default function Home() {
                   <Image
                     src="/wonderland-logo.svg"
                     alt="Wonderland Logo"
-                    width={48}
-                    height={48}
+                    width={64}
+                    height={80}
                     className="h-20 w-16 flex-shrink-0"
+                    loading="lazy"
                   />
                   <div className="pt-1">
                     <h3 className="text-xl font-bold font-primary">
@@ -759,6 +763,7 @@ export default function Home() {
                       width={20}
                       height={20}
                       className="w-5 h-5 brightness-0 invert"
+                      loading="lazy"
                     />
                   </a>
                   <span className="text-white/70 text-sm font-secondary">
@@ -784,7 +789,7 @@ export default function Home() {
       </footer>
 
       {/* Journey Modal */}
-      <JourneyModal
+      <DynamicJourneyModal
         isOpen={isJourneyModalOpen}
         onClose={() => setIsJourneyModalOpen(false)}
       />
