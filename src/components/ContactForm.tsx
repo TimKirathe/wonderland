@@ -192,10 +192,16 @@ export default function ContactForm() {
             </svg>
             <div className="flex-1">
               <p className="text-sm text-red-800 font-medium font-secondary">
-                Error submitting request
+                Unable to submit your enquiry
               </p>
               <p className="text-sm text-red-700 mt-1 font-secondary">
                 {errorMessage}
+              </p>
+              <p className="text-sm text-red-700 mt-2 font-secondary">
+                Please try again or contact us directly at{" "}
+                <a href="tel:+254738626219" className="underline font-semibold">
+                  +254 738 626 219
+                </a>
               </p>
             </div>
           </div>
